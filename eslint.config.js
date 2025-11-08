@@ -12,12 +12,15 @@ export default defineConfig([
 		extends: [
 			js.configs.recommended,
 			tseslint.configs.recommendedTypeChecked,
-			reactHooks.configs['recommended-latest'],
+			reactHooks.configs.flat.recommended,
 			reactRefresh.configs.vite,
 		],
 		languageOptions: {
 			ecmaVersion: 2020,
 			globals: globals.browser,
+			parserOptions: {
+				projectService: true,
+			},
 		},
 	},
 ]);
