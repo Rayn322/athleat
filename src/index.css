@@ -13,9 +13,8 @@
   --color-bg-white: #f7f7f7;
   --color-green-primary: #209f2d;
   --color-green-secondary: #d3edcf;
+  --color-gray-60: #a1a1a199;
   --color-light-gray: #d9d9d9;
-  /* #a1a1a1 at 60% opacity, not to be confused with gray dark (we should change the name) */
-  --color-dark-gray: #a1a1a199;
-  --color-gray-dark: #7e7e7e;
+  --color-dark-gray: #7e7e7e;
   --color-red: #c00000;
 }
