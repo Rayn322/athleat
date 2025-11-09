@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
+  /* Typography scale */
   --text-display: 48px;
   --text-h1: 24px;
   --text-h2: 20px;
@@ -8,6 +10,12 @@
   --text-base: 16px;
   --text-small: 12px;
   --text-tiny: 8px;
+
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 
   /* rename to off-white? otherwise we end up with classname bg-bg-white */
   --color-bg-white: #f7f7f7;
@@ -17,4 +25,11 @@
   --color-light-gray: #d9d9d9;
   --color-dark-gray: #7e7e7e;
   --color-red: #c00000;
+}
+
+/* Apply Inter globally */
+html {
+  font-family: "Inter", sans-serif;
+  font-weight: 400; /* default to regular */
+  color: #000;
 }
