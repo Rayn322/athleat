@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  --text-display: 48px;
+  --text-h1: 24px;
+  --text-h2: 20px;
+  --text-h3: 18px;
+  --text-base: 16px;
+  --text-small: 12px;
+  --text-tiny: 8px;
+
+  /* rename to off-white? otherwise we end up with classname bg-bg-white */
+  --color-bg-white: #f7f7f7;
+  --color-green-primary: #209f2d;
+  --color-green-secondary: #d3edcf;
+  --color-light-gray: #d9d9d9;
+  /* #a1a1a1 at 60% opacity, not to be confused with gray dark (we should change the name) */
+  --color-dark-gray: #a1a1a199;
+  --color-gray-dark: #7e7e7e;
+  --color-red: #c00000;
+}
