@@ -1,12 +1,55 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Plus, Check } from "lucide-react";
 import { Link } from "react-router";
 import { AnalyticsBar } from "../components/AnalyticsBar";
+import { Button} from "../components/Button";
+import { QuickAddItem } from "../components/QuickAddItem";
+import { NavBar } from "../components/NavBar";
+
 
 
 export default function Root() {
   return (
     <div>
       <p>This is the main page</p>
+      <div className="space-y-4 p-6">
+        {/* Default icon (ChevronRight) */}
+        <Button variant="primary" showIcon>
+          Continue
+        </Button>
+
+        {/* Custom icon */}
+        <Button variant="primary" width="hug" showIcon icon={<Plus className="h-4 w-4" />} size="sm">
+          Add Item
+        </Button>
+
+        {/* Left icon */}
+        <Button
+          variant="outline"
+          showIcon
+          icon={<Check className="h-5 w-5" />}
+          iconPosition="left"
+        >
+          Confirm
+        </Button>
+
+        {/* Disabled visual + actual disabled */}
+        <Button variant="disabled" width="hug">
+          Disabled
+        </Button>
+
+        <QuickAddItem
+          name="Protein Bar"
+          imageSrc="/images/protein-bar.jpg"
+        />
+
+        <NavBar active="home" />
+        <NavBar active="analytics" />
+        <NavBar active="cart" />
+
+        <NavBar active="home" useNotifCartIcon />
+        <NavBar active="analytics" useNotifCartIcon />
+        <NavBar active="cart" useNotifCartIcon />
+      </div>
 
       {/* Example Analytics Bars */}
       <AnalyticsBar
