@@ -71,18 +71,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 const baseClasses =
-  "inline-flex items-center justify-center rounded-full font-medium transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-green-primary)]/40";
+  "inline-flex items-center justify-center rounded-full font-medium transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-primary/40";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-green-primary)] text-white hover:bg-[color:var(--color-green-primary)]/90",
+    "bg-green-primary text-white hover:bg-green-primary/90",
   outline:
     "bg-white text-black border border-black/10 shadow-sm hover:bg-black/5",
-  disabled: "bg-[var(--color-dark-gray)] text-white",
+  disabled: "bg-dark-gray text-white",
 };
 
 const sizeClasses: Record<Size, string> = {
-  lg: "h-14 px-6 text-[length:var(--text-h2)]",
-  md: "h-11 px-5 text-[length:var(--text-base)]",
-  sm: "py-2 px-3 text-[length:var(--text-small)] h-auto",
+  lg: "h-14 px-6 text-h2",
+  md: "h-11 px-5 text--base",
+  sm: "py-2 px-3 text-small h-auto",
 };

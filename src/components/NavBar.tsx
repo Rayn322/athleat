@@ -23,7 +23,7 @@ export function NavBar({
   className,
 }: NavBarProps) {
   const color = (t: Tab) =>
-    t === active ? "text-[color:var(--color-green-primary)]" : "text-black";
+    t === active ? "text--green-primary" : "text-black";
 
   const Item: React.FC<{
     tab: Tab;
@@ -33,7 +33,7 @@ export function NavBar({
     const href = hrefs?.[tab];
     const content = (
       <span
-        className="grid h-16 place-items-center px-2 outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-green-primary)]/40 rounded-lg"
+        className="grid h-16 place-items-center px-2 outline-none focus-visible:ring-2 focus-visible:ring-green-primary/40 rounded-lg"
         aria-current={active === tab ? "page" : undefined}
       >
         {children}

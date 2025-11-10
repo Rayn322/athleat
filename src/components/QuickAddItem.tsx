@@ -44,24 +44,23 @@ export function QuickAddItem({
         // border 2px light gray by default
         "border-2",
         isSelected
-          ? "border-[color:var(--color-green-primary)] ring-4 ring-[color:var(--color-green-primary)]/35"
-          : "border-[var(--color-light-gray)]",
+          ? "border-green-primary ring-4 ring-green-primary/35"
+          : "border-light-gray",
         // hover/active polish
         "hover:shadow-sm active:scale-[0.99]",
-        "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[color:var(--color-green-primary)]/45",
+        "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-green-primary/45",
         className,
       ].join(" ")}
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-[length:var(--text-h2)] font-[var(--weight-semibold,600)]">
+        <span className="text-h2 font-semibold">
           {name}
         </span>
 
         {isSelected ? (
           <CheckCircle2
-            className="h-6 w-6"
-            style={{ color: "var(--color-green-primary)" }}
+            className="h-6 w-6 text-green-primary"
             aria-hidden
           />
         ) : (
@@ -70,7 +69,7 @@ export function QuickAddItem({
       </div>
 
       {/* Image */}
-      <div className="overflow-hidden rounded-[12px] border border-[color:var(--color-light-gray)]/80">
+      <div className="overflow-hidden rounded-[12px] border border-light-gray/80">
         <img
           src={imageSrc}
           alt={imageAlt || name}
