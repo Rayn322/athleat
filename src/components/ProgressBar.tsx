@@ -1,13 +1,9 @@
 import React from "react";
 
 type ProgressBarProps = {
-  /** current value */
   value: number;
-  /** maximum value (defaults to 100) */
   max?: number;
-  /** height in px or any CSS size (defaults to 16) */
   height?: number | string;
-  /** extra classes for the outer track */
   className?: string;
 };
 
@@ -25,11 +21,11 @@ export function ProgressBar({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(pct)}
-      className={`w-full rounded-full bg-gray-300/60 overflow-hidden ${className}`}
+      className={`w-full rounded-full bg-light-gray overflow-hidden ${className}`}
       style={{ height }}
     >
       <div
-        className="h-full rounded-full bg-green-600 transition-[width] duration-300"
+        className="h-full rounded-full bg-green-primary transition-[width] duration-300"
         style={{ width: `${pct}%` }}
       />
     </div>
