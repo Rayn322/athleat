@@ -55,7 +55,7 @@ export default function Root() {
 
       {/* Example Meal Options */}
       <section className="space-y-6">
-        <h2 className="text-lg font-semibold">Meal Options</h2>
+        <h2 className="text-lg font-semibold">Meal Options (click to toggle)</h2>
         <MealOption
           title="Cheese Burger"
           imageSrc="/Images/burger.jpg"
@@ -68,13 +68,12 @@ export default function Root() {
           imageSrc="/Images/burger.jpg"
           tags={["high protein", "carbs"]}
           ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
-          selected
         />
       </section>
 
       {/* Example Grocery Items */}
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">Grocery Items</h2>
+        <h2 className="text-lg font-semibold">Grocery Items (click to toggle)</h2>
         <div className="max-w-lg space-y-3 bg-white p-6">
           {Object.entries(checkedItems).map(([label, checked]) => (
             <GroceryItem
