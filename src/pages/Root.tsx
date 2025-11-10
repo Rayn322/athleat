@@ -1,7 +1,6 @@
 // src/routes/Root.tsx
 import { Link } from "react-router";
 import { ChevronRight, Plus, Check } from "lucide-react";
-import { Link } from "react-router";
 import { AnalyticsBar } from "../components/AnalyticsBar";
 import { Button} from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
