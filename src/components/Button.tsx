@@ -1,6 +1,7 @@
-// src/components/button.tsx
+// src/components/Button.tsx
 import * as React from "react";
 import { ChevronRight } from "lucide-react";
+import clsx from "clsx";
 
 type Variant = "primary" | "outline" | "disabled";
 type Size = "lg" | "md" | "sm";
@@ -11,9 +12,9 @@ export interface ButtonProps
   variant?: Variant;
   size?: Size;
   width?: Width;
-  showIcon?: boolean; 
-  icon?: React.ReactNode; 
-  iconPosition?: "left" | "right"; // icon side (default right)
+  showIcon?: boolean;
+  icon?: React.ReactNode;
+  iconPosition?: "left" | "right";
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -42,7 +43,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(
+        className={clsx(
           baseClasses,
           v,
           s,
@@ -54,7 +55,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         <div
-          className={cn(
+          className={clsx(
             "inline-flex items-center justify-center gap-2",
             iconPosition === "left" && "flex-row-reverse"
           )}
@@ -69,7 +70,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-// Styles and tokens
 const baseClasses =
   "inline-flex items-center justify-center rounded-full font-medium transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-green-primary)]/40";
 
@@ -86,8 +86,3 @@ const sizeClasses: Record<Size, string> = {
   md: "h-11 px-5 text-[length:var(--text-base)]",
   sm: "py-2 px-3 text-[length:var(--text-small)] h-auto",
 };
-
-// class merge helper
-function cn(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
-}

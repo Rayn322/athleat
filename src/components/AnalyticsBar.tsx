@@ -1,15 +1,16 @@
 // src/components/AnalyticsBar.tsx
 import React from "react";
+import clsx from "clsx";
 
 type Variant = "onTrack" | "low";
 
 export type AnalyticsBarProps = {
-  label: string;        // e.g., "Carbs"
-  variant: Variant;     // "onTrack" | "low"
-  value: number;        // current amount
-  goal: number;         // target amount
-  max: number;          // scale maximum (same unit)
-  goalBandPct?: number; // width of gray goal band (default 12%)
+  label: string;
+  variant: Variant;
+  value: number;
+  goal: number;
+  max: number;
+  goalBandPct?: number;
   onQuickAdd?: () => void;
   className?: string;
 };
@@ -35,7 +36,7 @@ export function AnalyticsBar({
 
   return (
     <section
-      className={["w-full max-w-[480px]", className].join(" ")}
+      className={clsx("w-full max-w-[480px]", className)}
       aria-label={`${label} analytics`}
     >
       {/* Top row: label + status */}
@@ -46,55 +47,59 @@ export function AnalyticsBar({
 
       {/* Bar */}
       <div className="relative h-6 w-full">
-        {/* Track (z-0) */}
-        <div className="absolute inset-0 rounded-full bg-light-gray z-0" />
+        {/* Track */}
+        <div className="absolute inset-0 z-0 rounded-full bg-light-gray" />
 
-        {/* Fill below the goal band (z-10) */}
+        {/* Fill */}
         <div
-          className={`absolute top-0 h-full rounded-full ${fillColor} z-10 transition-[width] duration-300`}
+          className={clsx(
+            "absolute top-0 z-10 h-full rounded-full transition-[width] duration-300",
+            fillColor
+          )}
           style={{ width: `${pct}%` }}
         />
 
-        {/* Goal band ON TOP of fill (z-20), translucent gray */}
+        {/* Goal band (on top) */}
         <div
           aria-hidden
-          className="absolute top-0 h-full rounded-full bg-gray-60 z-20 pointer-events-none"
+          className="pointer-events-none absolute top-0 z-20 h-full rounded-full bg-gray-60"
           style={{ width: `${bandWidth}%`, left: `${bandLeft}%` }}
         />
 
-        {/* Goal tick + label above everything (z-30) */}
+        {/* Goal tick + label */}
         <div
           aria-hidden
-          className="absolute inset-y-0 w-0.5 -translate-x-1/2 bg-dark-gray z-30"
+          className="absolute inset-y-0 z-30 w-0.5 -translate-x-1/2 bg-dark-gray"
           style={{ left: `${goalPct}%` }}
         />
         <div
           aria-hidden
-          className="absolute -top-5 -translate-x-1/2 text-small text-dark-gray z-30"
+          className="absolute -top-5 z-30 -translate-x-1/2 text-small text-dark-gray"
           style={{ left: `${goalPct}%` }}
         >
           goal
         </div>
 
-        {/* a11y description */}
         <span className="sr-only">
           {label} {Math.round(pct)} percent of maximum. Goal at{" "}
           {Math.round(goalPct)} percent.
         </span>
       </div>
 
-      {/* Quick add BELOW the bar, right-aligned (only for low) */}
-      {variant === "low" && onQuickAdd ? (
+      {/* Quick add below bar (only for low) */}
+      {variant === "low" && onQuickAdd && (
         <div className="mt-2 flex justify-end">
           <button
             type="button"
             onClick={onQuickAdd}
-            className="text-base underline underline-offset-2 hover:opacity-90 active:opacity-80 cursor-pointer"
+            className={clsx(
+              "cursor-pointer text-base underline underline-offset-2 hover:opacity-90 active:opacity-80"
+            )}
           >
             quick add
           </button>
         </div>
-      ) : null}
+      )}
     </section>
   );
 }

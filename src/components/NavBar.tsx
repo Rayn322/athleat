@@ -1,19 +1,15 @@
 // src/components/NavBar.tsx
-
 import * as React from "react";
+import clsx from "clsx";
 import { House, ChartNoAxesColumn, ShoppingBasket } from "lucide-react";
-import cartUrl from "../assets/icons/shopping-basket-notif.svg";
-import cartActiveUrl from "../assets/icons/shopping-basket-notif-active.svg";
+import cartUrl from "../assets/icons/shopping-basket-notif.svg?url";
+import cartActiveUrl from "../assets/icons/shopping-basket-notif-active.svg?url";
 
 type Tab = "home" | "analytics" | "cart";
 
-/** Notes
- * - hrefs: optional links for each tab (plain anchors; can swap to React Router later)
- * - onSelect: optional click handler to intercept navigation
- */
 export type NavBarProps = {
-  active: Tab;                       
-  useNotifCartIcon?: boolean;        
+  active: Tab;
+  useNotifCartIcon?: boolean;
   hrefs?: Partial<Record<Tab, string>>;
   onSelect?: (tab: Tab) => void;
   className?: string;
@@ -27,89 +23,83 @@ export function NavBar({
   className,
 }: NavBarProps) {
   const color = (t: Tab) =>
-    t === active
-      ? "text-[color:var(--color-green-primary)]"
-      : "text-black";
+    t === active ? "text-[color:var(--color-green-primary)]" : "text-black";
 
   const Item: React.FC<{
     tab: Tab;
-    children: React.ReactNode;
     label: string;
-  }> = ({ tab, children, label }) => {
-    const common = (
+    children: React.ReactNode;
+  }> = ({ tab, label, children }) => {
+    const href = hrefs?.[tab];
+    const content = (
       <span
-        className="block p-2"
+        className="grid h-16 place-items-center px-2 outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-green-primary)]/40 rounded-lg"
         aria-current={active === tab ? "page" : undefined}
-        aria-label={label}
       >
         {children}
+        <span className="sr-only">{label}</span>
       </span>
     );
 
-    // If hrefs provided, use <a>; else use <button>
-    const href = hrefs?.[tab];
-    if (href) {
-      return (
-        <a
-          href={href}
-          onClick={(e) => {
-            onSelect?.(tab);
-          }}
-          className="select-none"
-        >
-          {common}
-        </a>
-      );
-    }
-    return (
+    return href ? (
+      <a
+        href={href}
+        className="select-none"
+        aria-label={label}
+        onClick={() => onSelect?.(tab)}
+      >
+        {content}
+      </a>
+    ) : (
       <button
         type="button"
-        onClick={() => onSelect?.(tab)}
         className="select-none"
+        aria-label={label}
+        onClick={() => onSelect?.(tab)}
       >
-        {common}
+        {content}
       </button>
     );
   };
 
   return (
     <nav
-      className={[
-        "fixed inset-x-0 bottom-0 z-50 bg-white border-t border-black", 
-        className,
-      ].join(" ")}
       aria-label="Primary"
+      className={clsx(
+        "fixed inset-x-0 bottom-0 z-50 bg-white border-t border-black",
+        // Safe-area padding for iOS home indicator
+        "pb-[env(safe-area-inset-bottom)]",
+        className
+      )}
     >
-      <div className="mx-auto max-w-[480px] h-16 px-[52px]">
-        <ul className="flex h-full items-center justify-between">
+      <div className="mx-auto max-w-[480px]">
+        <ul className="flex items-center justify-between">
           {/* Home */}
           <li>
             <Item tab="home" label="Home">
-              <House className={`h-7 w-7 ${color("home")}`} />
+              <House className={clsx("h-7 w-7", color("home"))} />
             </Item>
           </li>
 
           {/* Analytics */}
           <li>
             <Item tab="analytics" label="Analytics">
-              <ChartNoAxesColumn className={`h-7 w-7 ${color("analytics")}`} />
+              <ChartNoAxesColumn className={clsx("h-7 w-7", color("analytics"))} />
             </Item>
           </li>
+
+          {/* Cart */}
           <li>
             <Item tab="cart" label="Cart">
               {useNotifCartIcon ? (
                 <img
-                  src={
-                    active === "cart"
-                      ? cartActiveUrl
-                      : cartUrl
-                  }
-                  alt="Cart"
+                  src={active === "cart" ? cartActiveUrl : cartUrl}
+                  alt=""
                   className="h-7 w-7"
                   draggable={false}
                 />
               ) : (
-                <ShoppingBasket className={`h-7 w-7 ${color("cart")}`} />
+                <ShoppingBasket className={clsx("h-7 w-7", color("cart"))} />
               )}
             </Item>
           </li>
