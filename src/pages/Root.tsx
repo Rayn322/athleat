@@ -58,14 +58,14 @@ export default function Root() {
         <h2 className="text-lg font-semibold">Meal Options</h2>
         <MealOption
           title="Cheese Burger"
-          imageSrc="/images/burger.jpg"
+          imageSrc="/Images/burger.jpg"
           tags={["high protein", "carbs"]}
           ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
         />
 
         <MealOption
           title="Cheese Burger"
-          imageSrc="/images/burger.jpg"
+          imageSrc="/Images/burger.jpg"
           tags={["high protein", "carbs"]}
           ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
           selected
