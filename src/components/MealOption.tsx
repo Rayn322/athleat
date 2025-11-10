@@ -4,13 +4,9 @@ import clsx from "clsx";
 export type MealOptionProps = {
   title: string;
   imageSrc: string;
-  /** e.g. ["high protein", "carbs"] */
   tags?: string[];
-  /** e.g. ["Bread", "Patty", "Lettuce", ...] */
   ingredients?: string[];
-  /** green border + glow when true */
-  selected?: boolean;
-  /** click/keyboard handler */
+  selected?: boolean; // controlled
   onSelect?: (selected: boolean) => void;
   className?: string;
 };
@@ -24,17 +20,14 @@ export function MealOption({
   onSelect,
   className,
 }: MealOptionProps) {
-  // internal selection state (used if not controlled externally)
   const [internalSelected, setInternalSelected] = useState(false);
   const isControlled = controlledSelected !== undefined;
   const selected = isControlled ? controlledSelected : internalSelected;
 
   const handleClick = () => {
-    const newValue = !selected;
-    if (!isControlled) {
-      setInternalSelected(newValue);
-    }
-    onSelect?.(newValue);
+    const next = !selected;
+    if (!isControlled) setInternalSelected(next);
+    onSelect?.(next);
   };
 
   return (
@@ -45,10 +38,10 @@ export function MealOption({
       className={clsx(
         "w-full text-left flex items-center gap-6 p-6 sm:p-7 rounded-[28px] transition-all border-2",
         selected
-          ? "border-green-500 shadow-[0_0_0_6px_rgba(34,197,94,0.35)]"
-          : "border-neutral-300",
+          ? "border-green-primary shadow-[0_0_0_6px_rgba(32,159,45,0.35)]"
+          : "border-light-gray",
         "bg-transparent",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-primary",
         className
       )}
     >
@@ -71,7 +64,7 @@ export function MealOption({
             {tags.map((t, i) => (
               <span
                 key={i}
-                className="inline-flex items-center rounded-full px-4 py-1 text-lg font-medium bg-black text-white"
+                className="inline-flex items-center rounded-full px-4 py-1 text-lg font-medium bg-black text-bg-white"
               >
                 {t}
               </span>
