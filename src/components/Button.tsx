@@ -1,0 +1,93 @@
+// src/components/button.tsx
+import * as React from "react";
+import { ChevronRight } from "lucide-react";
+
+type Variant = "primary" | "outline" | "disabled";
+type Size = "lg" | "md" | "sm";
+type Width = "full" | "hug";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
+  width?: Width;
+  showIcon?: boolean; 
+  icon?: React.ReactNode; 
+  iconPosition?: "left" | "right"; // icon side (default right)
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      children,
+      variant = "primary",
+      size = "md",
+      width = "full",
+      showIcon = false,
+      icon,
+      iconPosition = "right",
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const v = variantClasses[variant];
+    const s = sizeClasses[size];
+    const w = width === "full" ? "w-full" : "w-auto";
+    const isDisabled = disabled || variant === "disabled";
+
+    const IconToShow = icon ?? <ChevronRight className="h-5 w-5" />;
+
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          baseClasses,
+          v,
+          s,
+          w,
+          isDisabled && "cursor-not-allowed opacity-80",
+          className
+        )}
+        disabled={isDisabled}
+        {...props}
+      >
+        <div
+          className={cn(
+            "inline-flex items-center justify-center gap-2",
+            iconPosition === "left" && "flex-row-reverse"
+          )}
+        >
+          {showIcon && iconPosition === "left" && IconToShow}
+          <span className="truncate">{children}</span>
+          {showIcon && iconPosition === "right" && IconToShow}
+        </div>
+      </button>
+    );
+  }
+);
+Button.displayName = "Button";
+
+// Styles and tokens
+const baseClasses =
+  "inline-flex items-center justify-center rounded-full font-medium transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-green-primary)]/40";
+
+const variantClasses: Record<Variant, string> = {
+  primary:
+    "bg-[var(--color-green-primary)] text-white hover:bg-[color:var(--color-green-primary)]/90",
+  outline:
+    "bg-white text-black border border-black/10 shadow-sm hover:bg-black/5",
+  disabled: "bg-[var(--color-dark-gray)] text-white",
+};
+
+const sizeClasses: Record<Size, string> = {
+  lg: "h-14 px-6 text-[length:var(--text-h2)]",
+  md: "h-11 px-5 text-[length:var(--text-base)]",
+  sm: "py-2 px-3 text-[length:var(--text-small)] h-auto",
+};
+
+// class merge helper
+function cn(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(" ");
+}

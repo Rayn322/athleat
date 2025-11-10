@@ -1,4 +1,4 @@
-// src/components/ui/analytics-bar.tsx
+// src/components/AnalyticsBar.tsx
 import React from "react";
 
 type Variant = "onTrack" | "low";
@@ -89,7 +89,7 @@ export function AnalyticsBar({
           <button
             type="button"
             onClick={onQuickAdd}
-            className="text-base underline underline-offset-2 hover:opacity-90 active:opacity-80"
+            className="text-base underline underline-offset-2 hover:opacity-90 active:opacity-80 cursor-pointer"
           >
             quick add
           </button>
