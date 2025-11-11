@@ -61,9 +61,9 @@ export function MealOption({
         {/* tags */}
         {tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-3">
-            {tags.map((t, i) => (
+            {tags.map((t) => (
               <span
-                key={i}
+                key={t}
                 className="inline-flex items-center rounded-full px-4 py-1 text-lg font-medium bg-black text-bg-white"
               >
                 {t}
@@ -76,7 +76,7 @@ export function MealOption({
         {ingredients.length > 0 && (
           <div className="mt-4 text-xl sm:text-2xl text-current/90">
             {ingredients.map((ing, i) => (
-              <React.Fragment key={i}>
+              <React.Fragment key={ing}>
                 {i > 0 && <span className="mx-2">•</span>}
                 <span>{ing}</span>
               </React.Fragment>
