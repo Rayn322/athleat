@@ -9,6 +9,8 @@ import { ProgressBar } from "../components/ProgressBar";
 import { MealOption } from "../components/MealOption";
 import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
+import { TextBox } from "../components/TextBox";
+
 import React, { useState } from "react";
 
 export default function Root() {
@@ -17,6 +19,8 @@ export default function Root() {
     "almonds": true,
     "greek yogurt": false,
   });
+
+  const [textValue, setTextValue] = useState("");
 
   const handleToggle = (label: string, checked: boolean) => {
     setCheckedItems((prev) => ({ ...prev, [label]: checked }));
@@ -126,6 +130,20 @@ export default function Root() {
             />
           ))}
         </div>
+      </section>
+
+      {/* Example Text Box */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">TextBoxes</h2>
+  
+        {/* Username */}
+        <TextBox
+          label="Username"
+          placeholder="Enter a username"
+          value={textValue}
+          onChange={setTextValue}
+          variant="unfilled"
+        />
       </section>
 
       <section className="space-y-4">
