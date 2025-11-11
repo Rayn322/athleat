@@ -1,8 +1,9 @@
 // src/routes/Root.tsx
+import { useState } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Plus, Check } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
-import { Button} from "../components/Button";
+import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
 import { NavBar } from "../components/NavBar";
 import { ProgressBar } from "../components/ProgressBar";
@@ -10,8 +11,6 @@ import { MealOption } from "../components/MealOption";
 import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
 import { TextBox } from "../components/TextBox";
-
-import React, { useState } from "react";
 
 export default function Root() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
