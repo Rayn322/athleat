@@ -1,4 +1,5 @@
 // src/routes/Root.tsx
+import { useState } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Plus, Check } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
@@ -9,7 +10,7 @@ import { ProgressBar } from "../components/ProgressBar";
 import { MealOption } from "../components/MealOption";
 import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
-import { useState } from "react";
+import { TextBox } from "../components/TextBox";
 
 export default function Root() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
@@ -17,6 +18,8 @@ export default function Root() {
     "almonds": true,
     "greek yogurt": false,
   });
+
+  const [textValue, setTextValue] = useState("");
 
   const handleToggle = (label: string, checked: boolean) => {
     setCheckedItems((prev) => ({ ...prev, [label]: checked }));
@@ -126,6 +129,20 @@ export default function Root() {
             />
           ))}
         </div>
+      </section>
+
+      {/* Example Text Box */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">TextBoxes</h2>
+  
+        {/* Username */}
+        <TextBox
+          label="Username"
+          placeholder="Enter a username"
+          value={textValue}
+          onChange={setTextValue}
+          variant="unfilled"
+        />
       </section>
 
       <section className="space-y-4">
