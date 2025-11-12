@@ -44,7 +44,7 @@ export default function MealModal({
               <Tag
                 key={tag.label}
                 label={tag.label}
-                size="sm"
+                size="sm" // all sizes are too big, supposed to be size "default"
                 variant={tag.emphasized ? "outline-green" : "outline-black"}
               />
             ))}
