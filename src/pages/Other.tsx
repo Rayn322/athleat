@@ -7,6 +7,7 @@ import {
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
+import MealModal from "../components/MealModal";
 
 export default function Other() {
   return (
@@ -19,6 +20,19 @@ export default function Other() {
         <span>Back to main page</span>
         <ChevronRight />
       </Link>
+
+      {/* temp background so you can see the modal better */}
+      <div className="bg-bg-white p-4">
+        <MealModal
+          name="Bagel with Cream Cheese"
+          calories={371}
+          tags={[
+            { label: "protein", emphasized: true },
+            { label: "fats" },
+            { label: "carbs" },
+          ]}
+        />
+      </div>
 
       <CalendarDayList />
       <DaySchedule>
