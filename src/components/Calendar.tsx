@@ -61,7 +61,8 @@ export function DaySchedule() {
   // evil negative margin
   // either make this a variable later or pay close attention to the layout's padding
   return (
-    <div className="-mx-4 bg-bg-white">
+    <div className="relative -mx-4 bg-bg-white">
+      <CalendarItem />
       <HourSlot hour={0} />
       <HourSlot hour={1} />
       <HourSlot hour={2} />
@@ -104,6 +105,27 @@ function HourSlot({ hour = 8 }: { hour?: number }) {
     // make pt 11px so the border adds the 12th pixel lol
     <div className="border-t border-t-light-gray pt-2.75 pr-2.5 pb-15 pl-6">
       <p className="text-small font-medium">{hourLabel}</p>
+    </div>
+  );
+}
+
+function CalendarItem({
+  startHour = 12,
+  lengthInHours = 2,
+}: {
+  startHour?: number;
+  lengthInHours?: number;
+}) {
+  return (
+    <div
+      className="absolute inset-x-0 mr-6 ml-22 space-y-1 rounded-xl bg-green-secondary p-3"
+      style={{
+        top: `calc(${(startHour / 24) * 100}% + 1px)`,
+        height: `calc(${(lengthInHours / 24) * 100}% - 1px)`,
+      }}
+    >
+      <p className="text-base font-bold">CSC 321</p>
+      <p className="text-small font-medium">12 PM - 2 PM</p>
     </div>
   );
 }
