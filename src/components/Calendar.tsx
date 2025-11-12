@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import { ChevronRight, Plus } from "lucide-react";
+import type { PropsWithChildren } from "react";
 
 function CalendarDay({
   date,
@@ -30,8 +32,7 @@ function CalendarDay({
         {dayLetter}
       </p>
       <p
-        className={clsx({
-          "flex aspect-square items-center px-2.5 py-1.5": true,
+        className={clsx("flex aspect-square items-center px-2.5 py-1.5", {
           "text-black": !selected,
           "rounded-full bg-black text-white": selected,
         })}
@@ -57,12 +58,12 @@ export function CalendarDayList() {
   );
 }
 
-export function DaySchedule() {
+export function DaySchedule({ children }: PropsWithChildren) {
   // evil negative margin
   // either make this a variable later or pay close attention to the layout's padding
   return (
     <div className="relative -mx-4 bg-bg-white">
-      <CalendarItem />
+      {children}
       <HourSlot hour={0} />
       <HourSlot hour={1} />
       <HourSlot hour={2} />
@@ -109,12 +110,12 @@ function HourSlot({ hour = 8 }: { hour?: number }) {
   );
 }
 
-function CalendarItem({
-  startHour = 12,
-  lengthInHours = 2,
+export function ClassCalItem({
+  startHour,
+  lengthInHours,
 }: {
-  startHour?: number;
-  lengthInHours?: number;
+  startHour: number;
+  lengthInHours: number;
 }) {
   return (
     <div
@@ -127,5 +128,44 @@ function CalendarItem({
       <p className="text-base font-bold">CSC 321</p>
       <p className="text-small font-medium">12 PM - 2 PM</p>
     </div>
+  );
+}
+
+export function MealCalItem({
+  name,
+  startHour,
+  onClick,
+}: {
+  name: string;
+  startHour: number;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
+      style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
+    >
+      <span className="text-base font-normal">{name}</span>
+      <ChevronRight />
+    </button>
+  );
+}
+
+export function AddCalItem({
+  startHour,
+  onClick,
+}: {
+  startHour: number;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-center rounded-xl bg-green-primary p-2.5 text-white"
+      style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
+    >
+      <Plus />
+    </button>
   );
 }

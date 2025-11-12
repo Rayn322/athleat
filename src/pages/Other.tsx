@@ -1,5 +1,12 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
+import {
+  AddCalItem,
+  CalendarDayList,
+  ClassCalItem,
+  DaySchedule,
+  MealCalItem,
+} from "../components/Calendar";
 
 export default function Other() {
   return (
@@ -12,6 +19,13 @@ export default function Other() {
         <span>Back to main page</span>
         <ChevronRight />
       </Link>
+
+      <CalendarDayList />
+      <DaySchedule>
+        <MealCalItem name="Bagel with Cream Cheese" startHour={8} />
+        <AddCalItem startHour={11} />
+        <ClassCalItem startHour={12} lengthInHours={2} />
+      </DaySchedule>
     </div>
   );
 }
