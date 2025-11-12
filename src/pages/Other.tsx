@@ -24,7 +24,7 @@ export default function Other() {
       <DaySchedule>
         <MealCalItem name="Bagel with Cream Cheese" startHour={8} />
         <AddCalItem startHour={11} />
-        <ClassCalItem startHour={12} lengthInHours={2} />
+        <ClassCalItem name="CSC 321" startHour={12} lengthInHours={2} />
       </DaySchedule>
     </div>
   );

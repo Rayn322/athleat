@@ -58,6 +58,9 @@ export function CalendarDayList() {
   );
 }
 
+/**
+ * Pass in {@link ClassCalItem}, {@link MealCalItem}, and/or {@link AddCalItem} as children
+ */
 export function DaySchedule({ children }: PropsWithChildren) {
   // evil negative margin
   // either make this a variable later or pay close attention to the layout's padding
@@ -93,30 +96,26 @@ export function DaySchedule({ children }: PropsWithChildren) {
 }
 
 function HourSlot({ hour = 8 }: { hour?: number }) {
-  const hourLabel =
-    hour === 0
-      ? "12 AM"
-      : hour < 12
-        ? `${hour} AM`
-        : hour === 12
-          ? "12 PM"
-          : `${hour - 12} PM`;
-
   return (
     // make pt 11px so the border adds the 12th pixel lol
     <div className="border-t border-t-light-gray pt-2.75 pr-2.5 pb-15 pl-6">
-      <p className="text-small font-medium">{hourLabel}</p>
+      <p className="text-small font-medium">{hourToTimeString(hour)}</p>
     </div>
   );
 }
 
 export function ClassCalItem({
+  name,
   startHour,
   lengthInHours,
 }: {
+  name: string;
   startHour: number;
   lengthInHours: number;
 }) {
+  const endHour = startHour + lengthInHours;
+  const timeRange = `${hourToTimeString(startHour)} - ${hourToTimeString(endHour)}`;
+
   return (
     <div
       className="absolute inset-x-0 mr-6 ml-22 space-y-1 rounded-xl bg-green-secondary p-3"
@@ -125,8 +124,8 @@ export function ClassCalItem({
         height: `calc(${(lengthInHours / 24) * 100}% - 1px)`,
       }}
     >
-      <p className="text-base font-bold">CSC 321</p>
-      <p className="text-small font-medium">12 PM - 2 PM</p>
+      <p className="text-base font-bold">{name}</p>
+      <p className="text-small font-medium">{timeRange}</p>
     </div>
   );
 }
@@ -168,4 +167,15 @@ export function AddCalItem({
       <Plus />
     </button>
   );
+}
+
+// TODO: make work with half hours
+function hourToTimeString(hour: number) {
+  return hour === 0
+    ? "12 AM"
+    : hour < 12
+      ? `${hour} AM`
+      : hour === 12
+        ? "12 PM"
+        : `${hour - 12} PM`;
 }
