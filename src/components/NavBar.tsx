@@ -29,7 +29,7 @@ export function NavBar({
     <nav
       aria-label="Primary"
       className={clsx(
-        "fixed inset-x-0 bottom-0 z-50 border-t border-black bg-white",
+        "z-50 border-t border-black bg-white",
         // Safe-area padding for iOS home indicator
         "pb-[env(safe-area-inset-bottom)]",
         className,
