@@ -4,7 +4,7 @@ import { NavBar } from "../components/NavBar";
 export default function Layout() {
   return (
     <div className="flex h-dvh flex-col">
-      <div className="overflow-y-auto px-4 pt-4">
+      <div className="overflow-y-auto px-6 pt-[60px]">
         <Outlet />
       </div>
       <NavBar active="home" />

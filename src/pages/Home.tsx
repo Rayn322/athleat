@@ -13,7 +13,7 @@ export default function Home() {
         <p className="text-2xl font-bold">BIG FAT TITLE</p>
         <CalendarDayList />
       </div>
-      <div className="-mx-4 overflow-y-auto">
+      <div className="-mx-6 overflow-y-auto">
         <DaySchedule>
           <MealCalItem name="Bagel with Cream Cheese" startHour={8} />
           <AddCalItem startHour={11} />
