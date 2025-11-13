@@ -1,3 +1,4 @@
+import { CircleUser } from "lucide-react";
 import {
   AddCalItem,
   CalendarDayList,
@@ -9,10 +10,16 @@ import {
 export default function Home() {
   return (
     <div className="flex h-full flex-col">
-      <div>
-        <p className="text-2xl font-bold">BIG FAT TITLE</p>
+      <div className="flex flex-col gap-8 pb-8">
+        <div className="flex justify-between">
+          <h2 className="text-base font-normal">Hello Sarah!</h2>
+          <CircleUser />
+        </div>
+        <h1 className="text-2xl font-normal">Today's Meals</h1>
         <CalendarDayList />
       </div>
+      {/* evil negative margin */}
+      {/* either make this a variable later or pay close attention to the layout's padding */}
       <div className="-mx-6 overflow-y-auto">
         <DaySchedule>
           <MealCalItem name="Bagel with Cream Cheese" startHour={8} />

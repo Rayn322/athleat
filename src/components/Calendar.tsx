@@ -62,8 +62,6 @@ export function CalendarDayList() {
  * Pass in {@link ClassCalItem}, {@link MealCalItem}, and/or {@link AddCalItem} as children
  */
 export function DaySchedule({ children }: PropsWithChildren) {
-  // evil negative margin
-  // either make this a variable later or pay close attention to the layout's padding
   return (
     <div className="relative bg-bg-white">
       {children}
