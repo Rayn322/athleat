@@ -15,9 +15,11 @@ export default function Home() {
           <h2 className="text-base font-normal">Hello Sarah!</h2>
           <CircleUser />
         </div>
-        <h1 className="text-2xl font-normal">Today's Meals</h1>
+        <h1 className="text-2xl font-normal">today's meals</h1>
         <CalendarDayList />
       </div>
+      {/* sorry */}
+      <div className="-mx-6 border-t-2 border-t-light-gray"></div>
       {/* evil negative margin */}
       {/* either make this a variable later or pay close attention to the layout's padding */}
       <div className="-mx-6 overflow-y-auto">
