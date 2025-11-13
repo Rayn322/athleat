@@ -65,7 +65,7 @@ export function DaySchedule({ children }: PropsWithChildren) {
   // evil negative margin
   // either make this a variable later or pay close attention to the layout's padding
   return (
-    <div className="relative -mx-4 bg-bg-white">
+    <div className="relative bg-bg-white">
       {children}
       <HourSlot hour={0} />
       <HourSlot hour={1} />
