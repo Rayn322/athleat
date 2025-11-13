@@ -10,6 +10,7 @@ import Groceries1 from "./pages/Groceries1.tsx";
 import Groceries2 from "./pages/Groceries2.tsx";
 import Groceries3 from "./pages/Groceries3.tsx";
 import Groceries4 from "./pages/Groceries4.tsx";
+import GroceryList from "./pages/GroceryList.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="Groceries2" element={<Groceries2 />} />
           <Route path="Groceries3" element={<Groceries3 />} />
           <Route path="Groceries4" element={<Groceries4 />} />
+          <Route path="GroceryList" element={<GroceryList />} />
         </Route>
       </Routes>
     </BrowserRouter>
