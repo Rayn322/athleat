@@ -9,6 +9,7 @@ export type MealOptionProps = {
   selected?: boolean; // controlled
   onSelect?: (selected: boolean) => void;
   className?: string;
+  showImage?: boolean; // for swipe cards (preferences)
 };
 
 export function MealOption({
@@ -19,6 +20,7 @@ export function MealOption({
   selected: controlledSelected,
   onSelect,
   className,
+  showImage = true,
 }: MealOptionProps) {
   const [internalSelected, setInternalSelected] = useState(false);
   const isControlled = controlledSelected !== undefined;
@@ -46,11 +48,13 @@ export function MealOption({
       )}
     >
       {/* image */}
-      <img
-        src={imageSrc}
-        alt={title}
-        className="h-28 w-28 shrink-0 rounded-2xl object-cover"
-      />
+      {showImage !== false && (
+        <img
+          src={imageSrc}
+          alt={title}
+          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+        />
+      )}  
 
       {/* content */}
       <div className="min-w-0 flex-1">

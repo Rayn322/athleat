@@ -26,7 +26,7 @@ export function TextBox({
 
       <div
         className={clsx(
-          "self-stretch p-4 rounded-xl outline outline-2 outline-offset-[-2px] inline-flex items-center",
+          "self-stretch p-4 rounded-xl outline -outline-offset-2 inline-flex items-center",
           "outline-light-gray",
           variant === "filled" ? "bg-transparent" : "bg-transparent"
         )}

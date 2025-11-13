@@ -11,6 +11,8 @@ import { MealOption } from "../components/MealOption";
 import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
 import { TextBox } from "../components/TextBox";
+import { SwipeCards } from "../components/SwipeCard";
+
 
 export default function Root() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
@@ -129,6 +131,12 @@ export default function Root() {
             />
           ))}
         </div>
+      </section>
+
+      {/* Example Swipeable Cards */}
+      <section className="space-y-6">
+        <h2 className="text-lg font-semibold">Swipeable Food Cards</h2>
+        <SwipeCards />
       </section>
 
       {/* Example Text Box */}
