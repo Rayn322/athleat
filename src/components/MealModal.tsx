@@ -10,8 +10,10 @@ export type MealModalProps = {
   name: string;
   calories: number;
   tags: Tag[];
-  onMarkCompleted?: () => void;
-  onClose?: () => void;
+  completed: boolean;
+  onMarkCompleted: () => void;
+  onMarkIncomplete: () => void;
+  onClose: () => void;
   onEdit?: () => void;
 };
 
@@ -19,12 +21,14 @@ export default function MealModal({
   name,
   calories,
   tags,
+  completed,
   onMarkCompleted,
+  onMarkIncomplete,
   onClose,
   onEdit,
 }: MealModalProps) {
   return (
-    <div className="flex flex-col gap-8 rounded-[20px] bg-white p-6">
+    <div className="flex grow flex-col gap-8 rounded-[20px] bg-white p-6">
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
           <button className="cursor-pointer">
@@ -52,10 +56,14 @@ export default function MealModal({
         </div>
       </div>
       <button
-        onClick={onMarkCompleted}
+        onClick={() => {
+          if (completed) onMarkIncomplete();
+          else onMarkCompleted();
+          onClose();
+        }}
         className="cursor-pointer rounded-[25px] bg-green-primary py-3 text-base font-bold text-white"
       >
-        mark completed
+        {completed ? "mark incomplete" : "mark completed"}
       </button>
     </div>
   );
