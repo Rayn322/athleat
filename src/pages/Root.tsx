@@ -13,6 +13,7 @@ import { Tag } from "../components/Tag";
 import { TextBox } from "../components/TextBox";
 import { SwipeCards } from "../components/SwipeCard";
 import { Checkbox } from "../components/Checkbox";
+import { Dropdown } from "../components/Dropdown";
 
 
 export default function Root() {
@@ -144,6 +145,12 @@ export default function Root() {
       <section className="space-y-4 p-6">
         <h2 className="text-lg font-semibold">Checkbox Example</h2>
         <Checkbox />
+      </section>
+
+      {/* Example Dropdown */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Dropdown Example</h2>
+        <Dropdown />
       </section>
 
       {/* Example Text Box */}
