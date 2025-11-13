@@ -131,10 +131,12 @@ export function ClassCalItem({
 export function MealCalItem({
   name,
   startHour,
+  completed = false,
   onClick,
 }: {
   name: string;
   startHour: number;
+  completed?: boolean;
   onClick?: () => void;
 }) {
   return (
@@ -143,7 +145,11 @@ export function MealCalItem({
       className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
       style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
     >
-      <span className="text-base font-normal">{name}</span>
+      <span
+        className={clsx("text-base font-normal", { "line-through": completed })}
+      >
+        {name}
+      </span>
       <ChevronRight />
     </button>
   );
