@@ -12,6 +12,7 @@ import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
 import { TextBox } from "../components/TextBox";
 import { SwipeCards } from "../components/SwipeCard";
+import { Checkbox } from "../components/Checkbox";
 
 
 export default function Root() {
@@ -137,6 +138,12 @@ export default function Root() {
       <section className="space-y-6">
         <h2 className="text-lg font-semibold">Swipeable Food Cards</h2>
         <SwipeCards />
+      </section>
+
+      {/* Example Checkbox */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Checkbox Example</h2>
+        <Checkbox />
       </section>
 
       {/* Example Text Box */}
