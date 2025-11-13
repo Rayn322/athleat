@@ -1,5 +1,5 @@
 // src/pages/MealOptions.tsx
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { MealOption } from "../components/MealOption";
 
 export default function MealOptions() {
