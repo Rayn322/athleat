@@ -1,7 +1,7 @@
 // src/routes/Root.tsx
 import { useState } from "react";
 import { Link } from "react-router";
-import { ChevronRight, Plus, Check, User, Settings } from "lucide-react";
+import { ChevronRight, Plus, Check, X, User, Settings } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
 import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
@@ -15,6 +15,7 @@ import { SwipeCards } from "../components/SwipeCard";
 import { Checkbox } from "../components/Checkbox";
 import { Dropdown } from "../components/Dropdown";
 import { ProfileHeading } from "../components/ProfileHeading";
+import { ContactCard } from "../components/ContactCard";
 
 
 export default function Root() {
@@ -29,6 +30,27 @@ export default function Root() {
   const handleToggle = (label: string, checked: boolean) => {
     setCheckedItems((prev) => ({ ...prev, [label]: checked }));
   };
+
+  //for ContactCard demo
+const [contacts, setContacts] = useState<
+  { id: number; name: string; company: string }[]
+>([
+  { id: 1, name: "Name 1", company: "Company A" },
+  { id: 2, name: "Name 2", company: "Company B" },
+]);
+
+const addContact = (data: { name: string; company: string }) => {
+  const nextId = Math.max(0, ...contacts.map((c) => c.id)) + 1;
+  setContacts((prev) => [...prev, { id: nextId, ...data }]);
+};
+
+const updateContact = (id: number, data: { name: string; company: string }) => {
+  setContacts((prev) => prev.map((c) => (c.id === id ? { ...c, ...data } : c)));
+};
+
+const removeContact = (id: number) => {
+  setContacts((prev) => prev.filter((c) => c.id !== id));
+};
 
   return (
     <div className="space-y-6">
@@ -155,19 +177,41 @@ export default function Root() {
       </section>
 
       {/* Example Profile Headings */}
+        <section className="space-y-4 p-6">
+  <h2 className="text-lg font-semibold">Profile Heading Example</h2>
+
+  <ProfileHeading
+    icon={<Settings className="h-6 w-6 text-black" />}
+    text="Account Settings"
+  />
+
+  <ProfileHeading
+    icon={<User className="h-6 w-6 text-black" />}
+    text="Personal Information"
+  />
+</section>
+
+      {/* Example Contact Cards */}
       <section className="space-y-4 p-6">
-        <h2 className="text-lg font-semibold">Example Profile Headings</h2>
+  <h2 className="text-lg font-semibold">Contacts</h2>
 
-        <ProfileHeading
-          icon={<Settings className="h-6 w-6 text-black" />}
-          text="Account Settings"
-        />
+  <div className="flex items-start gap-3">
+    {contacts.map((c) => (
+      <ContactCard
+        key={c.id}
+        name={c.name}
+        company={c.company}
+        onSave={(data) => updateContact(c.id, data)}
+        onRemove={() => removeContact(c.id)}
+      />
+    ))}
 
-        <ProfileHeading
-          icon={<User className="h-6 w-6 text-black" />}
-          text="Personal Information"
-        />
-      </section>
+    {/* Add card (empty) */}
+    <ContactCard
+      onSave={(data) => addContact(data)}
+    />
+  </div>
+</section>
 
 
       {/* Example Text Box */}
@@ -212,3 +256,4 @@ export default function Root() {
     </div>
   );
 }
+
