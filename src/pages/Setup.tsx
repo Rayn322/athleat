@@ -7,34 +7,30 @@ export default function Setup() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-[392px] h-[852px] flex-col px-6 pt-[60px] pb-10 bg-bg-white mx-auto">
-
+    <div className="mx-auto flex h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
       {/* Back button */}
-      <button
-        className="mb-10"
-        onClick={() => navigate("/create-account")}
-      >
-        <ChevronLeft className="w-6 h-6" />
+      <button className="mb-10" onClick={() => navigate("/create-account")}>
+        <ChevronLeft className="h-6 w-6" />
       </button>
 
       {/* Content wrapper */}
-      <div className="flex flex-col items-start gap-20 flex-1">
-
+      <div className="flex flex-1 flex-col items-start gap-20">
         {/* Logo */}
         <img
           src={leafLogo}
           alt="Leaf Logo"
-          className="w-[67.211px] h-[71.805px]"
+          className="h-[71.805px] w-[67.211px]"
         />
 
         {/* Text block */}
         <div className="flex flex-col items-start gap-4">
-          <h1 className="text-display font-regular text-black leading-none">
+          <h1 className="font-regular text-display leading-none text-black">
             fuel starts here.
           </h1>
 
-          <p className="text-base text-dark-gray leading-normal">
-            we’ll use your schedule, goals, and dietary info to personalize your meals.
+          <p className="text-base leading-normal text-dark-gray">
+            we’ll use your schedule, goals, and dietary info to personalize your
+            meals.
           </p>
         </div>
       </div>
