@@ -11,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
 
+  const [error, setError] = useState("");
+
   // Basic email validation
   const isValidEmail = (value: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -64,6 +66,9 @@ export default function Login() {
         />
       </div>
 
+      {error && <p className="text-small text-red mt-2">{error}</p>}
+
+
       {/* Link to create account */}
       <p 
         className="text-small font-medium text-black underline cursor-pointer mt-4"
@@ -73,15 +78,34 @@ export default function Login() {
       </p>
 
       {/* Button */}
-      <Button 
+        <Button 
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
-        onClick={() => navigate("/home")}
-      >
+        onClick={() => {
+            const saved = localStorage.getItem("fakeUser");
+
+            if (!saved) {
+            setError("no account found. create one first!");
+            return;
+            }
+
+            const user = JSON.parse(saved);
+
+            if (
+            user.username === username &&
+            user.email === email &&
+            user.password === password
+            ) {
+            navigate("/home");
+            } else {
+            setError("incorrect username, email, or password.");
+            }
+        }}
+        >
         Log In
-      </Button>
+        </Button>
     </div>
   );
 }

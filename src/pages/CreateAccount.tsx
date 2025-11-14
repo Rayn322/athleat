@@ -99,15 +99,22 @@ export default function CreateAccount() {
       </p>
 
       {/* Button */}
-      <Button 
+        <Button 
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
-        onClick={() => alert("Account created!")}
-      >
+        onClick={() => {
+            const newUser = { username, email, password };
+
+            // Save the fake account
+            localStorage.setItem("fakeUser", JSON.stringify(newUser));
+
+            navigate("/login");
+        }}
+        >
         Create Account
-      </Button>
+        </Button>
     </div>
   );
 }
