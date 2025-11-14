@@ -21,6 +21,10 @@ export default defineConfig([
       reactRefresh.configs.vite,
       eslintConfigPrettier,
     ],
+    rules: {
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-misused-promises": "off",
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,

@@ -16,6 +16,9 @@ import GroceryListEmpty from "./pages/GroceryListEmpty.tsx";
 import GroceryList from "./pages/GroceryList.tsx";
 import History from "./pages/History.tsx";
 import Profile from "./pages/Profile.tsx";
+import Welcome from "./pages/Welcome.tsx";
+import CreateAccount from "./pages/CreateAccount.tsx";
+import Login from "./pages/Login.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
@@ -55,6 +58,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Root />, handle: { nav: { show: false } } },
+      { path: "welcome", element: <Welcome />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
+      { path: "create-account", element: <CreateAccount />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
+      { path: "login", element: <Login />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
       { path: "home", element: <Home />, handle: { nav: { show: true, active: "home", useNotifCartIcon: false } } },
       { path: "analytics", element: <Analytics />, handle: { nav: { show: true, active: "analytics", useNotifCartIcon: false } } },
       { path: "quickProteins", element: <QuickProteins />, handle: { nav: { show: true, active: "home", useNotifCartIcon: false } } },
