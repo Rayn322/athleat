@@ -7,7 +7,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [email, setEmail]       = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
 
@@ -24,16 +24,15 @@ export default function Login() {
   const buttonDisabled = !username || !emailIsValid || !password;
 
   return (
-    <div className="flex w-[393px] h-[852px] flex-col justify-between items-center bg-bg-white p-[60px_24px_40px_24px] mx-auto">
-
+    <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
       {/* Title */}
-      <h1 className="text-display font-regular text-black self-start">
+      <h1 className="font-regular self-start text-display text-black">
         welcome back.
       </h1>
 
       {/* Input fields */}
-      <div className="flex flex-col gap-6 mt-10">
-        <TextBox 
+      <div className="mt-10 flex flex-col gap-6">
+        <TextBox
           label="username"
           placeholder="enter username"
           value={username}
@@ -42,7 +41,7 @@ export default function Login() {
 
         {/* Email */}
         <div className="flex flex-col">
-          <TextBox 
+          <TextBox
             label="email"
             placeholder="enter email"
             value={email}
@@ -50,15 +49,15 @@ export default function Login() {
               setEmail(v);
               if (!emailTouched) setEmailTouched(true);
             }}
-            className={emailHasError ? "outline-red border-red" : ""}
+            className={emailHasError ? "border-red outline-red" : ""}
           />
           {emailHasError && (
-            <p className="text-small text-red mt-1">Invalid email format</p>
+            <p className="mt-1 text-small text-red">Invalid email format</p>
           )}
         </div>
 
         {/* Password */}
-        <TextBox 
+        <TextBox
           label="password"
           placeholder="enter password"
           value={password}
@@ -66,46 +65,45 @@ export default function Login() {
         />
       </div>
 
-      {error && <p className="text-small text-red mt-2">{error}</p>}
-
+      {error && <p className="mt-2 text-small text-red">{error}</p>}
 
       {/* Link to create account */}
-      <p 
-        className="text-small font-medium text-black underline cursor-pointer mt-4"
+      <p
+        className="mt-4 cursor-pointer text-small font-medium text-black underline"
         onClick={() => navigate("/create-account")}
       >
         don't have an account? create one
       </p>
 
       {/* Button */}
-        <Button 
+      <Button
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-            const saved = localStorage.getItem("fakeUser");
+          const saved = localStorage.getItem("fakeUser");
 
-            if (!saved) {
+          if (!saved) {
             setError("no account found. create one first!");
             return;
-            }
+          }
 
-            const user = JSON.parse(saved);
+          const user = JSON.parse(saved);
 
-            if (
+          if (
             user.username === username &&
             user.email === email &&
             user.password === password
-            ) {
+          ) {
             navigate("/home");
-            } else {
+          } else {
             setError("incorrect username, email, or password.");
-            }
+          }
         }}
-        >
+      >
         Log In
-        </Button>
+      </Button>
     </div>
   );
 }
