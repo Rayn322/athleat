@@ -24,7 +24,7 @@ export function NavBar({
   className,
 }: NavBarProps) {
   const color = (t: Tab) =>
-    t === active ? "text--green-primary" : "text-black";
+    t === active ? "text-green-primary" : "text-black";
 
   return (
     <nav
@@ -37,7 +37,7 @@ export function NavBar({
       )}
     >
       <div className="mx-auto max-w-[480px]">
-        <ul className="flex items-center justify-between">
+        <ul className="flex items-center justify-center gap-20">
           {/* Home */}
           <li>
             <Item

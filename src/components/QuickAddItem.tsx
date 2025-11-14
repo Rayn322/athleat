@@ -10,6 +10,7 @@ export type QuickAddItemProps = {
   selected?: boolean;
   defaultSelected?: boolean;
   onSelectedChange?: (next: boolean) => void;
+  onAdd?: () => void;
   className?: string;
 };
 
@@ -20,6 +21,7 @@ export function QuickAddItem({
   selected,
   defaultSelected = false,
   onSelectedChange,
+  onAdd,
   className,
 }: QuickAddItemProps) {
   const [internal, setInternal] = React.useState(defaultSelected);
@@ -35,7 +37,12 @@ export function QuickAddItem({
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => {
+        const next = !isSelected;
+        if (!isControlled) setInternal(next);
+        onSelectedChange?.(next);
+        if (next) onAdd?.(); // only fire when selecting; or just call onAdd?.() if you want every click
+      }}
       aria-pressed={isSelected}
       className={[
         "w-full space-y-2 rounded-[24px] p-4 text-left transition-all",
@@ -54,7 +61,9 @@ export function QuickAddItem({
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-h2 font-semibold">{name}</span>
+        <span className="text-h2">
+          {name}
+        </span>
 
         {isSelected ? (
           <CheckCircle2 className="h-6 w-6 text-green-primary" aria-hidden />
