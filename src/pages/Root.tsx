@@ -1,7 +1,7 @@
 // src/routes/Root.tsx
 import { useState } from "react";
 import { Link } from "react-router";
-import { ChevronRight, Plus, Check } from "lucide-react";
+import { ChevronRight, Plus, Check, User, Settings } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
 import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
@@ -14,6 +14,7 @@ import { TextBox } from "../components/TextBox";
 import { SwipeCards } from "../components/SwipeCard";
 import { Checkbox } from "../components/Checkbox";
 import { Dropdown } from "../components/Dropdown";
+import { ProfileHeading } from "../components/ProfileHeading";
 
 
 export default function Root() {
@@ -152,6 +153,22 @@ export default function Root() {
         <h2 className="text-lg font-semibold">Dropdown Example</h2>
         <Dropdown />
       </section>
+
+      {/* Example Profile Headings */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Example Profile Headings</h2>
+
+        <ProfileHeading
+          icon={<Settings className="h-6 w-6 text-black" />}
+          text="Account Settings"
+        />
+
+        <ProfileHeading
+          icon={<User className="h-6 w-6 text-black" />}
+          text="Personal Information"
+        />
+      </section>
+
 
       {/* Example Text Box */}
       <section className="space-y-4 p-6">
