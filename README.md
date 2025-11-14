@@ -20,7 +20,7 @@ You may also create your own temporary account. Accounts are stored only in brow
 
 ## Team Contribution
 
-- Ryan Lauderbach: project setup, home page, calendar components, root layout
+- Ryan Lauderbach: project setup, imported figma styles, made home page, calendar components, and root layout
 - Cory Cowden: login and account setup pages (components: swipeable cards, text box, dropdown, checkbox, profile headers, contact cards)
 - Stephen Chen: Empty Grocery List, modified versions of calendar pages, and meal options pages, (components: green highlights on user selection, buttons, progress bar, calendar date selected, meal cards), everything within the grocery icon tab (bottom right corner)
-- Tra Nguyen: led discussions, helped create figma mid-fi, created figma hi-fi, created components in figma, created text and color styles in figma, coded analysis flow, profile page, and grocery list page
+- Tra Nguyen: led discussions, helped create figma mid-fi, created figma hi-fi, created components in figma, created text and color styles in figma, coded nav bar, analysis flow, profile page, and grocery list page
