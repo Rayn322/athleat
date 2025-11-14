@@ -30,6 +30,7 @@ import InputSchedule from "./pages/InputSchedule.tsx";
 import AddClass from "./pages/AddClass.tsx";
 import AddPractice from "./pages/AddPractice.tsx";
 import AddEvent from "./pages/AddEvent.tsx";
+import InputMetrics from "./pages/InputMetrics.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
@@ -114,6 +115,13 @@ const router = createBrowserRouter([
       {
         path: "add-event",
         element: <AddEvent />,
+        handle: {
+          nav: { show: false, active: "home", useNotifCartIcon: false },
+        },
+      },
+      {
+        path: "input-metrics",
+        element: <InputMetrics />,
         handle: {
           nav: { show: false, active: "home", useNotifCartIcon: false },
         },
