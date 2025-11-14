@@ -31,6 +31,7 @@ import AddClass from "./pages/AddClass.tsx";
 import AddPractice from "./pages/AddPractice.tsx";
 import AddEvent from "./pages/AddEvent.tsx";
 import InputMetrics from "./pages/InputMetrics.tsx";
+import Preferences from "./pages/Preferences.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
@@ -122,6 +123,13 @@ const router = createBrowserRouter([
       {
         path: "input-metrics",
         element: <InputMetrics />,
+        handle: {
+          nav: { show: false, active: "home", useNotifCartIcon: false },
+        },
+      },
+      {
+        path: "preferences",
+        element: <Preferences />,
         handle: {
           nav: { show: false, active: "home", useNotifCartIcon: false },
         },
