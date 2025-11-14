@@ -1,5 +1,4 @@
 import {
-  AddCalItem,
   CalendarDayList,
   ClassCalItem,
   DaySchedule,

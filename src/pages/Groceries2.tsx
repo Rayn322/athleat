@@ -1,7 +1,6 @@
 // src/pages/Groceries2.tsx
 import { useNavigate } from "react-router";
 import {
-  AddCalItem,
   CalendarDayList,
   ClassCalItem,
   DaySchedule,

@@ -1,7 +1,7 @@
 // src/routes/Root.tsx
 import { useState } from "react";
 import { Link } from "react-router";
-import { ChevronRight, Plus, Check, X, User, Settings } from "lucide-react";
+import { ChevronRight, Plus, Check, User, Settings } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
 import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
