@@ -11,11 +11,20 @@ import Groceries2 from "./pages/Groceries2.tsx";
 import Groceries3 from "./pages/Groceries3.tsx";
 import Groceries4 from "./pages/Groceries4.tsx";
 import GroceryList from "./pages/GroceryList.tsx";
+import Welcome from "./pages/Welcome.tsx";
+import CreateAccount from "./pages/CreateAccount.tsx";
+import Login from "./pages/LogIn.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
+        {/* AUTH PAGES (no layout) */}
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* MAIN APP WITH LAYOUT */}
         <Route element={<Layout />}>
           <Route index element={<Root />} />
           <Route path="home" element={<Home />} />
