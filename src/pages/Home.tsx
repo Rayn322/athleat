@@ -10,7 +10,7 @@ import { useState } from "react";
 import MealModal from "../components/MealModal";
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [bagelCompleted, setBagelCompleted] = useState(false);
 
   return (
