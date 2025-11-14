@@ -15,14 +15,17 @@ export default function Groceries2() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-full flex-col relative">
+    <div className="relative flex h-full flex-col">
       <div>
         <p className="text-2xl font-bold">groceries</p>
         <div className="mt-2 flex items-center gap-3">
           <div className="h-3 w-full rounded-full bg-light-gray">
-            <div className="h-3 rounded-full bg-green-primary" style={{ width: `${percent}%` }} />
+            <div
+              className="h-3 rounded-full bg-green-primary"
+              style={{ width: `${percent}%` }}
+            />
           </div>
-          <div className="text-sm text-black/70 whitespace-nowrap">
+          <div className="text-sm whitespace-nowrap text-black/70">
             {plannedDays} of {TOTAL_DAYS} days planned
           </div>
         </div>
@@ -41,11 +44,17 @@ export default function Groceries2() {
 
       <button
         onClick={() => navigate("/Groceries3")}
-        className="absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-green-primary text-white px-5 py-3 font-semibold shadow-lg"
+        className="absolute right-6 bottom-6 flex items-center gap-2 rounded-full bg-green-primary px-5 py-3 font-semibold text-white shadow-lg"
       >
         <span>next day</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path
+            d="M9 18l6-6-6-6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
     </div>

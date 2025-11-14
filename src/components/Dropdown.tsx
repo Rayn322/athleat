@@ -22,7 +22,7 @@ export function Dropdown({ className }: DropdownProps) {
         "inline-flex items-center justify-center",
         "gap-2.5 rounded-xl bg-light-gray",
         "p-2 transition-all duration-150 hover:opacity-90 active:opacity-80",
-        className
+        className,
       )}
     >
       <motion.div

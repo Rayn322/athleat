@@ -19,14 +19,17 @@ export default function Groceries3() {
   };
 
   return (
-    <div className="flex h-full flex-col relative">
+    <div className="relative flex h-full flex-col">
       <div>
         <p className="text-2xl font-bold">groceries</p>
         <div className="mt-2 flex items-center gap-3">
           <div className="h-3 w-full rounded-full bg-light-gray">
-            <div className="h-3 rounded-full bg-green-primary" style={{ width: `${percent}%` }} />
+            <div
+              className="h-3 rounded-full bg-green-primary"
+              style={{ width: `${percent}%` }}
+            />
           </div>
-          <div className="text-sm text-black/70 whitespace-nowrap">
+          <div className="text-sm whitespace-nowrap text-black/70">
             {plannedDays} of {TOTAL_DAYS} days planned
           </div>
         </div>

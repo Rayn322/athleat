@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { MealOption } from "./MealOption";
 
@@ -50,7 +50,7 @@ export function SwipeCards() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 space-y-6">
+    <div className="flex flex-col items-center justify-center space-y-6 py-12">
       <div className="relative h-[450px] w-[320px]">
         {cards.map((card, index) => (
           <SwipeableCard
@@ -107,7 +107,7 @@ function SwipeableCard({
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
     >
-      <div className="h-[420px] w-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-light-gray flex flex-col">
+      <div className="flex h-[420px] w-[300px] flex-col overflow-hidden rounded-2xl border-2 border-light-gray bg-white shadow-lg">
         {/* Image */}
         <div className="h-[250px] w-full overflow-hidden">
           <img
@@ -118,14 +118,14 @@ function SwipeableCard({
         </div>
 
         {/* Info */}
-        <div className="flex-1 flex items-center justify-center p-3">
+        <div className="flex flex-1 items-center justify-center p-3">
           <MealOption
             title={title}
             imageSrc={imageSrc}
             tags={tags}
             ingredients={ingredients}
             showImage={false}
-            className="border-none shadow-none p-0 text-center text-gray-800"
+            className="border-none p-0 text-center text-gray-800 shadow-none"
           />
         </div>
       </div>

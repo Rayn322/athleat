@@ -21,14 +21,14 @@ export function TextBox({
   className,
 }: TextBoxProps) {
   return (
-    <div className={clsx("w-80 inline-flex flex-col gap-2", className)}>
-      <label className="text-dark-gray text-base font-normal">{label}</label>
+    <div className={clsx("inline-flex w-80 flex-col gap-2", className)}>
+      <label className="text-base font-normal text-dark-gray">{label}</label>
 
       <div
         className={clsx(
-          "self-stretch p-4 rounded-xl outline -outline-offset-2 inline-flex items-center",
+          "inline-flex items-center self-stretch rounded-xl p-4 outline -outline-offset-2",
           "outline-light-gray",
-          variant === "filled" ? "bg-transparent" : "bg-transparent"
+          variant === "filled" ? "bg-transparent" : "bg-transparent",
         )}
       >
         <input
@@ -37,10 +37,9 @@ export function TextBox({
           onChange={(e) => onChange?.(e.target.value)}
           placeholder={placeholder}
           className={clsx(
-            "flex-1 bg-transparent text-base font-normal focus:outline-none placeholder:italic",
-            value ? "text-black" : "text-dark-gray placeholder-dark-gray"
-        )}
-
+            "flex-1 bg-transparent text-base font-normal placeholder:italic focus:outline-none",
+            value ? "text-black" : "text-dark-gray placeholder-dark-gray",
+          )}
         />
       </div>
     </div>

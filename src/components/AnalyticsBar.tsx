@@ -54,7 +54,7 @@ export function AnalyticsBar({
         <div
           className={clsx(
             "absolute top-0 z-10 h-full rounded-full transition-[width] duration-300",
-            fillColor
+            fillColor,
           )}
           style={{ width: `${pct}%` }}
         />
@@ -93,7 +93,7 @@ export function AnalyticsBar({
             type="button"
             onClick={onQuickAdd}
             className={clsx(
-              "cursor-pointer text-base underline underline-offset-2 hover:opacity-90 active:opacity-80"
+              "cursor-pointer text-base underline underline-offset-2 hover:opacity-90 active:opacity-80",
             )}
           >
             quick add

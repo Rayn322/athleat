@@ -18,8 +18,10 @@ export default function Groceries1() {
     <div className="flex h-full flex-col">
       <div>
         <p className="text-2xl font-bold">groceries</p>
-        <div className="text-sm text-black/70 text-right mt-2">0 of 7 days planned</div>
-        <div className="w-full h-2 rounded-full bg-neutral-200 mt-2 mb-4">
+        <div className="mt-2 text-right text-sm text-black/70">
+          0 of 7 days planned
+        </div>
+        <div className="mt-2 mb-4 h-2 w-full rounded-full bg-neutral-200">
           <div className="h-2 rounded-full bg-black" style={{ width: "0%" }} />
         </div>
         <div className="mt-3">
