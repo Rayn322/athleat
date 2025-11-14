@@ -19,6 +19,7 @@ import Profile from "./pages/Profile.tsx";
 import Welcome from "./pages/Welcome.tsx";
 import CreateAccount from "./pages/CreateAccount.tsx";
 import Login from "./pages/Login.tsx";
+import Setup from "./pages/Setup.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "welcome", element: <Welcome />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
       { path: "create-account", element: <CreateAccount />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
       { path: "login", element: <Login />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
+      { path: "setup", element: <Setup />, handle: { nav: { show: false, active: "home", useNotifCartIcon: false } } },
       { path: "home", element: <Home />, handle: { nav: { show: true, active: "home", useNotifCartIcon: false } } },
       { path: "analytics", element: <Analytics />, handle: { nav: { show: true, active: "analytics", useNotifCartIcon: false } } },
       { path: "quickProteins", element: <QuickProteins />, handle: { nav: { show: true, active: "home", useNotifCartIcon: false } } },
