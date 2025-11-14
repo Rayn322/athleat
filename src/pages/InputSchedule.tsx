@@ -119,7 +119,7 @@ export default function InputSchedule() {
           size="md"
           width="full"
           disabled={items.length === 0}
-          onClick={() => navigate("/setup/next")}
+          onClick={() => navigate("/input-metrics")}
         >
           continue
         </Button>
