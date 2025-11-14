@@ -46,7 +46,7 @@ export function AnalyticsBar({
       </div>
 
       {/* Bar */}
-      <div className="relative h-6 w-full">
+      <div className="relative h-3 w-full">
         {/* Track */}
         <div className="absolute inset-0 z-0 rounded-full bg-light-gray" />
 
