@@ -38,7 +38,7 @@ export function QuickAddItem({
       onClick={toggle}
       aria-pressed={isSelected}
       className={[
-        "w-full text-left p-4 space-y-2 rounded-[24px] transition-all",
+        "w-full space-y-2 rounded-[24px] p-4 text-left transition-all",
         // background + text
         "bg-white text-black",
         // border 2px light gray by default
@@ -48,21 +48,16 @@ export function QuickAddItem({
           : "border-light-gray",
         // hover/active polish
         "hover:shadow-sm active:scale-[0.99]",
-        "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-green-primary/45",
+        "focus-visible:ring-4 focus-visible:ring-green-primary/45 focus-visible:outline-none",
         className,
       ].join(" ")}
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-h2 font-semibold">
-          {name}
-        </span>
+        <span className="text-h2 font-semibold">{name}</span>
 
         {isSelected ? (
-          <CheckCircle2
-            className="h-6 w-6 text-green-primary"
-            aria-hidden
-          />
+          <CheckCircle2 className="h-6 w-6 text-green-primary" aria-hidden />
         ) : (
           <CirclePlus className="h-6 w-6 text-black" />
         )}

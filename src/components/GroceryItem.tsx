@@ -16,7 +16,7 @@ export function GroceryItem({
   return (
     <label
       className={[
-        "flex items-center gap-4 w-full p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer",
+        "flex w-full cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 transition-all sm:p-5",
         checked
           ? "border-green-primary shadow-[0_0_0_4px_rgba(32,159,45,0.35)]"
           : "border-light-gray",
@@ -30,7 +30,7 @@ export function GroceryItem({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange?.(e.target.checked)}
-        className="appearance-none h-6 w-6 rounded border-2 border-black checked:bg-green-primary checked:border-green-primary transition-colors"
+        className="h-6 w-6 appearance-none rounded border-2 border-black transition-colors checked:border-green-primary checked:bg-green-primary"
       />
       <span className="text-2xl font-medium">{label}</span>
     </label>

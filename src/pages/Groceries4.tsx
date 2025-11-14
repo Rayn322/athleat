@@ -13,7 +13,7 @@ export default function Groceries4() {
   const percent = 100; // full bar
 
   return (
-    <div className="flex h-full flex-col relative">
+    <div className="relative flex h-full flex-col">
       <div>
         {/* Title */}
         <p className="text-2xl font-bold">groceries</p>
@@ -26,7 +26,7 @@ export default function Groceries4() {
               style={{ width: `${percent}%` }}
             />
           </div>
-          <div className="text-sm text-black/70 whitespace-nowrap">
+          <div className="text-sm whitespace-nowrap text-black/70">
             {plannedDays} of {TOTAL_DAYS} days planned
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function Groceries4() {
       {/* Floating pill button */}
       <button
         onClick={() => console.log("generate grocery list")}
-        className="absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-green-primary text-white px-5 py-3 font-semibold shadow-lg"
+        className="absolute right-6 bottom-6 flex items-center gap-2 rounded-full bg-green-primary px-5 py-3 font-semibold text-white shadow-lg"
         aria-label="Generate grocery list"
       >
         <span>generate grocery list</span>

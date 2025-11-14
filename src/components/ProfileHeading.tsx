@@ -14,15 +14,13 @@ export function ProfileHeading({ icon, text, className }: ProfileHeadingProps) {
       className={clsx(
         "flex w-full max-w-[345px] items-start justify-between pb-3",
         "border-b-2 border-light-gray",
-        className
+        className,
       )}
     >
       <div className="flex items-center gap-3">
         <div className="h-6 w-6">{icon}</div>
 
-        <span className="text-h3 font-regular text-black">
-          {text}
-        </span>
+        <span className="font-regular text-h3 text-black">{text}</span>
       </div>
     </div>
   );

@@ -66,11 +66,11 @@ export function ContactCard({
       className={clsx(
         "relative shrink-0",
         isEmptyInitial && !isEditing
-          ? "w-[50px] h-[50px]"
-          : "w-auto min-h-[70px] p-2",
+          ? "h-[50px] w-[50px]"
+          : "min-h-[70px] w-auto p-2",
         "rounded-xl border-2 border-light-gray bg-white",
         "flex flex-col items-start justify-center transition-all",
-        className
+        className,
       )}
     >
       {/* Remove icon (top-right) for filled cards */}
@@ -82,7 +82,7 @@ export function ContactCard({
             onRemove?.();
           }}
           aria-label="Remove contact"
-          className="absolute right-2 top-2 p-1"
+          className="absolute top-2 right-2 p-1"
         >
           <X className="h-3 w-3 text-black" strokeWidth={2} />
         </button>
@@ -92,7 +92,7 @@ export function ContactCard({
       {isEmptyInitial && !isEditing && (
         <div
           onClick={() => setIsEditing(true)}
-          className="flex h-full w-full cursor-pointer select-none items-center justify-center"
+          className="flex h-full w-full cursor-pointer items-center justify-center select-none"
         >
           <Plus className="h-6 w-6 text-black" strokeWidth={2} />
         </div>
@@ -100,7 +100,7 @@ export function ContactCard({
 
       {/* Edit mode (for both add and edit) */}
       {isEditing && (
-        <div className="w-full flex flex-col gap-1">
+        <div className="flex w-full flex-col gap-1">
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -111,7 +111,7 @@ export function ContactCard({
             value={company}
             onChange={(e) => setCompany(e.target.value)}
             placeholder="Company"
-            className="w-full bg-transparent text-small italic text-dark-gray placeholder:text-gray-400 focus:outline-none"
+            className="w-full bg-transparent text-small text-dark-gray italic placeholder:text-gray-400 focus:outline-none"
           />
 
           <div className="mt-1 flex gap-2">
@@ -126,7 +126,7 @@ export function ContactCard({
             <button
               type="button"
               onClick={handleCancel}
-              className="rounded-lg bg-white border px-3 py-1 text-xs font-medium"
+              className="rounded-lg border bg-white px-3 py-1 text-xs font-medium"
             >
               Cancel
             </button>
@@ -138,15 +138,15 @@ export function ContactCard({
       {!isEmptyInitial && !isEditing && (
         <div
           onClick={() => setIsEditing(true)}
-          className="w-full cursor-pointer flex flex-col gap-1"
+          className="flex w-full cursor-pointer flex-col gap-1"
         >
           <div
-            className="text-small font-medium text-black overflow-hidden whitespace-nowrap overflow-ellipsis"
+            className="overflow-hidden text-small font-medium overflow-ellipsis whitespace-nowrap text-black"
             style={{ maxWidth: 66 }}
           >
             {propName}
           </div>
-          <div className="text-small italic text-dark-gray overflow-hidden whitespace-nowrap overflow-ellipsis">
+          <div className="overflow-hidden text-small overflow-ellipsis whitespace-nowrap text-dark-gray italic">
             {propCompany}
           </div>
         </div>

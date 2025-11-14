@@ -23,11 +23,11 @@ export function Checkbox({ defaultChecked = true, className }: CheckboxProps) {
       onClick={handleClick}
       className={clsx(
         "flex items-center justify-center",
-        "w-6 h-6 shrink-0 rounded-sm transition-all duration-150",
+        "h-6 w-6 shrink-0 rounded-sm transition-all duration-150",
         checked
           ? "bg-green-primary hover:bg-green-primary/90"
           : "border-2 border-black hover:bg-black/5",
-        className
+        className,
       )}
     >
       {checked && <Check className="h-4 w-4 text-white" strokeWidth={2} />}

@@ -17,11 +17,10 @@ import { Dropdown } from "../components/Dropdown";
 import { ProfileHeading } from "../components/ProfileHeading";
 import { ContactCard } from "../components/ContactCard";
 
-
 export default function Root() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
     "protein bar": false,
-    "almonds": true,
+    almonds: true,
     "greek yogurt": false,
   });
 
@@ -32,25 +31,30 @@ export default function Root() {
   };
 
   //for ContactCard demo
-const [contacts, setContacts] = useState<
-  { id: number; name: string; company: string }[]
->([
-  { id: 1, name: "Name 1", company: "Company A" },
-  { id: 2, name: "Name 2", company: "Company B" },
-]);
+  const [contacts, setContacts] = useState<
+    { id: number; name: string; company: string }[]
+  >([
+    { id: 1, name: "Name 1", company: "Company A" },
+    { id: 2, name: "Name 2", company: "Company B" },
+  ]);
 
-const addContact = (data: { name: string; company: string }) => {
-  const nextId = Math.max(0, ...contacts.map((c) => c.id)) + 1;
-  setContacts((prev) => [...prev, { id: nextId, ...data }]);
-};
+  const addContact = (data: { name: string; company: string }) => {
+    const nextId = Math.max(0, ...contacts.map((c) => c.id)) + 1;
+    setContacts((prev) => [...prev, { id: nextId, ...data }]);
+  };
 
-const updateContact = (id: number, data: { name: string; company: string }) => {
-  setContacts((prev) => prev.map((c) => (c.id === id ? { ...c, ...data } : c)));
-};
+  const updateContact = (
+    id: number,
+    data: { name: string; company: string },
+  ) => {
+    setContacts((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...data } : c)),
+    );
+  };
 
-const removeContact = (id: number) => {
-  setContacts((prev) => prev.filter((c) => c.id !== id));
-};
+  const removeContact = (id: number) => {
+    setContacts((prev) => prev.filter((c) => c.id !== id));
+  };
 
   return (
     <div className="space-y-6">
@@ -62,7 +66,13 @@ const removeContact = (id: number) => {
         </Button>
 
         {/* Custom icon */}
-        <Button variant="primary" width="hug" showIcon icon={<Plus className="h-4 w-4" />} size="sm">
+        <Button
+          variant="primary"
+          width="hug"
+          showIcon
+          icon={<Plus className="h-4 w-4" />}
+          size="sm"
+        >
           Add Item
         </Button>
 
@@ -81,10 +91,7 @@ const removeContact = (id: number) => {
           Disabled
         </Button>
 
-        <QuickAddItem
-          name="Protein Bar"
-          imageSrc="/images/protein-bar.jpg"
-        />
+        <QuickAddItem name="Protein Bar" imageSrc="/images/protein-bar.jpg" />
 
         <NavBar active="home" />
         <NavBar active="analytics" />
@@ -98,7 +105,13 @@ const removeContact = (id: number) => {
       {/* Example Analytics Bars (unchanged) */}
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Analytics Bars</h2>
-        <AnalyticsBar label="Carbs" variant="onTrack" value={55} goal={50} max={100} />
+        <AnalyticsBar
+          label="Carbs"
+          variant="onTrack"
+          value={55}
+          goal={50}
+          max={100}
+        />
         <AnalyticsBar
           label="Protein"
           variant="low"
@@ -113,39 +126,57 @@ const removeContact = (id: number) => {
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Progress Bars</h2>
         <div className="space-y-5 bg-white p-6">
-          <ProgressBar value={18}  height={18} className="mb-4" />
-          <ProgressBar value={45}  height={18} className="mb-4" />
-          <ProgressBar value={68}  height={18} className="mb-4" />
+          <ProgressBar value={18} height={18} className="mb-4" />
+          <ProgressBar value={45} height={18} className="mb-4" />
+          <ProgressBar value={68} height={18} className="mb-4" />
           <ProgressBar value={100} height={18} className="mb-4" />
-          <ProgressBar value={30}  height={18} className="mb-4" />
-          <ProgressBar value={0}   height={18} className="mb-4" />
-          <ProgressBar value={60}  height={18} className="mb-4" />
-          <ProgressBar value={72}  height={18} className="mb-4" />
-          <ProgressBar value={85}  height={18} className="mb-4" />
+          <ProgressBar value={30} height={18} className="mb-4" />
+          <ProgressBar value={0} height={18} className="mb-4" />
+          <ProgressBar value={60} height={18} className="mb-4" />
+          <ProgressBar value={72} height={18} className="mb-4" />
+          <ProgressBar value={85} height={18} className="mb-4" />
         </div>
       </section>
 
       {/* Example Meal Options */}
       <section className="space-y-6">
-        <h2 className="text-lg font-semibold">Meal Options (click to toggle)</h2>
+        <h2 className="text-lg font-semibold">
+          Meal Options (click to toggle)
+        </h2>
         <MealOption
           title="Cheese Burger"
           imageSrc="/Images/burger.jpg"
           tags={["high protein", "carbs"]}
-          ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
+          ingredients={[
+            "Bread",
+            "Patty",
+            "Lettuce",
+            "Tomato",
+            "Cheese",
+            "Pickles",
+          ]}
         />
 
         <MealOption
           title="Cheese Burger"
           imageSrc="/Images/burger.jpg"
           tags={["high protein", "carbs"]}
-          ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
+          ingredients={[
+            "Bread",
+            "Patty",
+            "Lettuce",
+            "Tomato",
+            "Cheese",
+            "Pickles",
+          ]}
         />
       </section>
 
       {/* Example Grocery Items */}
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">Grocery Items (click to toggle)</h2>
+        <h2 className="text-lg font-semibold">
+          Grocery Items (click to toggle)
+        </h2>
         <div className="max-w-lg space-y-3 bg-white p-6">
           {Object.entries(checkedItems).map(([label, checked]) => (
             <GroceryItem
@@ -177,47 +208,44 @@ const removeContact = (id: number) => {
       </section>
 
       {/* Example Profile Headings */}
-        <section className="space-y-4 p-6">
-  <h2 className="text-lg font-semibold">Profile Heading Example</h2>
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Profile Heading Example</h2>
 
-  <ProfileHeading
-    icon={<Settings className="h-6 w-6 text-black" />}
-    text="Account Settings"
-  />
+        <ProfileHeading
+          icon={<Settings className="h-6 w-6 text-black" />}
+          text="Account Settings"
+        />
 
-  <ProfileHeading
-    icon={<User className="h-6 w-6 text-black" />}
-    text="Personal Information"
-  />
-</section>
+        <ProfileHeading
+          icon={<User className="h-6 w-6 text-black" />}
+          text="Personal Information"
+        />
+      </section>
 
       {/* Example Contact Cards */}
       <section className="space-y-4 p-6">
-  <h2 className="text-lg font-semibold">Contacts</h2>
+        <h2 className="text-lg font-semibold">Contacts</h2>
 
-  <div className="flex items-start gap-3">
-    {contacts.map((c) => (
-      <ContactCard
-        key={c.id}
-        name={c.name}
-        company={c.company}
-        onSave={(data) => updateContact(c.id, data)}
-        onRemove={() => removeContact(c.id)}
-      />
-    ))}
+        <div className="flex items-start gap-3">
+          {contacts.map((c) => (
+            <ContactCard
+              key={c.id}
+              name={c.name}
+              company={c.company}
+              onSave={(data) => updateContact(c.id, data)}
+              onRemove={() => removeContact(c.id)}
+            />
+          ))}
 
-    {/* Add card (empty) */}
-    <ContactCard
-      onSave={(data) => addContact(data)}
-    />
-  </div>
-</section>
-
+          {/* Add card (empty) */}
+          <ContactCard onSave={(data) => addContact(data)} />
+        </div>
+      </section>
 
       {/* Example Text Box */}
       <section className="space-y-4 p-6">
         <h2 className="text-lg font-semibold">TextBoxes</h2>
-  
+
         {/* Username */}
         <TextBox
           label="Username"
@@ -248,7 +276,7 @@ const removeContact = (id: number) => {
       {/* Navigation link */}
       <Link
         to="/other"
-        className="flex w-fit gap-2 rounded-3xl bg-green-primary px-4 py-3 text-white hover:opacity-90 active:opacity-80 transition"
+        className="flex w-fit gap-2 rounded-3xl bg-green-primary px-4 py-3 text-white transition hover:opacity-90 active:opacity-80"
       >
         <span>Go to other page</span>
         <ChevronRight />
@@ -256,4 +284,3 @@ const removeContact = (id: number) => {
     </div>
   );
 }
-

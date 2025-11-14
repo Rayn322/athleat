@@ -12,8 +12,10 @@ export default function MealOptions() {
   return (
     <section className="space-y-6 p-6">
       <h1 className="text-3xl font-medium lowercase">meal options</h1>
-      <div className="text-sm text-black/70 text-right">0 of 7 days planned</div>
-      <div className="w-full h-2 rounded-full bg-neutral-200">
+      <div className="text-right text-sm text-black/70">
+        0 of 7 days planned
+      </div>
+      <div className="h-2 w-full rounded-full bg-neutral-200">
         <div className="h-2 rounded-full bg-black" style={{ width: "0%" }} />
       </div>
 
@@ -21,7 +23,14 @@ export default function MealOptions() {
         title="Cheese Burger"
         imageSrc="/Images/burger.jpg"
         tags={["high protein", "carbs"]}
-        ingredients={["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"]}
+        ingredients={[
+          "Bread",
+          "Patty",
+          "Lettuce",
+          "Tomato",
+          "Cheese",
+          "Pickles",
+        ]}
         onSelect={choose}
       />
       <MealOption

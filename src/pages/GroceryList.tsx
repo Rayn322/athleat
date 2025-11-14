@@ -4,15 +4,14 @@ export default function GroceryList() {
   const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen flex flex-col">
+    <section className="flex min-h-screen flex-col">
       {/* Header (left-aligned like Groceries1) */}
       <div className="px-0">
         <p className="text-2xl font-bold">your grocery list</p>
       </div>
 
-
       {/* Centered empty state */}
-      <div className="flex-1 flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-1 flex-col items-center justify-center gap-4">
         {/* Outline milk carton + apple icon */}
         <svg
           width="112"
@@ -34,7 +33,13 @@ export default function GroceryList() {
             strokeWidth="4"
             strokeLinecap="round"
           />
-          <circle cx="68" cy="62" r="12" stroke="currentColor" strokeWidth="4" />
+          <circle
+            cx="68"
+            cy="62"
+            r="12"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
           <path
             d="M68 50c2-4 5-6 9-6"
             stroke="currentColor"
@@ -60,11 +65,17 @@ export default function GroceryList() {
         {/* Pill button */}
         <button
           onClick={() => navigate("/Groceries1")}
-          className="mt-2 inline-flex items-center gap-2 rounded-full bg-green-primary text-white px-5 py-3 font-semibold shadow-lg"
+          className="mt-2 inline-flex items-center gap-2 rounded-full bg-green-primary px-5 py-3 font-semibold text-white shadow-lg"
           aria-label="Plan next week"
         >
           <span>plan next week</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
             <path
               d="M9 18l6-6-6-6"
               stroke="currentColor"

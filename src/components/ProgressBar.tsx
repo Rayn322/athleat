@@ -21,7 +21,7 @@ export function ProgressBar({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(pct)}
-      className={`w-full rounded-full bg-light-gray overflow-hidden ${className}`}
+      className={`w-full overflow-hidden rounded-full bg-light-gray ${className}`}
       style={{ height }}
     >
       <div

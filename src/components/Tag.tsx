@@ -24,10 +24,12 @@ export function Tag({
 }: TagProps) {
   const base =
     "inline-flex items-center justify-center rounded-full font-medium transition-all";
-  const sizeClasses = size === "lg" ? "px-5 py-1.5 text-2xl" : "px-3 py-1 text-base";
+  const sizeClasses =
+    size === "lg" ? "px-5 py-1.5 text-2xl" : "px-3 py-1 text-base";
 
   const variantClasses = {
-    "outline-green": "border-2 border-green-primary text-green-primary bg-transparent",
+    "outline-green":
+      "border-2 border-green-primary text-green-primary bg-transparent",
     green: "bg-green-primary text-bg-white",
     "outline-black": "border-2 border-black text-black bg-transparent",
     outline: "border-2 border-bg-white text-bg-white bg-transparent",
