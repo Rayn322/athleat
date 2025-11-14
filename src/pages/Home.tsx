@@ -8,10 +8,12 @@ import {
 } from "../components/Calendar";
 import { useState } from "react";
 import MealModal from "../components/MealModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [bagelCompleted, setBagelCompleted] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -41,7 +43,12 @@ export default function Home() {
         <div className="flex flex-col gap-8 pb-8">
           <div className="flex justify-between">
             <h2 className="text-base font-normal">Hello Sarah!</h2>
-            <CircleUser />
+            <button
+              type="button"
+              onClick={() => navigate("/profile")}
+            >
+              <CircleUser className="h-6 w-6 text-black" />
+            </button>
           </div>
           <h1 className="text-2xl font-normal">today's meals</h1>
           <CalendarDayList />

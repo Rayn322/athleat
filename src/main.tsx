@@ -15,6 +15,7 @@ import Groceries4 from "./pages/Groceries4.tsx";
 import GroceryListEmpty from "./pages/GroceryListEmpty.tsx";
 import GroceryList from "./pages/GroceryList.tsx";
 import History from "./pages/History.tsx";
+import Profile from "./pages/Profile.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
       { path: "groceryListEmpty", element: <GroceryListEmpty />, handle: { nav: { show: true, active: "cart", useNotifCartIcon: false } } },
       { path: "groceryList", element: <GroceryList />, handle: { nav: { show: true, active: "cart", useNotifCartIcon: false } } },
       { path: "history", element: <History />, handle: { nav: { show: true, active: "analytics", useNotifCartIcon: false } } },
+      { path: "profile", element: <Profile />, handle: { nav: { show: true, active: "analytics", useNotifCartIcon: false } } },
     ],
   },
 ]);

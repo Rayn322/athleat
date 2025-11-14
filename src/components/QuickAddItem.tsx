@@ -61,13 +61,9 @@ export function QuickAddItem({
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-<<<<<<< HEAD
         <span className="text-h2">
           {name}
         </span>
-=======
-        <span className="text-h2 font-semibold">{name}</span>
->>>>>>> origin/main
 
         {isSelected ? (
           <CheckCircle2 className="h-6 w-6 text-green-primary" aria-hidden />
