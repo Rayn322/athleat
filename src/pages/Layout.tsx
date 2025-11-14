@@ -7,7 +7,10 @@ export default function Layout() {
       <div className="overflow-y-auto px-6 pt-[60px]">
         <Outlet />
       </div>
-      <NavBar active="home" />
+      <NavBar
+        active="home"
+        hrefs={{ home: "/home", analytics: "/", cart: "/grocerylist" }}
+      />
     </div>
   );
 }

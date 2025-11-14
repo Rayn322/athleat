@@ -4,6 +4,7 @@ import { House, ChartNoAxesColumn, ShoppingBasket } from "lucide-react";
 import cartUrl from "../assets/icons/shopping-basket-notif.svg?url";
 import cartActiveUrl from "../assets/icons/shopping-basket-notif-active.svg?url";
 import type { PropsWithChildren } from "react";
+import { Link } from "react-router";
 
 type Tab = "home" | "analytics" | "cart";
 
@@ -114,14 +115,14 @@ function Item({ tab, label, children, hrefs, active, onSelect }: ItemProps) {
   );
 
   return href ? (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="select-none"
       aria-label={label}
       onClick={() => onSelect?.(tab)}
     >
       {content}
-    </a>
+    </Link>
   ) : (
     <button
       type="button"
