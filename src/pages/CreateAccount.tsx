@@ -7,9 +7,9 @@ export default function CreateAccount() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [confirm, setConfirm]   = useState("");
 
   const [emailTouched, setEmailTouched] = useState(false);
   const [confirmTouched, setConfirmTouched] = useState(false);
@@ -30,15 +30,17 @@ export default function CreateAccount() {
     !username || !emailIsValid || !password || !confirmMatches;
 
   return (
-    <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
+    <div className="flex w-[393px] h-[852px] flex-col justify-between items-center bg-bg-white p-[60px_24px_40px_24px] mx-auto">
+
       {/* Title */}
-      <h1 className="font-regular text-display text-black">
+      <h1 className="text-display font-regular text-black">
         create your account.
       </h1>
 
       {/* Input fields */}
-      <div className="mt-10 flex flex-col gap-6">
-        <TextBox
+      <div className="flex flex-col gap-6 mt-10">
+        
+        <TextBox 
           label="username"
           placeholder="enter username"
           value={username}
@@ -47,7 +49,7 @@ export default function CreateAccount() {
 
         {/* Email */}
         <div className="flex flex-col">
-          <TextBox
+          <TextBox 
             label="email"
             placeholder="enter email"
             value={email}
@@ -55,15 +57,15 @@ export default function CreateAccount() {
               setEmail(v);
               if (!emailTouched) setEmailTouched(true);
             }}
-            className={emailHasError ? "border-red outline-red" : ""}
+            className={emailHasError ? "outline-red border-red" : ""}
           />
           {emailHasError && (
-            <p className="mt-1 text-small text-red">Invalid email format</p>
+            <p className="text-small text-red mt-1">Invalid email format</p>
           )}
         </div>
 
         {/* Password */}
-        <TextBox
+        <TextBox 
           label="create password"
           placeholder="enter password"
           value={password}
@@ -72,7 +74,7 @@ export default function CreateAccount() {
 
         {/* Confirm password */}
         <div className="flex flex-col">
-          <TextBox
+          <TextBox 
             label="confirm password"
             placeholder="re-enter password"
             value={confirm}
@@ -80,39 +82,39 @@ export default function CreateAccount() {
               setConfirm(v);
               if (!confirmTouched) setConfirmTouched(true);
             }}
-            className={confirmHasError ? "border-red outline-red" : ""}
+            className={confirmHasError ? "outline-red border-red" : ""}
           />
           {confirmHasError && (
-            <p className="mt-1 text-small text-red">Passwords do not match</p>
+            <p className="text-small text-red mt-1">Passwords do not match</p>
           )}
         </div>
       </div>
 
       {/* Link to sign in */}
-      <p
-        className="mt-4 cursor-pointer text-small font-medium text-black underline"
-        onClick={() => navigate("/login")}
+      <p 
+        className="text-small font-medium text-black underline cursor-pointer mt-4"
+        onClick={() => navigate("/setup")}
       >
         already have an account? log in
       </p>
 
       {/* Button */}
-      <Button
+        <Button 
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-          const newUser = { username, email, password };
+            const newUser = { username, email, password };
 
-          // Save the fake account
-          localStorage.setItem("fakeUser", JSON.stringify(newUser));
+            // Save the fake account
+            localStorage.setItem("fakeUser", JSON.stringify(newUser));
 
-          navigate("/login");
+            navigate("/setup");
         }}
-      >
+        >
         Create Account
-      </Button>
+        </Button>
     </div>
   );
 }
