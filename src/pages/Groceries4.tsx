@@ -50,7 +50,7 @@ export default function Groceries4() {
       {/* Floating pill button */}
       <button
         onClick={() => navigate("/groceryList")}
-        className="absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-green-primary text-white px-5 py-3 font-semibold shadow-lg"
+        className="absolute right-6 bottom-6 flex items-center gap-2 rounded-full bg-green-primary px-5 py-3 font-semibold text-white shadow-lg"
         aria-label="Generate grocery list"
       >
         <span>generate grocery list</span>

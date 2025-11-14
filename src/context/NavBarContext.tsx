@@ -20,7 +20,6 @@ export function NavBarProvider({ children }: { children: React.ReactNode }) {
 
 export function useNavBar() {
   const ctx = useContext(NavBarContext);
-  if (!ctx)
-    throw new Error("useNavBar must be used inside a <NavBarProvider>");
+  if (!ctx) throw new Error("useNavBar must be used inside a <NavBarProvider>");
   return ctx;
 }

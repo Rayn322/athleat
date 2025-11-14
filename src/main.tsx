@@ -84,43 +84,8 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "input-schedule",
-        element: <InputSchedule />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-class",
-        element: <AddClass />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-practice",
-        element: <AddPractice />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-event",
-        element: <AddEvent />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
         path: "login",
         element: <Login />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "setup",
-        element: <Setup />,
         handle: {
           nav: { show: false, active: "home", useNotifCartIcon: false },
         },
