@@ -25,6 +25,11 @@ import Profile from "./pages/Profile.tsx";
 import Welcome from "./pages/Welcome.tsx";
 import CreateAccount from "./pages/CreateAccount.tsx";
 import Login from "./pages/Login.tsx";
+import Setup from "./pages/Setup.tsx";
+import InputSchedule from "./pages/InputSchedule.tsx";
+import AddClass from "./pages/AddClass.tsx";
+import AddPractice from "./pages/AddPractice.tsx";
+import AddEvent from "./pages/AddEvent.tsx";
 
 // createRoot(document.getElementById("root")!).render(
 //   <StrictMode>
