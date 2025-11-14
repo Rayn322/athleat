@@ -1,7 +1,14 @@
 import { QuickAddItem } from "../components/QuickAddItem";
-import { NavBar } from "../components/NavBar";
+import { useNavBar } from "../context/NavBarContext";
 
-export default function Analytics() {
+export default function QuickProteins() {
+    const { setUseNotifCartIcon } = useNavBar();
+
+    const handleAddToCart = (name: string) => {
+        console.log(`Added ${name} to cart`);
+        setUseNotifCartIcon(true); // turns on the notif icon
+    };
+
     return (
         <div className="space-y-13 mt-4">
             <div className="space-y-1">
@@ -12,23 +19,19 @@ export default function Analytics() {
             </div>
             <section className="space-y-4">
                 <QuickAddItem
-                    name="Protein Bar"
-                    imageSrc="/images/protein-bar.jpg"
+                    name="protein bar"
+                    imageSrc="/Images/bar.png"
+                    onAdd={() => handleAddToCart("protein shake")}
                 />
                 <QuickAddItem
-                    name="Protein Bar"
-                    imageSrc="/images/protein-bar.jpg"
+                    name="chicken breast"
+                    imageSrc="/Images/chickenBreast.png"
                 />
                 <QuickAddItem
-                    name="Protein Bar"
-                    imageSrc="/images/protein-bar.jpg"
-                />
-                <QuickAddItem
-                    name="Protein Bar"
-                    imageSrc="/images/protein-bar.jpg"
+                    name="protein shake"
+                    imageSrc="/Images/shake.png"
                 />
             </section>
-            <NavBar active="analytics" />
         </div>
     );
 }

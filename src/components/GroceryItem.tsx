@@ -32,7 +32,7 @@ export function GroceryItem({
         onChange={(e) => onChange?.(e.target.checked)}
         className="appearance-none h-6 w-6 rounded border-2 border-black checked:bg-green-primary checked:border-green-primary transition-colors"
       />
-      <span className="text-2xl font-medium">{label}</span>
+      <span className="text-base">{label}</span>
     </label>
   );
 }

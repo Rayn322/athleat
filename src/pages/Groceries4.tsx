@@ -5,12 +5,14 @@ import {
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
+import { useNavigate } from "react-router";
 
 export default function Groceries4() {
   // Static mock to match the screenshot
   const plannedDays = 7;
   const TOTAL_DAYS = 7;
   const percent = 100; // full bar
+  const navigate = useNavigate();
 
   return (
     <div className="flex h-full flex-col relative">
@@ -48,7 +50,7 @@ export default function Groceries4() {
 
       {/* Floating pill button */}
       <button
-        onClick={() => console.log("generate grocery list")}
+        onClick={() => navigate("/groceryList")}
         className="absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-green-primary text-white px-5 py-3 font-semibold shadow-lg"
         aria-label="Generate grocery list"
       >
