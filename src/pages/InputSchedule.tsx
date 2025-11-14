@@ -1,4 +1,3 @@
-// src/pages/InputSchedule.tsx
 import { useEffect, useState } from "react";
 import { ChevronLeft, CirclePlus, CircleMinus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -22,90 +21,98 @@ export default function InputSchedule() {
     setItems(loadSchedule());
   }
 
-  return (
-    <div className="mx-auto flex h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
-      {/* Top Row: Back Button + Progress Bar */}
-      <div className="mb-6 flex w-full items-center justify-between">
-        {/* Back button */}
-        <button onClick={() => navigate(-1)}>
-          <ChevronLeft className="h-6 w-6" />
-        </button>
+  const groupedItems = {
+    class: items.filter((i) => i.type === "class"),
+    practice: items.filter((i) => i.type === "practice"),
+    event: items.filter((i) => i.type === "event"),
+  };
 
-        {/* Progress Bar (same as AddClass) */}
+  return (
+    <div className="flex w-[392px] min-h-[852px] flex-col px-6 pt-[60px] pb-10 bg-bg-white mx-auto">
+
+      {/* Top Row */}
+      <div className="flex items-center justify-between mb-6 w-full">
+        <button onClick={() => navigate(-1)}>
+          <ChevronLeft className="w-6 h-6" />
+        </button>
         <div className="w-[304px] shrink-0">
           <ProgressBar value={1} max={3} height={9} />
         </div>
       </div>
 
       {/* Logo + title */}
-      <div className="mb-6 flex flex-col gap-3">
-        <img src={leafLogo} alt="Leaf Logo" className="h-[71.8px] w-[67.2px]" />
-        <h1 className="text-h1 font-normal text-black">add your schedule.</h1>
-        <p className="text-small text-dark-gray italic">
-          psst! you can edit this later.
-        </p>
+      <div className="flex flex-col gap-3 mb-6">
+        <img src={leafLogo} alt="Leaf Logo" className="w-[67.2px] h-[71.8px]" />
+        <h1 className="text-h1 text-black font-normal">add your schedule.</h1>
+        <p className="text-small italic text-dark-gray">psst! you can edit this later.</p>
       </div>
 
-      {/* Add buttons + list */}
-      <div className="mt-6 w-full flex-1">
-        <div className="flex flex-col gap-5">
+      {/* MAIN CONTENT */}
+      <div className="flex-1 mt-2 w-full flex flex-col gap-8">
+
+        {/* --------------------- CLASS SECTION --------------------- */}
+        <div className="flex flex-col gap-3">
           <button
-            className="flex items-center gap-3 py-2"
+            className="flex items-center gap-3 px-2 py-1"
             onClick={() => navigate("/add-class")}
           >
-            <CirclePlus className="h-6 w-6" />
+            <CirclePlus className="w-6 h-6" />
             <span className="text-h1 font-normal">class</span>
           </button>
 
+          {groupedItems.class.length > 0 && (
+            <div className="flex flex-col gap-2 pl-6">
+              {groupedItems.class.map((it) =>
+                renderScheduleItem(it, handleRemove)
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* --------------------- PRACTICE SECTION --------------------- */}
+        <div className="flex flex-col gap-3">
           <button
-            className="flex items-center gap-3 py-2"
+            className="flex items-center gap-3 px-2 py-1"
             onClick={() => navigate("/add-practice")}
           >
-            <CirclePlus className="h-6 w-6" />
+            <CirclePlus className="w-6 h-6" />
             <span className="text-h1 font-normal">practice</span>
           </button>
 
+          {groupedItems.practice.length > 0 && (
+            <div className="flex flex-col gap-2 pl-6">
+              {groupedItems.practice.map((it) =>
+                renderScheduleItem(it, handleRemove)
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* --------------------- EVENT SECTION --------------------- */}
+        <div className="flex flex-col gap-3">
           <button
-            className="flex items-center gap-3 py-2"
+            className="flex items-center gap-3 px-2 py-1"
             onClick={() => navigate("/add-event")}
           >
-            <CirclePlus className="h-6 w-6" />
+            <CirclePlus className="w-6 h-6" />
             <span className="text-h1 font-normal">event</span>
           </button>
-        </div>
 
-        {/* Existing items */}
-        <div className="mt-8 space-y-4">
-          {items.length === 0 && (
-            <p className="text-base text-dark-gray">No schedule items yet.</p>
-          )}
-
-          {items.map((it) => (
-            <div
-              key={it.id}
-              className="flex items-center gap-4 rounded-xl bg-white px-9 py-3 shadow-sm"
-            >
-              <button onClick={() => handleRemove(it.id)}>
-                <CircleMinus className="h-6 w-6" />
-              </button>
-
-              <div className="flex flex-col">
-                <div className="text-base font-normal text-black">
-                  {it.name}{" "}
-                  <span className="text-dark-gray">
-                    {renderDaysSummary(it)}
-                  </span>
-                </div>
-                <div className="text-small text-dark-gray">
-                  {renderTimeSummary(it)}
-                </div>
-              </div>
+          {groupedItems.event.length > 0 && (
+            <div className="flex flex-col gap-2 pl-6">
+              {groupedItems.event.map((it) =>
+                renderScheduleItem(it, handleRemove)
+              )}
             </div>
-          ))}
+          )}
         </div>
+
+        {items.length === 0 && (
+          <p className="text-dark-gray text-base">No schedule items yet.</p>
+        )}
       </div>
 
-      {/* Primary button */}
+      {/* Continue button */}
       <div className="mt-6 w-full">
         <Button
           variant={items.length === 0 ? "disabled" : "primary"}
@@ -114,25 +121,46 @@ export default function InputSchedule() {
           disabled={items.length === 0}
           onClick={() => navigate("/setup/next")}
         >
-          Continue
+          continue
         </Button>
       </div>
     </div>
   );
 }
 
-/** Helpers */
+/* --- Render item --- */
+function renderScheduleItem(it: ScheduleItem, removeFn: any) {
+  return (
+    <div key={it.id} className="flex items-center gap-3 py-1">
+      <button onClick={() => removeFn(it.id)}>
+        <CircleMinus className="w-6 h-6" />
+      </button>
+
+      <div className="flex flex-col">
+        <div className="text-base text-black">
+          {it.name}{" "}
+          <span className="text-dark-gray">{renderDaysSummary(it)}</span>
+        </div>
+
+        <div className="text-small text-dark-gray">
+          {renderTimeSummary(it)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function renderDaysSummary(it: ScheduleItem) {
   if (!it.days || it.days.length === 0) return "";
   return it.days.join("");
 }
 
 function renderTimeSummary(it: ScheduleItem) {
-  if (it.sameTimeDaily && it.time) {
+  if (it.sameTimeDaily && it.time)
     return `${it.time.start} - ${it.time.end}`;
-  } else if (!it.sameTimeDaily && it.schedule?.length) {
-    const s = it.schedule[0];
-    return `${s.time.start} - ${s.time.end} (varies)`;
-  }
+
+  if (!it.sameTimeDaily && it.schedule?.length)
+    return `${it.schedule[0].time.start} - ${it.schedule[0].time.end} (varies)`;
+
   return "";
 }

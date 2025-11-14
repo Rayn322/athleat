@@ -113,7 +113,7 @@ export default function CreateAccount() {
             navigate("/setup");
         }}
         >
-        Create Account
+        create account
         </Button>
     </div>
   );
