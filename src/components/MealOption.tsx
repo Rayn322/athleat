@@ -9,6 +9,7 @@ export type MealOptionProps = {
   selected?: boolean; // controlled
   onSelect?: (selected: boolean) => void;
   className?: string;
+  showImage?: boolean; // for swipe cards (preferences)
 };
 
 export function MealOption({
@@ -19,6 +20,7 @@ export function MealOption({
   selected: controlledSelected,
   onSelect,
   className,
+  showImage = true,
 }: MealOptionProps) {
   const [internalSelected, setInternalSelected] = useState(false);
   const isControlled = controlledSelected !== undefined;
@@ -46,11 +48,13 @@ export function MealOption({
       )}
     >
       {/* image */}
-      <img
-        src={imageSrc}
-        alt={title}
-        className="h-28 w-28 shrink-0 rounded-2xl object-cover"
-      />
+      {showImage !== false && (
+        <img
+          src={imageSrc}
+          alt={title}
+          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+        />
+      )}  
 
       {/* content */}
       <div className="min-w-0 flex-1">
@@ -61,9 +65,9 @@ export function MealOption({
         {/* tags */}
         {tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-3">
-            {tags.map((t, i) => (
+            {tags.map((t) => (
               <span
-                key={i}
+                key={t}
                 className="inline-flex items-center rounded-full px-4 py-1 text-lg font-medium bg-black text-bg-white"
               >
                 {t}
@@ -76,7 +80,7 @@ export function MealOption({
         {ingredients.length > 0 && (
           <div className="mt-4 text-xl sm:text-2xl text-current/90">
             {ingredients.map((ing, i) => (
-              <React.Fragment key={i}>
+              <React.Fragment key={ing}>
                 {i > 0 && <span className="mx-2">•</span>}
                 <span>{ing}</span>
               </React.Fragment>

@@ -1,15 +1,20 @@
 // src/routes/Root.tsx
+import { useState } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Plus, Check } from "lucide-react";
 import { AnalyticsBar } from "../components/AnalyticsBar";
-import { Button} from "../components/Button";
+import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
 import { NavBar } from "../components/NavBar";
 import { ProgressBar } from "../components/ProgressBar";
 import { MealOption } from "../components/MealOption";
 import { GroceryItem } from "../components/GroceryItem";
 import { Tag } from "../components/Tag";
-import React, { useState } from "react";
+import { TextBox } from "../components/TextBox";
+import { SwipeCards } from "../components/SwipeCard";
+import { Checkbox } from "../components/Checkbox";
+import { Dropdown } from "../components/Dropdown";
+
 
 export default function Root() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
@@ -17,6 +22,8 @@ export default function Root() {
     "almonds": true,
     "greek yogurt": false,
   });
+
+  const [textValue, setTextValue] = useState("");
 
   const handleToggle = (label: string, checked: boolean) => {
     setCheckedItems((prev) => ({ ...prev, [label]: checked }));
@@ -126,6 +133,38 @@ export default function Root() {
             />
           ))}
         </div>
+      </section>
+
+      {/* Example Swipeable Cards */}
+      <section className="space-y-6">
+        <h2 className="text-lg font-semibold">Swipeable Food Cards</h2>
+        <SwipeCards />
+      </section>
+
+      {/* Example Checkbox */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Checkbox Example</h2>
+        <Checkbox />
+      </section>
+
+      {/* Example Dropdown */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">Dropdown Example</h2>
+        <Dropdown />
+      </section>
+
+      {/* Example Text Box */}
+      <section className="space-y-4 p-6">
+        <h2 className="text-lg font-semibold">TextBoxes</h2>
+  
+        {/* Username */}
+        <TextBox
+          label="Username"
+          placeholder="Enter a username"
+          value={textValue}
+          onChange={setTextValue}
+          variant="unfilled"
+        />
       </section>
 
       <section className="space-y-4">

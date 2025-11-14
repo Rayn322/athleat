@@ -17,21 +17,8 @@ export interface ButtonProps
   iconPosition?: "left" | "right";
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      children,
-      variant = "primary",
-      size = "md",
-      width = "full",
-      showIcon = false,
-      icon,
-      iconPosition = "right",
-      disabled,
-      ...props
-    },
-    ref
+export const Button = (
+    { ref, className, children, variant = "primary", size = "md", width = "full", showIcon = false, icon, iconPosition = "right", disabled, ...props }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> }
   ) => {
     const v = variantClasses[variant];
     const s = sizeClasses[size];
@@ -66,9 +53,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </div>
       </button>
     );
-  }
-);
-Button.displayName = "Button";
+  };
 
 const baseClasses =
   "inline-flex items-center justify-center rounded-full font-medium transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-primary/40";
