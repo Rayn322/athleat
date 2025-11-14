@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ChevronRight, Plus } from "lucide-react";
-import type { PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
+import MealModal from "./MealModal";
 
 function CalendarDay({
   date,
@@ -131,27 +132,57 @@ export function ClassCalItem({
 export function MealCalItem({
   name,
   startHour,
-  completed = false,
-  onClick,
+  completable = false,
+  ref,
 }: {
   name: string;
   startHour: number;
-  completed?: boolean;
-  onClick?: () => void;
+  completable?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [completed, setCompleted] = useState(false);
+
   return (
-    <button
-      onClick={onClick}
-      className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
-      style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
-    >
-      <span
-        className={clsx("text-base font-normal", { "line-through": completed })}
+    <>
+      {modalOpen && (
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setModalOpen(false); // only background
+          }}
+          className="fixed top-0 left-0 z-51 flex size-full items-center justify-center bg-gray-60 px-6 backdrop-blur-[2.70px]"
+        >
+          <MealModal
+            name={name}
+            calories={371}
+            tags={[
+              { label: "protein", emphasized: true },
+              { label: "fats" },
+              { label: "carbs" },
+            ]}
+            onClose={() => setModalOpen(false)}
+            onMarkCompleted={() => setCompleted(true)}
+            onMarkIncomplete={() => setCompleted(false)}
+            completed={completed}
+          />
+        </div>
+      )}
+      <button
+        ref={ref}
+        onClick={() => completable && setModalOpen(true)}
+        className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
+        style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
       >
-        {name}
-      </span>
-      <ChevronRight />
-    </button>
+        <span
+          className={clsx("text-base font-normal", {
+            "line-through": completed,
+          })}
+        >
+          {name}
+        </span>
+        <ChevronRight />
+      </button>
+    </>
   );
 }
 

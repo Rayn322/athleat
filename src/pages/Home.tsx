@@ -1,52 +1,32 @@
 import { CircleUser } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
-  AddCalItem,
   CalendarDayList,
   ClassCalItem,
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
-import { useState } from "react";
-import MealModal from "../components/MealModal";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [bagelCompleted, setBagelCompleted] = useState(false);
   const navigate = useNavigate();
+  const firstMealRef = useRef<HTMLButtonElement>(null);
+
+  // Scroll to the first meal item when the component mounts
+  useEffect(() => {
+    if (firstMealRef.current) {
+      // scroll with some padding
+      firstMealRef.current.scrollIntoView();
+    }
+  }, []);
 
   return (
     <>
-      {modalOpen && (
-        <div
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setModalOpen(false); // only background
-          }}
-          className="fixed top-0 left-0 z-51 flex size-full items-center justify-center bg-gray-60 px-6 backdrop-blur-[2.70px]"
-        >
-          <MealModal
-            name="Bagel with Cream Cheese"
-            calories={371}
-            tags={[
-              { label: "protein", emphasized: true },
-              { label: "fats" },
-              { label: "carbs" },
-            ]}
-            onClose={() => setModalOpen(false)}
-            onMarkCompleted={() => setBagelCompleted(true)}
-            onMarkIncomplete={() => setBagelCompleted(false)}
-            completed={bagelCompleted}
-          />
-        </div>
-      )}
       <div className="flex h-full flex-col">
         <div className="flex flex-col gap-8 pb-8">
           <div className="flex justify-between">
             <h2 className="text-base font-normal">Hello Sarah!</h2>
-            <button
-              type="button"
-              onClick={() => navigate("/profile")}
-            >
+            <button type="button" onClick={() => navigate("/profile")}>
               <CircleUser className="h-6 w-6 text-black" />
             </button>
           </div>
@@ -59,14 +39,13 @@ export default function Home() {
         {/* either make this a variable later or pay close attention to the layout's padding */}
         <div className="-mx-6 overflow-y-auto">
           <DaySchedule>
-            {/* TODO: replace with some sort of state from the week planning */}
             <MealCalItem
               name="Bagel with Cream Cheese"
               startHour={8}
-              completed={bagelCompleted}
-              onClick={() => setModalOpen(true)} // needs state
+              completable
+              ref={firstMealRef}
             />
-            <AddCalItem startHour={11} />
+            <MealCalItem name="Burger" startHour={11} completable />
             <ClassCalItem name="CSC 321" startHour={12} lengthInHours={2} />
           </DaySchedule>
         </div>

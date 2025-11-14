@@ -21,7 +21,7 @@ function LayoutInner() {
       ?.nav ?? { show: true, active: "home", useNotifCartIcon: false };
 
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="flex h-dvh flex-col justify-between">
       <div className="overflow-y-auto px-6 pt-[60px]">
         <Outlet />
       </div>
