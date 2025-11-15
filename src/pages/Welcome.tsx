@@ -7,13 +7,9 @@ export default function Welcome() {
   return (
     <div
       onClick={() => navigate("/create-account")}
-      className="flex h-screen w-screen flex-col items-center justify-center bg-bg-white cursor-pointer"
+      className="flex h-screen w-screen cursor-pointer flex-col items-center justify-center bg-bg-white"
     >
-      <img
-        src={logo}
-        alt="Athleat Logo"
-        className="h-32 w-32 opacity-90"
-      />
+      <img src={logo} alt="Athleat Logo" className="h-32 w-32 opacity-90" />
 
       <p className="mt-6 text-small text-dark-gray italic">
         tap anywhere to continue

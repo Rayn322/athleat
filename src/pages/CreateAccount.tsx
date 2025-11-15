@@ -93,7 +93,7 @@ export default function CreateAccount() {
       {/* Link to sign in */}
       <p 
         className="text-small font-medium text-black underline cursor-pointer mt-4"
-        onClick={() => navigate("/login")}
+        onClick={() => navigate("/setup")}
       >
         already have an account? log in
       </p>
@@ -110,10 +110,10 @@ export default function CreateAccount() {
             // Save the fake account
             localStorage.setItem("fakeUser", JSON.stringify(newUser));
 
-            navigate("/login");
+            navigate("/setup");
         }}
         >
-        Create Account
+        create account
         </Button>
     </div>
   );
