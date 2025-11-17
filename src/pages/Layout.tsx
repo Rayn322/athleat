@@ -5,8 +5,7 @@ import { NavBarProvider, useNavBar } from "../context/NavBarContext";
 type Tab = "home" | "analytics" | "cart";
 type NavHandle = {
   nav?: {
-    show?: boolean;
-    active?: Tab;
+    tab?: Tab;
     useNotifCartIcon?: boolean;
   };
 };
@@ -19,24 +18,23 @@ function LayoutInner() {
   const navHandle = (
     [...matches].reverse().find((m) => (m.handle as NavHandle)?.nav)
       ?.handle as NavHandle
-  )?.nav ?? { show: true, active: "home", useNotifCartIcon: false };
+  )?.nav ?? { tab: "home", useNotifCartIcon: false };
 
   return (
     <div className="flex h-dvh flex-col justify-between">
       <div className="overflow-y-auto px-6 pt-[60px]">
         <Outlet />
       </div>
-      {navHandle.show && (
-        <NavBar
-          active={navHandle.active!}
-          useNotifCartIcon={useNotifCartIcon}
-          hrefs={{
-            home: "/home",
-            analytics: "/analytics",
-            cart: "/groceryListEmpty",
-          }}
-        />
-      )}
+
+      <NavBar
+        active={navHandle.tab!}
+        useNotifCartIcon={useNotifCartIcon}
+        hrefs={{
+          home: "/home",
+          analytics: "/analytics",
+          cart: "/groceryListEmpty",
+        }}
+      />
     </div>
   );
 }

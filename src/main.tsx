@@ -1,16 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BrowserRouter,
-  Route,
-  Routes,
   createBrowserRouter,
+  createRoutesFromElements,
+  Route,
   RouterProvider,
 } from "react-router";
 import "./index.css";
 import Home from "./pages/Home.tsx";
 import Layout from "./pages/Layout.tsx";
-import Root from "./pages/Root.tsx";
+import Testing from "./pages/Testing.tsx";
 import Analytics from "./pages/Analytics.tsx";
 import QuickProteins from "./pages/QuickProteins.tsx";
 import MealOptions from "./pages/MealOptions.tsx";
@@ -33,201 +32,169 @@ import AddEvent from "./pages/AddEvent.tsx";
 import InputMetrics from "./pages/InputMetrics.tsx";
 import Preferences from "./pages/Preferences.tsx";
 
-// createRoot(document.getElementById("root")!).render(
-//   <StrictMode>
-//     <BrowserRouter>
-//       <Routes>
-//         <Route element={<Layout />}>
-//           <Route index element={<Root />} handle={{
-//             nav: {
-//               show: true,
-//               active: "home",
-//               useNotifCartIcon: false,
-//             },
-//           }}/>
-//           <Route path="analytics" element={<Analytics />} handle={{
-//             nav: {
-//               show: true,
-//               active: "analytics",
-//               useNotifCartIcon: false,
-//             },
-//           }}/>
-//           <Route path="quickProteins" element={<QuickProteins />} />
-//           <Route path="home" element={<Home />} />
-//           <Route path="MealOptions" element={<MealOptions />} />
-//           <Route path="Groceries1" element={<Groceries1 />} />
-//           <Route path="Groceries2" element={<Groceries2 />} />
-//           <Route path="Groceries3" element={<Groceries3 />} />
-//           <Route path="Groceries4" element={<Groceries4 />} />
-//           <Route path="GroceryList" element={<GroceryList />} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   </StrictMode>,
-// );
+const routes = createRoutesFromElements(
+  <>
+    <Route
+      index
+      element={<Welcome />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="create-account"
+      element={<CreateAccount />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="setup"
+      element={<Setup />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="input-schedule"
+      element={<InputSchedule />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="add-class"
+      element={<AddClass />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="add-practice"
+      element={<AddPractice />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="add-event"
+      element={<AddEvent />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="input-metrics"
+      element={<InputMetrics />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="preferences"
+      element={<Preferences />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route
+      path="login"
+      element={<Login />}
+      handle={{
+        nav: { active: "home", useNotifCartIcon: false },
+      }}
+    />
+    <Route element={<Layout />}>
+      <Route path="testing" element={<Testing />} />
+      <Route
+        path="home"
+        element={<Home />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="analytics"
+        element={<Analytics />}
+        handle={{
+          nav: { active: "analytics", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="quickProteins"
+        element={<QuickProteins />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="MealOptions"
+        element={<MealOptions />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="Groceries1"
+        element={<Groceries1 />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="Groceries2"
+        element={<Groceries2 />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="Groceries3"
+        element={<Groceries3 />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="Groceries4"
+        element={<Groceries4 />}
+        handle={{
+          nav: { active: "home", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="groceryListEmpty"
+        element={<GroceryListEmpty />}
+        handle={{
+          nav: { active: "cart", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="groceryList"
+        element={<GroceryList />}
+        handle={{
+          nav: { active: "cart", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="history"
+        element={<History />}
+        handle={{
+          nav: { active: "analytics", useNotifCartIcon: false },
+        }}
+      />
+      <Route
+        path="profile"
+        element={<Profile />}
+        handle={{
+          nav: { tab: "analytics", useNotifCartIcon: false },
+        }}
+      />
+    </Route>
+  </>,
+);
 
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      { index: true, element: <Root />, handle: { nav: { show: false } } },
-      {
-        path: "welcome",
-        element: <Welcome />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "create-account",
-        element: <CreateAccount />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "setup",
-        element: <Setup />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "input-schedule",
-        element: <InputSchedule />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-class",
-        element: <AddClass />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-practice",
-        element: <AddPractice />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "add-event",
-        element: <AddEvent />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "input-metrics",
-        element: <InputMetrics />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "preferences",
-        element: <Preferences />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "login",
-        element: <Login />,
-        handle: {
-          nav: { show: false, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "home",
-        element: <Home />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "analytics",
-        element: <Analytics />,
-        handle: {
-          nav: { show: true, active: "analytics", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "quickProteins",
-        element: <QuickProteins />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "MealOptions",
-        element: <MealOptions />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "Groceries1",
-        element: <Groceries1 />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "Groceries2",
-        element: <Groceries2 />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "Groceries3",
-        element: <Groceries3 />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "Groceries4",
-        element: <Groceries4 />,
-        handle: {
-          nav: { show: true, active: "home", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "groceryListEmpty",
-        element: <GroceryListEmpty />,
-        handle: {
-          nav: { show: true, active: "cart", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "groceryList",
-        element: <GroceryList />,
-        handle: {
-          nav: { show: true, active: "cart", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "history",
-        element: <History />,
-        handle: {
-          nav: { show: true, active: "analytics", useNotifCartIcon: false },
-        },
-      },
-      {
-        path: "profile",
-        element: <Profile />,
-        handle: {
-          nav: { show: true, active: "analytics", useNotifCartIcon: false },
-        },
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
