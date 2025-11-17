@@ -2,14 +2,18 @@ import { useState } from "react";
 import { TextBox } from "../components/TextBox";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import type { User } from "../types/localStorage";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
 
+  const [, setUser] = useLocalStorage<User | null>("user", null);
+
   const [username, setUsername] = useState("");
-  const [email, setEmail]       = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm]   = useState("");
+  const [confirm, setConfirm] = useState("");
 
   const [emailTouched, setEmailTouched] = useState(false);
   const [confirmTouched, setConfirmTouched] = useState(false);
@@ -30,17 +34,15 @@ export default function CreateAccount() {
     !username || !emailIsValid || !password || !confirmMatches;
 
   return (
-    <div className="flex w-[393px] h-[852px] flex-col justify-between items-center bg-bg-white p-[60px_24px_40px_24px] mx-auto">
-
+    <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
       {/* Title */}
-      <h1 className="text-display font-regular text-black">
+      <h1 className="font-regular text-display text-black">
         create your account.
       </h1>
 
       {/* Input fields */}
-      <div className="flex flex-col gap-6 mt-10">
-        
-        <TextBox 
+      <div className="mt-10 flex flex-col gap-6">
+        <TextBox
           label="username"
           placeholder="enter username"
           value={username}
@@ -49,7 +51,7 @@ export default function CreateAccount() {
 
         {/* Email */}
         <div className="flex flex-col">
-          <TextBox 
+          <TextBox
             label="email"
             placeholder="enter email"
             value={email}
@@ -57,15 +59,15 @@ export default function CreateAccount() {
               setEmail(v);
               if (!emailTouched) setEmailTouched(true);
             }}
-            className={emailHasError ? "outline-red border-red" : ""}
+            className={emailHasError ? "border-red outline-red" : ""}
           />
           {emailHasError && (
-            <p className="text-small text-red mt-1">Invalid email format</p>
+            <p className="mt-1 text-small text-red">Invalid email format</p>
           )}
         </div>
 
         {/* Password */}
-        <TextBox 
+        <TextBox
           label="create password"
           placeholder="enter password"
           value={password}
@@ -74,7 +76,7 @@ export default function CreateAccount() {
 
         {/* Confirm password */}
         <div className="flex flex-col">
-          <TextBox 
+          <TextBox
             label="confirm password"
             placeholder="re-enter password"
             value={confirm}
@@ -82,39 +84,39 @@ export default function CreateAccount() {
               setConfirm(v);
               if (!confirmTouched) setConfirmTouched(true);
             }}
-            className={confirmHasError ? "outline-red border-red" : ""}
+            className={confirmHasError ? "border-red outline-red" : ""}
           />
           {confirmHasError && (
-            <p className="text-small text-red mt-1">Passwords do not match</p>
+            <p className="mt-1 text-small text-red">Passwords do not match</p>
           )}
         </div>
       </div>
 
       {/* Link to sign in */}
-      <p 
-        className="text-small font-medium text-black underline cursor-pointer mt-4"
+      <p
+        className="mt-4 cursor-pointer text-small font-medium text-black underline"
         onClick={() => navigate("/setup")}
       >
         already have an account? log in
       </p>
 
       {/* Button */}
-        <Button 
+      <Button
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-            const newUser = { username, email, password };
+          const newUser: User = { username, email, password };
 
-            // Save the fake account
-            localStorage.setItem("fakeUser", JSON.stringify(newUser));
+          // Save the fake account
+          setUser(newUser);
 
-            navigate("/setup");
+          navigate("/setup");
         }}
-        >
+      >
         create account
-        </Button>
+      </Button>
     </div>
   );
 }
