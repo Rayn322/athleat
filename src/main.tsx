@@ -32,169 +32,124 @@ import AddEvent from "./pages/AddEvent.tsx";
 import InputMetrics from "./pages/InputMetrics.tsx";
 import Preferences from "./pages/Preferences.tsx";
 
-const routes = createRoutesFromElements(
-  <>
-    <Route
-      index
-      element={<Welcome />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="create-account"
-      element={<CreateAccount />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="setup"
-      element={<Setup />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="input-schedule"
-      element={<InputSchedule />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="add-class"
-      element={<AddClass />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="add-practice"
-      element={<AddPractice />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="add-event"
-      element={<AddEvent />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="input-metrics"
-      element={<InputMetrics />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="preferences"
-      element={<Preferences />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route
-      path="login"
-      element={<Login />}
-      handle={{
-        nav: { active: "home", useNotifCartIcon: false },
-      }}
-    />
-    <Route element={<Layout />}>
-      <Route path="testing" element={<Testing />} />
-      <Route
-        path="home"
-        element={<Home />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="analytics"
-        element={<Analytics />}
-        handle={{
-          nav: { active: "analytics", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="quickProteins"
-        element={<QuickProteins />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="MealOptions"
-        element={<MealOptions />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="Groceries1"
-        element={<Groceries1 />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="Groceries2"
-        element={<Groceries2 />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="Groceries3"
-        element={<Groceries3 />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="Groceries4"
-        element={<Groceries4 />}
-        handle={{
-          nav: { active: "home", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="groceryListEmpty"
-        element={<GroceryListEmpty />}
-        handle={{
-          nav: { active: "cart", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="groceryList"
-        element={<GroceryList />}
-        handle={{
-          nav: { active: "cart", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="history"
-        element={<History />}
-        handle={{
-          nav: { active: "analytics", useNotifCartIcon: false },
-        }}
-      />
-      <Route
-        path="profile"
-        element={<Profile />}
-        handle={{
-          nav: { tab: "analytics", useNotifCartIcon: false },
-        }}
-      />
-    </Route>
-  </>,
-);
-
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter([
+  {
+    index: true,
+    element: <Welcome />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "create-account",
+    element: <CreateAccount />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "setup",
+    element: <Setup />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "input-schedule",
+    element: <InputSchedule />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "add-class",
+    element: <AddClass />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "add-practice",
+    element: <AddPractice />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "add-event",
+    element: <AddEvent />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "input-metrics",
+    element: <InputMetrics />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "preferences",
+    element: <Preferences />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    path: "login",
+    element: <Login />,
+    handle: { nav: { tab: "home", useNotifCartIcon: false } },
+  },
+  {
+    element: <Layout />,
+    children: [
+      { path: "testing", element: <Testing /> },
+      {
+        path: "home",
+        element: <Home />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "analytics",
+        element: <Analytics />,
+        handle: { nav: { tab: "analytics", useNotifCartIcon: false } },
+      },
+      {
+        path: "quickProteins",
+        element: <QuickProteins />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "MealOptions",
+        element: <MealOptions />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "Groceries1",
+        element: <Groceries1 />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "Groceries2",
+        element: <Groceries2 />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "Groceries3",
+        element: <Groceries3 />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "Groceries4",
+        element: <Groceries4 />,
+        handle: { nav: { tab: "home", useNotifCartIcon: false } },
+      },
+      {
+        path: "groceryListEmpty",
+        element: <GroceryListEmpty />,
+        handle: { nav: { tab: "cart", useNotifCartIcon: false } },
+      },
+      {
+        path: "groceryList",
+        element: <GroceryList />,
+        handle: { nav: { tab: "cart", useNotifCartIcon: false } },
+      },
+      {
+        path: "history",
+        element: <History />,
+        handle: { nav: { tab: "analytics", useNotifCartIcon: false } },
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+        handle: { nav: { tab: "analytics", useNotifCartIcon: false } },
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
