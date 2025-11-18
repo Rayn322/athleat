@@ -47,19 +47,10 @@ export default function Home() {
               completable
               ref={firstMealRef}
             />
-            <MealCalItem name="Burger" startHour={11} completable />
+            <MealCalItem name="Burger" startHour={12} completable />
             {schedule.map((item) => {
-              const [startHour, startMinute] = item.time.start.split(":");
-              const [endHour, endMinute] = item.time.end.split(":");
               return (
-                <ClassCalItem
-                  key={item.id}
-                  name={item.name}
-                  startHour={startHour}
-                  startMinute={startMinute}
-                  endHour={endHour}
-                  endMinute={endMinute}
-                />
+                <ClassCalItem key={item.id} name={item.name} time={item.time} />
               );
             })}
           </DaySchedule>

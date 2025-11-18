@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ChevronRight, Plus } from "lucide-react";
 import { useState, type PropsWithChildren } from "react";
+import type { ScheduleItem } from "../types/localStorage";
 import MealModal from "./MealModal";
 
 function CalendarDay({
@@ -105,33 +106,22 @@ function HourSlot({ hour = 8 }: { hour?: number }) {
 
 export function ClassCalItem({
   name,
-  startHour,
-  startMinute = 0,
-  endHour,
-  endMinute = 0,
+  time,
 }: {
   name: string;
-  startHour: number | string;
-  startMinute?: number | string;
-  endHour: number | string;
-  endMinute?: number | string;
+  time: ScheduleItem["time"];
 }) {
-  // sorry
-  const startHourNum =
-    typeof startHour === "string" ? parseInt(startHour) : startHour;
-  const startMinuteNum =
-    typeof startMinute === "string" ? parseInt(startMinute) : startMinute;
-  const endHourNum = typeof endHour === "string" ? parseInt(endHour) : endHour;
-  const endMinuteNum =
-    typeof endMinute === "string" ? parseInt(endMinute) : endMinute;
+  const [startHour, startMinute] = time.start.split(":").map(Number);
+  const [endHour, endMinute] = time.end.split(":").map(Number);
 
-  const startHourFloat = startHourNum + startMinuteNum / 60;
-  const endHourFloat = endHourNum + endMinuteNum / 60;
+  const startHourFloat = startHour + startMinute / 60;
+  const endHourFloat = endHour + endMinute / 60;
   const lengthInHours = endHourFloat - startHourFloat;
+
   const timeRange = `${convertToTimeString(
-    startHourNum,
-    startMinuteNum,
-  )} - ${convertToTimeString(endHourNum, endMinuteNum)}`;
+    startHour,
+    startMinute,
+  )} - ${convertToTimeString(endHour, endMinute)}`;
 
   return (
     <div
