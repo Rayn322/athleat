@@ -4,7 +4,7 @@ export interface User {
   password: string;
 }
 
-export interface ScheduleEvent {
+export interface ScheduleItem {
   id: string;
   type: "class" | "practice" | "event";
   name: string;
@@ -20,7 +20,7 @@ export interface ScheduleEvent {
   endDate: string;
 }
 
-export type Calendar = ScheduleEvent[];
+export type Calendar = ScheduleItem[];
 
 // add nutrition details if we have time
 export interface Meal {

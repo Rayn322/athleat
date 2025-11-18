@@ -8,7 +8,8 @@ import { Button } from "../components/Button";
 import { addScheduleItem } from "../utils/scheduleStorage.ts";
 import { v4 as uuidv4 } from "uuid";
 import { ProgressBar } from "../components/ProgressBar";
-import type { ScheduleEvent } from "../types/localStorage.ts";
+import type { ScheduleItem } from "../types/localStorage.ts";
+import { useSchedule } from "../utils/localStorageHooks.ts";
 
 const allDays: { letter: string; label: string }[] = [
   { letter: "SU", label: "S" },
@@ -29,9 +30,9 @@ function useQueryType() {
 export default function AddClass() {
   const navigate = useNavigate();
   const type = useQueryType();
+  const [, setSchedule] = useSchedule();
 
   const [name, setName] = useState("");
-
   const [days, setDays] = useState<string[]>([]);
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
@@ -39,11 +40,12 @@ export default function AddClass() {
   const [endDate, setEndDate] = useState("");
 
   const [frequency, setFrequency] =
-    useState<ScheduleEvent["frequency"]>("weekly");
+    useState<ScheduleItem["frequency"]>("weekly");
 
   const recurring = true;
   const sameTimeDaily = true;
 
+  // means that the order of the days relies on the order we click them in
   function toggleDay(letter: string) {
     setDays((prev) =>
       prev.includes(letter)
@@ -62,7 +64,7 @@ export default function AddClass() {
       return;
     }
 
-    const item: ScheduleEvent = {
+    const item: ScheduleItem = {
       id: uuidv4(),
       type: type,
       name: name.trim(),
@@ -78,7 +80,7 @@ export default function AddClass() {
       endDate,
     };
 
-    addScheduleItem(item);
+    addScheduleItem(item, setSchedule);
     navigate("/input-schedule");
   }
 
@@ -205,7 +207,7 @@ export default function AddClass() {
                 <select
                   value={frequency}
                   onChange={(e) =>
-                    setFrequency(e.target.value as ScheduleEvent["frequency"])
+                    setFrequency(e.target.value as ScheduleItem["frequency"])
                   }
                   className="bg-transparent outline-none"
                 >

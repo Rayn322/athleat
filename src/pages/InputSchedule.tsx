@@ -1,31 +1,25 @@
-import { useEffect, useState } from "react";
-import { ChevronLeft, CirclePlus, CircleMinus } from "lucide-react";
+import { ChevronLeft, CircleMinus, CirclePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import leafLogo from "../assets/icons/leafLogo.svg";
-import { ProgressBar } from "../components/ProgressBar";
 import { Button } from "../components/Button";
-
-import { loadSchedule, removeScheduleItem } from "../utils/scheduleStorage";
-import type { ScheduleEvent } from "../types/localStorage";
+import { ProgressBar } from "../components/ProgressBar";
+import type { ScheduleItem } from "../types/localStorage";
+import { useSchedule } from "../utils/localStorageHooks";
+import { removeScheduleItem } from "../utils/scheduleStorage";
 import { convert24hTo12h } from "../utils/time";
 
 export default function InputSchedule() {
   const navigate = useNavigate();
-  const [items, setItems] = useState<ScheduleEvent[]>([]);
-
-  useEffect(() => {
-    setItems(loadSchedule());
-  }, []);
+  const [schedule, setSchedule] = useSchedule();
 
   function handleRemove(id: string) {
-    removeScheduleItem(id);
-    setItems(loadSchedule());
+    removeScheduleItem(id, setSchedule);
   }
 
   const groupedItems = {
-    class: items.filter((i) => i.type === "class"),
-    practice: items.filter((i) => i.type === "practice"),
-    event: items.filter((i) => i.type === "event"),
+    class: schedule.filter((i) => i.type === "class"),
+    practice: schedule.filter((i) => i.type === "practice"),
+    event: schedule.filter((i) => i.type === "event"),
   };
 
   return (
@@ -108,7 +102,7 @@ export default function InputSchedule() {
           )}
         </div>
 
-        {items.length === 0 && (
+        {schedule.length === 0 && (
           <p className="text-base text-dark-gray">No schedule items yet.</p>
         )}
       </div>
@@ -116,10 +110,10 @@ export default function InputSchedule() {
       {/* Continue button */}
       <div className="mt-6 w-full">
         <Button
-          variant={items.length === 0 ? "disabled" : "primary"}
+          variant={schedule.length === 0 ? "disabled" : "primary"}
           size="md"
           width="full"
-          disabled={items.length === 0}
+          disabled={schedule.length === 0}
           onClick={() => navigate("/input-metrics")}
         >
           continue
@@ -130,7 +124,7 @@ export default function InputSchedule() {
 }
 
 /* --- Render item --- */
-function renderScheduleItem(it: ScheduleEvent, removeFn: (id: string) => void) {
+function renderScheduleItem(it: ScheduleItem, removeFn: (id: string) => void) {
   return (
     <div key={it.id} className="flex items-center gap-3 py-1">
       <button onClick={() => removeFn(it.id)}>
@@ -149,12 +143,12 @@ function renderScheduleItem(it: ScheduleEvent, removeFn: (id: string) => void) {
   );
 }
 
-function renderDaysSummary(it: ScheduleEvent) {
+function renderDaysSummary(it: ScheduleItem) {
   if (!it.days || it.days.length === 0) return "";
   return it.days.join("");
 }
 
-function renderTimeSummary(it: ScheduleEvent) {
+function renderTimeSummary(it: ScheduleItem) {
   // if (it.sameTimeDaily && it.time)
   return `${convert24hTo12h(it.time.start)} - ${convert24hTo12h(it.time.end)}`;
 

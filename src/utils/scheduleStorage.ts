@@ -1,42 +1,23 @@
 // src/utils/scheduleStorage.ts
-// src/utils/scheduleStorage.ts
-import type { ScheduleItem } from "../types/schedule.ts";
+import type { ScheduleItem } from "../types/localStorage.ts";
 
-const STORAGE_KEY = "athleat_schedule";
-
-export function loadSchedule(): ScheduleItem[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    return JSON.parse(raw) as ScheduleItem[];
-  } catch (e) {
-    console.error("Failed to load schedule", e);
-    return [];
-  }
+export function addScheduleItem(
+  item: ScheduleItem,
+  setSchedule: React.Dispatch<React.SetStateAction<ScheduleItem[]>>,
+) {
+  setSchedule((prev) => [...prev, item]);
 }
 
-export function saveSchedule(items: ScheduleItem[]) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  } catch (e) {
-    console.error("Failed to save schedule", e);
-  }
+export function removeScheduleItem(
+  id: string,
+  setSchedule: React.Dispatch<React.SetStateAction<ScheduleItem[]>>,
+) {
+  setSchedule((prev) => prev.filter((i) => i.id !== id));
 }
 
-export function addScheduleItem(item: ScheduleItem) {
-  const items = loadSchedule();
-  items.push(item);
-  saveSchedule(items);
-}
-
-export function removeScheduleItem(id: string) {
-  const items = loadSchedule();
-  saveSchedule(items.filter((i) => i.id !== id));
-}
-
-export function updateScheduleItem(updated: ScheduleItem) {
-  const items = loadSchedule();
-  const idx = items.findIndex((i) => i.id === updated.id);
-  if (idx !== -1) items[idx] = updated;
-  saveSchedule(items);
+export function updateScheduleItem(
+  updated: ScheduleItem,
+  setSchedule: React.Dispatch<React.SetStateAction<ScheduleItem[]>>,
+) {
+  setSchedule((prev) => prev.map((i) => (i.id === updated.id ? updated : i)));
 }
