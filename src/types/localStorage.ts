@@ -4,15 +4,23 @@ export interface User {
   password: string;
 }
 
-export interface Event {
+export interface ScheduleEvent {
   id: string;
+  type: "class" | "practice" | "event";
   name: string;
-  days: boolean[]; // array of 7, bool for each day
-  startTime: string;
-  endTime: string;
+  recurring: boolean;
+  sameTimeDaily: boolean;
+  days: string[];
+  frequency: "weekly" | "biweekly" | "monthly";
+  time: {
+    start: string;
+    end: string;
+  };
+  startDate: string;
+  endDate: string;
 }
 
-export type Calendar = Event[];
+export type Calendar = ScheduleEvent[];
 
 // add nutrition details if we have time
 export interface Meal {
