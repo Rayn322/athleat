@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { TextBox } from "../components/TextBox";
-import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "@uidotdev/usehooks";
-import type { User } from "../types/localStorage";
+import { Button } from "../components/Button";
+import { TextBox } from "../components/TextBox";
+import { useUser } from "../utils/localStorageHooks";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [user] = useLocalStorage<User | null>("user", null);
+  const [user] = useUser();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
