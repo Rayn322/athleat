@@ -7,15 +7,11 @@ import { TextBox } from "../components/TextBox";
 import { Button } from "../components/Button";
 import { addScheduleItem } from "../utils/scheduleStorage.ts";
 import { v4 as uuidv4 } from "uuid";
-import type {
-  DayLetter,
-  ScheduleItem,
-  PerDaySchedule,
-  TimeRange,
-} from "../types/schedule.ts";
 import { ProgressBar } from "../components/ProgressBar";
+import type { ScheduleItem } from "../types/localStorage.ts";
+import { useSchedule } from "../utils/localStorageHooks.ts";
 
-const allDays: { letter: DayLetter; label: string }[] = [
+const allDays: { letter: string; label: string }[] = [
   { letter: "SU", label: "S" },
   { letter: "M", label: "M" },
   { letter: "T", label: "T" },
@@ -34,24 +30,23 @@ function useQueryType() {
 export default function AddClass() {
   const navigate = useNavigate();
   const type = useQueryType();
+  const [, setSchedule] = useSchedule();
 
   const [name, setName] = useState("");
-
-  const [days, setDays] = useState<DayLetter[]>([]);
+  const [days, setDays] = useState<string[]>([]);
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const [perDay, setPerDay] = useState<Record<string, PerDaySchedule>>({});
-  const [frequency, setFrequency] = useState<"weekly" | "biweekly" | "monthly">(
-    "weekly",
-  );
+  const [frequency, setFrequency] =
+    useState<ScheduleItem["frequency"]>("weekly");
 
   const recurring = true;
   const sameTimeDaily = true;
 
-  function toggleDay(letter: DayLetter) {
+  // means that the order of the days relies on the order we click them in
+  function toggleDay(letter: string) {
     setDays((prev) =>
       prev.includes(letter)
         ? prev.filter((d) => d !== letter)
@@ -85,7 +80,7 @@ export default function AddClass() {
       endDate,
     };
 
-    addScheduleItem(item);
+    addScheduleItem(item, setSchedule);
     navigate("/input-schedule");
   }
 
@@ -164,6 +159,7 @@ export default function AddClass() {
             <div className="text-base text-dark-gray">time:</div>
             <div className="mt-3 flex gap-3">
               <input
+                type="time"
                 value={timeStart}
                 onChange={(e) => setTimeStart(e.target.value)}
                 placeholder="3:00 PM"
@@ -171,6 +167,7 @@ export default function AddClass() {
               />
               <div className="self-center">-</div>
               <input
+                type="time"
                 value={timeEnd}
                 onChange={(e) => setTimeEnd(e.target.value)}
                 placeholder="5:00 PM"
@@ -183,6 +180,7 @@ export default function AddClass() {
           <div className="mb-6">
             <div className="text-base text-dark-gray">starts:</div>
             <input
+              type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               placeholder="MM/DD/YYYY"
@@ -193,6 +191,7 @@ export default function AddClass() {
           <div className="mb-6">
             <div className="text-base text-dark-gray">ends:</div>
             <input
+              type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               placeholder="MM/DD/YYYY"
@@ -207,7 +206,9 @@ export default function AddClass() {
               <div className="rounded-full border-2 border-light-gray px-3 py-2">
                 <select
                   value={frequency}
-                  onChange={(e) => setFrequency(e.target.value as any)}
+                  onChange={(e) =>
+                    setFrequency(e.target.value as ScheduleItem["frequency"])
+                  }
                   className="bg-transparent outline-none"
                 >
                   <option value="weekly">weekly</option>

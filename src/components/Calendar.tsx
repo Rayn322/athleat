@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ChevronRight, Plus } from "lucide-react";
 import { useState, type PropsWithChildren } from "react";
+import type { ScheduleItem } from "../types/localStorage";
 import MealModal from "./MealModal";
 
 function CalendarDay({
@@ -105,21 +106,28 @@ function HourSlot({ hour = 8 }: { hour?: number }) {
 
 export function ClassCalItem({
   name,
-  startHour,
-  lengthInHours,
+  time,
 }: {
   name: string;
-  startHour: number;
-  lengthInHours: number;
+  time: ScheduleItem["time"];
 }) {
-  const endHour = startHour + lengthInHours;
-  const timeRange = `${hourToTimeString(startHour)} - ${hourToTimeString(endHour)}`;
+  const [startHour, startMinute] = time.start.split(":").map(Number);
+  const [endHour, endMinute] = time.end.split(":").map(Number);
+
+  const startHourFloat = startHour + startMinute / 60;
+  const endHourFloat = endHour + endMinute / 60;
+  const lengthInHours = endHourFloat - startHourFloat;
+
+  const timeRange = `${convertToTimeString(
+    startHour,
+    startMinute,
+  )} - ${convertToTimeString(endHour, endMinute)}`;
 
   return (
     <div
       className="absolute inset-x-0 mr-6 ml-22 space-y-1 rounded-xl bg-green-secondary p-3"
       style={{
-        top: `calc(${(startHour / 24) * 100}% + 1px)`,
+        top: `calc(${(startHourFloat / 24) * 100}% + 1px)`,
         height: `calc(${(lengthInHours / 24) * 100}% - 1px)`,
       }}
     >
@@ -204,7 +212,13 @@ export function AddCalItem({
   );
 }
 
-// TODO: make work with half hours
+function convertToTimeString(hour: number, minute: number) {
+  const period = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+  const minutePadded = minute.toString().padStart(2, "0");
+  return `${hour12}:${minutePadded} ${period}`;
+}
+
 function hourToTimeString(hour: number) {
   return hour === 0
     ? "12 AM"
