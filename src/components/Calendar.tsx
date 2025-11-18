@@ -106,20 +106,38 @@ function HourSlot({ hour = 8 }: { hour?: number }) {
 export function ClassCalItem({
   name,
   startHour,
-  lengthInHours,
+  startMinute = 0,
+  endHour,
+  endMinute = 0,
 }: {
   name: string;
-  startHour: number;
-  lengthInHours: number;
+  startHour: number | string;
+  startMinute?: number | string;
+  endHour: number | string;
+  endMinute?: number | string;
 }) {
-  const endHour = startHour + lengthInHours;
-  const timeRange = `${hourToTimeString(startHour)} - ${hourToTimeString(endHour)}`;
+  // sorry
+  const startHourNum =
+    typeof startHour === "string" ? parseInt(startHour) : startHour;
+  const startMinuteNum =
+    typeof startMinute === "string" ? parseInt(startMinute) : startMinute;
+  const endHourNum = typeof endHour === "string" ? parseInt(endHour) : endHour;
+  const endMinuteNum =
+    typeof endMinute === "string" ? parseInt(endMinute) : endMinute;
+
+  const startHourFloat = startHourNum + startMinuteNum / 60;
+  const endHourFloat = endHourNum + endMinuteNum / 60;
+  const lengthInHours = endHourFloat - startHourFloat;
+  const timeRange = `${convertToTimeString(
+    startHourNum,
+    startMinuteNum,
+  )} - ${convertToTimeString(endHourNum, endMinuteNum)}`;
 
   return (
     <div
       className="absolute inset-x-0 mr-6 ml-22 space-y-1 rounded-xl bg-green-secondary p-3"
       style={{
-        top: `calc(${(startHour / 24) * 100}% + 1px)`,
+        top: `calc(${(startHourFloat / 24) * 100}% + 1px)`,
         height: `calc(${(lengthInHours / 24) * 100}% - 1px)`,
       }}
     >
@@ -204,7 +222,13 @@ export function AddCalItem({
   );
 }
 
-// TODO: make work with half hours
+function convertToTimeString(hour: number, minute: number) {
+  const period = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+  const minutePadded = minute.toString().padStart(2, "0");
+  return `${hour12}:${minutePadded} ${period}`;
+}
+
 function hourToTimeString(hour: number) {
   return hour === 0
     ? "12 AM"

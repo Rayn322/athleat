@@ -7,10 +7,12 @@ import {
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
+import { useSchedule } from "../utils/localStorageHooks";
 
 export default function Home() {
   const navigate = useNavigate();
   const firstMealRef = useRef<HTMLButtonElement>(null);
+  const [schedule] = useSchedule();
 
   // Scroll to the first meal item when the component mounts
   useEffect(() => {
@@ -46,7 +48,20 @@ export default function Home() {
               ref={firstMealRef}
             />
             <MealCalItem name="Burger" startHour={11} completable />
-            <ClassCalItem name="CSC 321" startHour={12} lengthInHours={2} />
+            {schedule.map((item) => {
+              const [startHour, startMinute] = item.time.start.split(":");
+              const [endHour, endMinute] = item.time.end.split(":");
+              return (
+                <ClassCalItem
+                  key={item.id}
+                  name={item.name}
+                  startHour={startHour}
+                  startMinute={startMinute}
+                  endHour={endHour}
+                  endMinute={endMinute}
+                />
+              );
+            })}
           </DaySchedule>
         </div>
       </div>
