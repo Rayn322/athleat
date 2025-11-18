@@ -2,9 +2,13 @@ import { useState } from "react";
 import { TextBox } from "../components/TextBox";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import type { User } from "../types/localStorage";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  const [user] = useLocalStorage<User | null>("user", null);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -82,14 +86,10 @@ export default function Login() {
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-          const saved = localStorage.getItem("fakeUser");
-
-          if (!saved) {
+          if (!user) {
             setError("no account found. create one first!");
             return;
           }
-
-          const user = JSON.parse(saved);
 
           if (
             user.username === username &&
