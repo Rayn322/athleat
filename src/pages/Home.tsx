@@ -36,36 +36,36 @@ export default function Home() {
           <h1 className="text-2xl font-normal">today's meals</h1>
           <CalendarDayList />
         </div>
+
         {/* sorry */}
-        <div className="-mx-6 border-t-2 border-t-light-gray"></div>
         {/* evil negative margin */}
-        {/* either make this a variable later or pay close attention to the layout's padding */}
-        <div className="-mx-6 overflow-y-auto">
-          <DaySchedule>
-            <MealCalItem
-              name="Bagel with Cream Cheese"
-              startHour={8}
-              completable
-              ref={firstMealRef}
-            />
-            <MealCalItem name="Burger" startHour={12} completable />
-            {schedule.map((item) => {
-              return (
+        <div className="relative -mx-6 flex min-h-0 flex-col">
+          <div className="border-t-2 border-t-light-gray" />
+          <div className="min-h-0 overflow-y-auto">
+            <DaySchedule>
+              <MealCalItem
+                name="Bagel with Cream Cheese"
+                startHour={8}
+                completable
+                ref={firstMealRef}
+              />
+              <MealCalItem name="Burger" startHour={12} completable />
+              {schedule.map((item) => (
                 <ClassCalItem key={item.id} name={item.name} time={item.time} />
-              );
-            })}
-          </DaySchedule>
+              ))}
+            </DaySchedule>
+            <Button
+              width="hug"
+              icon={<ChevronRight />}
+              showIcon
+              iconPosition="right"
+              className="absolute right-3 bottom-3"
+              onClick={() => alert("Make this do something")}
+            >
+              plan next week
+            </Button>
+          </div>
         </div>
-        <Button
-          width="hug"
-          icon={<ChevronRight />}
-          showIcon
-          iconPosition="right"
-          className="absolute right-6 bottom-3 -mx-6"
-          onClick={() => alert("Make this do something")}
-        >
-          plan next week
-        </Button>
       </div>
     </>
   );
