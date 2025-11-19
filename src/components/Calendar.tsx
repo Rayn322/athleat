@@ -23,7 +23,7 @@ function CalendarDay({
   return (
     <button
       onClick={onClick}
-      className="flex w-fit flex-col items-center justify-center gap-1 text-small font-medium"
+      className="flex w-fit cursor-pointer flex-col items-center justify-center gap-1 text-small font-medium"
     >
       <p
         className={clsx({
@@ -45,17 +45,34 @@ function CalendarDay({
   );
 }
 
-export function CalendarDayList() {
+export function CalendarDayList({
+  selectedDay,
+  onSelectDay,
+}: {
+  selectedDay: number;
+  onSelectDay: (day: number) => void;
+}) {
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - dayOfWeek);
+
+  const days = Array.from({ length: 7 }, (_, i) => {
+    const date = new Date(startOfWeek);
+    date.setDate(startOfWeek.getDate() + i);
+    return date;
+  });
+
   return (
     <div className="flex items-center justify-between">
-      {/* month is zero indexed */}
-      <CalendarDay date={new Date(2025, 10, 10)} />
-      <CalendarDay date={new Date(2025, 10, 11)} selected />
-      <CalendarDay date={new Date(2025, 10, 12)} />
-      <CalendarDay date={new Date(2025, 10, 13)} />
-      <CalendarDay date={new Date(2025, 10, 14)} />
-      <CalendarDay date={new Date(2025, 10, 15)} />
-      <CalendarDay date={new Date(2025, 10, 16)} />
+      {days.map((date) => (
+        <CalendarDay
+          key={date.toDateString()}
+          date={date}
+          selected={date.getDay() === selectedDay}
+          onClick={() => onSelectDay(date.getDay())}
+        />
+      ))}
     </div>
   );
 }

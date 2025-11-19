@@ -1,4 +1,5 @@
 import { Edit, X } from "lucide-react";
+import { Button } from "./Button";
 import { Tag } from "./Tag";
 
 type Tag = {
@@ -55,16 +56,15 @@ export default function MealModal({
           </div>
         </div>
       </div>
-      <button
+      <Button
         onClick={() => {
           if (completed) onMarkIncomplete();
           else onMarkCompleted();
           onClose();
         }}
-        className="cursor-pointer rounded-[25px] bg-green-primary py-3 text-base font-bold text-white"
       >
         {completed ? "mark incomplete" : "mark completed"}
-      </button>
+      </Button>
     </div>
   );
 }

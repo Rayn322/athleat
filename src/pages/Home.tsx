@@ -1,6 +1,7 @@
-import { CircleUser } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { ChevronRight, CircleUser } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
 import {
   CalendarDayList,
   ClassCalItem,
@@ -13,6 +14,8 @@ export default function Home() {
   const navigate = useNavigate();
   const firstMealRef = useRef<HTMLButtonElement>(null);
   const [schedule] = useSchedule();
+
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
 
   // Scroll to the first meal item when the component mounts
   useEffect(() => {
@@ -33,27 +36,48 @@ export default function Home() {
             </button>
           </div>
           <h1 className="text-2xl font-normal">today's meals</h1>
-          <CalendarDayList />
+          <CalendarDayList
+            selectedDay={selectedDay}
+            onSelectDay={setSelectedDay}
+          />
         </div>
+
         {/* sorry */}
-        <div className="-mx-6 border-t-2 border-t-light-gray"></div>
         {/* evil negative margin */}
-        {/* either make this a variable later or pay close attention to the layout's padding */}
-        <div className="-mx-6 overflow-y-auto">
-          <DaySchedule>
-            <MealCalItem
-              name="Bagel with Cream Cheese"
-              startHour={8}
-              completable
-              ref={firstMealRef}
-            />
-            <MealCalItem name="Burger" startHour={12} completable />
-            {schedule.map((item) => {
-              return (
-                <ClassCalItem key={item.id} name={item.name} time={item.time} />
-              );
-            })}
-          </DaySchedule>
+        <div className="relative -mx-6 flex min-h-0 flex-col">
+          <div className="border-t-2 border-t-light-gray" />
+          <div className="min-h-0 overflow-y-auto">
+            <DaySchedule>
+              <MealCalItem
+                name="Bagel with Cream Cheese"
+                startHour={8}
+                completable
+                ref={firstMealRef}
+              />
+              <MealCalItem name="Burger" startHour={12} completable />
+              {schedule.map((item) => {
+                if (item.days.includes(selectedDay)) {
+                  return (
+                    <ClassCalItem
+                      key={item.id}
+                      name={item.name}
+                      time={item.time}
+                    />
+                  );
+                }
+              })}
+            </DaySchedule>
+            <Button
+              width="hug"
+              icon={<ChevronRight />}
+              showIcon
+              iconPosition="right"
+              className="absolute right-3 bottom-3"
+              onClick={() => alert("Make this do something")}
+            >
+              plan next week
+            </Button>
+          </div>
         </div>
       </div>
     </>

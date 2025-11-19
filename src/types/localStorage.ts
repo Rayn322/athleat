@@ -10,7 +10,7 @@ export interface ScheduleItem {
   name: string;
   recurring: boolean;
   sameTimeDaily: boolean;
-  days: string[];
+  days: number[]; // 0 (Sun) to 6 (Sat)
   frequency: "weekly" | "biweekly" | "monthly";
   time: {
     start: string;

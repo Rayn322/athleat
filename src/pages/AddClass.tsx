@@ -11,14 +11,14 @@ import { ProgressBar } from "../components/ProgressBar";
 import type { ScheduleItem } from "../types/localStorage.ts";
 import { useSchedule } from "../utils/localStorageHooks.ts";
 
-const allDays: { letter: string; label: string }[] = [
-  { letter: "SU", label: "S" },
-  { letter: "M", label: "M" },
-  { letter: "T", label: "T" },
-  { letter: "W", label: "W" },
-  { letter: "TH", label: "TH" },
-  { letter: "F", label: "F" },
-  { letter: "SA", label: "S" },
+const allDays: { day: number; label: string }[] = [
+  { day: 0, label: "S" },
+  { day: 1, label: "M" },
+  { day: 2, label: "T" },
+  { day: 3, label: "W" },
+  { day: 4, label: "TH" },
+  { day: 5, label: "F" },
+  { day: 6, label: "S" },
 ];
 
 function useQueryType() {
@@ -33,7 +33,7 @@ export default function AddClass() {
   const [, setSchedule] = useSchedule();
 
   const [name, setName] = useState("");
-  const [days, setDays] = useState<string[]>([]);
+  const [days, setDays] = useState<number[]>([]);
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -46,11 +46,9 @@ export default function AddClass() {
   const sameTimeDaily = true;
 
   // means that the order of the days relies on the order we click them in
-  function toggleDay(letter: string) {
+  function toggleDay(day: number) {
     setDays((prev) =>
-      prev.includes(letter)
-        ? prev.filter((d) => d !== letter)
-        : [...prev, letter],
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
     );
   }
 
@@ -70,7 +68,7 @@ export default function AddClass() {
       name: name.trim(),
       recurring,
       sameTimeDaily,
-      days: [...days],
+      days: [...days].sort(),
       frequency,
       time: {
         start: simpleTimeSanitize(timeStart),
@@ -136,16 +134,16 @@ export default function AddClass() {
             <div className="text-base text-dark-gray">repeat:</div>
             <div className="mt-3 flex flex-wrap gap-3 pr-2">
               {allDays.map((d) => {
-                const selected = days.includes(d.letter);
+                const selected = days.includes(d.day);
                 return (
                   <button
-                    key={d.letter}
+                    key={d.day}
                     className={`rounded-full px-3 py-1 ${
                       selected
                         ? "bg-green-primary text-white"
                         : "border border-light-gray bg-transparent text-dark-gray"
                     }`}
-                    onClick={() => toggleDay(d.letter)}
+                    onClick={() => toggleDay(d.day)}
                   >
                     {d.label}
                   </button>
