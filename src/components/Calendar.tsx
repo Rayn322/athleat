@@ -224,7 +224,7 @@ export function AddCalItem({
       className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-center rounded-xl bg-green-primary p-2.5 text-white"
       style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
     >
-      <Plus />
+      add meal
     </button>
   );
 }
