@@ -25,16 +25,16 @@ export function Tag({
   const base =
     "inline-flex items-center justify-center rounded-full font-medium transition-all";
   const sizeClasses =
-    size === "lg" ? "px-5 py-1.5 text-2xl" : "px-3 py-1 text-base";
+    size === "lg" ? "px-2 py-1 text-small" : "px-2 py-1 text-tiny";
 
   const variantClasses = {
     "outline-green":
       "border-2 border-green-primary text-green-primary bg-transparent",
-    green: "bg-green-primary text-bg-white",
+    green: "bg-green-primary text-white",
     "outline-black": "border-2 border-black text-black bg-transparent",
-    outline: "border-2 border-bg-white text-bg-white bg-transparent",
-    black: "bg-black text-bg-white",
-    white: "bg-bg-white text-black",
+    outline: "border-2 border-bg-white text-white bg-transparent",
+    black: "bg-black text-white",
+    white: "bg-white text-black",
   }[variant];
 
   return (

@@ -24,8 +24,12 @@ export default function QuickProteins() {
         <QuickAddItem
           name="chicken breast"
           imageSrc="/Images/chickenBreast.png"
+          onAdd={() => handleAddToCart("protein shake")}
         />
-        <QuickAddItem name="protein shake" imageSrc="/Images/shake.png" />
+        <QuickAddItem 
+          name="protein shake" 
+          imageSrc="/Images/shake.png"
+          onAdd={() => handleAddToCart("protein shake")} />
       </section>
     </div>
   );
