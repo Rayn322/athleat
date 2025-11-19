@@ -145,7 +145,8 @@ function renderScheduleItem(it: ScheduleItem, removeFn: (id: string) => void) {
 
 function renderDaysSummary(it: ScheduleItem) {
   if (!it.days || it.days.length === 0) return "";
-  return it.days.join("");
+  const dayLabels = ["S", "M", "T", "W", "Th", "F", "S"];
+  return it.days.map((d) => dayLabels[d]).join(" ");
 }
 
 function renderTimeSummary(it: ScheduleItem) {

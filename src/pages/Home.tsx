@@ -1,5 +1,5 @@
 import { ChevronRight, CircleUser } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import {
@@ -14,6 +14,8 @@ export default function Home() {
   const navigate = useNavigate();
   const firstMealRef = useRef<HTMLButtonElement>(null);
   const [schedule] = useSchedule();
+
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
 
   // Scroll to the first meal item when the component mounts
   useEffect(() => {
@@ -34,7 +36,10 @@ export default function Home() {
             </button>
           </div>
           <h1 className="text-2xl font-normal">today's meals</h1>
-          <CalendarDayList />
+          <CalendarDayList
+            selectedDay={selectedDay}
+            onSelectDay={setSelectedDay}
+          />
         </div>
 
         {/* sorry */}
@@ -50,9 +55,17 @@ export default function Home() {
                 ref={firstMealRef}
               />
               <MealCalItem name="Burger" startHour={12} completable />
-              {schedule.map((item) => (
-                <ClassCalItem key={item.id} name={item.name} time={item.time} />
-              ))}
+              {schedule.map((item) => {
+                if (item.days.includes(selectedDay)) {
+                  return (
+                    <ClassCalItem
+                      key={item.id}
+                      name={item.name}
+                      time={item.time}
+                    />
+                  );
+                }
+              })}
             </DaySchedule>
             <Button
               width="hug"

@@ -45,7 +45,7 @@ export const Button = ({
         v,
         s,
         w,
-        isDisabled && "cursor-not-allowed opacity-80",
+        isDisabled ? "cursor-not-allowed opacity-80" : "cursor-pointer",
         className,
       )}
       disabled={isDisabled}
