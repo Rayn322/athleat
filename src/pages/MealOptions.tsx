@@ -1,13 +1,24 @@
 // src/pages/MealOptions.tsx
 import { useLocation, useNavigate } from "react-router";
 import { MealOption } from "../components/MealOption";
+import { useEffect } from "react";
 
 export default function MealOptions() {
   const navigate = useNavigate();
-  const location = useLocation() as { state?: { next?: string } };
-  const next = location.state?.next ?? "/Groceries2";
+  const location = useLocation() as {
+    state?: { day: number; mealType: "breakfast" | "lunch" | "dinner" };
+  };
 
-  const choose = () => navigate(next);
+  useEffect(() => {
+    if (!location.state?.day || !location.state?.mealType) {
+      navigate("/home");
+    }
+  }, [location.state, navigate]);
+
+  function choose() {
+    // for now just go back
+    navigate("/home");
+  }
 
   return (
     <section className="space-y-6 p-6">

@@ -29,7 +29,9 @@ export default function Home() {
   }, []);
 
   function addMeal(day: number, mealType: "breakfast" | "lunch" | "dinner") {
-    // send to meal selection screen with params
+    navigate(`/MealOptions`, {
+      state: { day, mealType },
+    });
   }
 
   return (
