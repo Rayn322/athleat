@@ -1,7 +1,7 @@
-import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import leafLogo from "../assets/icons/leafLogo.svg";
 import { Button } from "../components/Button";
+import BackButton from "../components/BackButton";
 
 export default function Setup() {
   const navigate = useNavigate();
@@ -9,9 +9,9 @@ export default function Setup() {
   return (
     <div className="mx-auto flex h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
       {/* Back button */}
-      <button className="mb-10" onClick={() => navigate("/create-account")}>
-        <ChevronLeft className="h-6 w-6" />
-      </button>
+      <div className="mb-10">
+        <BackButton />
+      </div>
 
       {/* Content wrapper */}
       <div className="flex flex-1 flex-col items-start gap-20">

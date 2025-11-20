@@ -1,5 +1,6 @@
 import { GroceryItem } from "../components/GroceryItem";
 import { useState } from "react";
+import BackButton from "../components/BackButton";
 
 export default function GroceryList() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
@@ -20,6 +21,9 @@ export default function GroceryList() {
 
   return (
     <div className="space-y-13">
+      <div className="self-start">
+        <BackButton />
+      </div>
       <h1 className="text-h1">your grocery list</h1>
       <section className="mb-5 space-y-3">
         {Object.entries(checkedItems).map(([label, checked]) => (

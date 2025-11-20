@@ -1,5 +1,6 @@
 import { QuickAddItem } from "../components/QuickAddItem";
 import { useNavBar } from "../context/NavBarContext";
+import BackButton from "../components/BackButton";
 
 export default function QuickProteins() {
   const { setUseNotifCartIcon } = useNavBar();
@@ -11,6 +12,9 @@ export default function QuickProteins() {
 
   return (
     <div className="mt-4 space-y-13">
+      <div className="self-start">
+        <BackButton />
+      </div>
       <div className="space-y-1">
         <h1 className="text-h1">quick proteins</h1>
         <p className="text-sm">Add proteins to your next grocery trip.</p>

@@ -1,6 +1,6 @@
 // src/pages/AddClass.tsx
 import { useState } from "react";
-import { ChevronLeft } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Checkbox } from "../components/Checkbox";
 import { TextBox } from "../components/TextBox";
@@ -86,10 +86,10 @@ export default function AddClass() {
     <div className="mx-auto flex min-h-screen flex-col bg-bg-white px-6 pt-10 pb-10">
       {/* Top Row: Back Button + Progress Bar */}
       <div className="mb-6 flex w-full items-center justify-between">
-        {/* Back button */}
-        <button onClick={() => navigate(-1)}>
-          <ChevronLeft className="h-6 w-6" />
-        </button>
+        {/* Back button (shared component) */}
+        <div>
+          <BackButton />
+        </div>
 
         {/* Progress Bar */}
         <div className="w-[304px] shrink-0">

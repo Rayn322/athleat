@@ -2,6 +2,7 @@
 import { useLocation, useNavigate } from "react-router";
 import { MealOption } from "../components/MealOption";
 import { useEffect } from "react";
+import BackButton from "../components/BackButton";
 
 export default function MealOptions() {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ export default function MealOptions() {
 
   return (
     <section className="space-y-6 p-6">
+      <div className="self-start">
+        <BackButton />
+      </div>
       <h1 className="text-3xl font-medium lowercase">meal options</h1>
       <div className="text-right text-sm text-black/70">
         0 of 7 days planned
@@ -46,28 +50,28 @@ export default function MealOptions() {
       />
       <MealOption
         title="Veggie Bowl"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/veggie.jpg"
         tags={["vegetarian"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Salmon"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/salmon.jpg"
         tags={["high protein"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Salad"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/salad.jpg"
         tags={["vegetarian"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Terriyaki Chicken"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/chicken.jpg"
         tags={["high protein"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}

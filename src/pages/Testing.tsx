@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Plus, Check, User, Settings } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { AnalyticsBar } from "../components/AnalyticsBar";
 import { Button } from "../components/Button";
 import { QuickAddItem } from "../components/QuickAddItem";
@@ -58,6 +59,9 @@ export default function Root() {
 
   return (
     <div className="space-y-6">
+      <div className="self-start">
+        <BackButton />
+      </div>
       <p>This is the main page</p>
       <div className="space-y-4 p-6">
         {/* Default icon (ChevronRight) */}

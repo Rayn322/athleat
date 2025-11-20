@@ -1,5 +1,6 @@
 // src/pages/Groceries2.tsx
 import { useNavigate } from "react-router";
+import BackButton from "../components/BackButton";
 import {
   CalendarDayList,
   ClassCalItem,
@@ -16,6 +17,9 @@ export default function Groceries2() {
   return (
     <div className="relative flex h-full flex-col">
       <div>
+        <div className="mb-2">
+          <BackButton />
+        </div>
         <p className="text-2xl font-bold">groceries</p>
         <div className="mt-2 flex items-center gap-3">
           <div className="h-3 w-full rounded-full bg-light-gray">

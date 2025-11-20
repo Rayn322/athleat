@@ -1,16 +1,15 @@
 import { Checkbox } from "../components/Checkbox";
 import { ContactCard } from "../components/ContactCard";
-import { ChevronLeft, SquarePen, Users, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { SquarePen, Users, User } from "lucide-react";
+import BackButton from "../components/BackButton";
 
 export default function History() {
-  const navigate = useNavigate();
   return (
     <div className="space-y-8">
       <div className="flex flex-row justify-between">
-        <button type="button" onClick={() => navigate("/home")}>
-          <ChevronLeft className="h-6 w-6 text-black" />
-        </button>
+        <div>
+          <BackButton />
+        </div>
         <SquarePen className="h-6 w-6 text-black" />
       </div>
       <h1 className="text-h1">your profile</h1>

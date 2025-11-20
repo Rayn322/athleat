@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { TextBox } from "../components/TextBox";
 import { useUser } from "../utils/localStorageHooks";
+import BackButton from "../components/BackButton";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ export default function Login() {
 
   return (
     <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
+      <div className="self-start">
+        <BackButton />
+      </div>
       {/* Title */}
       <h1 className="font-regular self-start text-display text-black">
         welcome back.
