@@ -1,14 +1,44 @@
 // src/pages/MealOptions.tsx
 import { useLocation, useNavigate } from "react-router";
 import { MealOption } from "../components/MealOption";
+import { useEffect } from "react";
 import BackButton from "../components/BackButton";
+import { MEALS } from "../utils/meals";
+import type { Meal } from "../types/localStorage";
+import { useMeals } from "../utils/localStorageHooks";
 
 export default function MealOptions() {
   const navigate = useNavigate();
-  const location = useLocation() as { state?: { next?: string } };
-  const next = location.state?.next ?? "/Groceries2";
+  const location = useLocation() as {
+    state?: { day: number; mealType: "breakfast" | "lunch" | "dinner" };
+  };
 
-  const choose = () => navigate(next);
+  const [, setMeals] = useMeals();
+
+  useEffect(() => {
+    if (!location.state?.day || !location.state?.mealType) {
+      navigate("/home");
+    }
+  }, [location.state, navigate]);
+
+  function choose(meal: Meal) {
+    const day = location.state?.day;
+    const mealType = location.state?.mealType;
+    if (day === undefined || mealType === undefined) {
+      return;
+    }
+
+    setMeals((prevMeals) => {
+      const newMeals = [...prevMeals];
+      newMeals[day] = {
+        ...newMeals[day],
+        [mealType]: meal,
+      };
+      return newMeals;
+    });
+
+    navigate("/home");
+  }
 
   return (
     <section className="space-y-6 p-6">
@@ -23,48 +53,16 @@ export default function MealOptions() {
         <div className="h-2 rounded-full bg-black" style={{ width: "0%" }} />
       </div>
 
-      <MealOption
-        title="Cheese Burger"
-        imageSrc="/Images/burger.jpg"
-        tags={["high protein", "carbs"]}
-        ingredients={[
-          "Bread",
-          "Patty",
-          "Lettuce",
-          "Tomato",
-          "Cheese",
-          "Pickles",
-        ]}
-        onSelect={choose}
-      />
-      <MealOption
-        title="Veggie Bowl"
-        imageSrc="/Images/veggie.jpg"
-        tags={["vegetarian"]}
-        ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
-        onSelect={choose}
-      />
-      <MealOption
-        title="Salmon"
-        imageSrc="/Images/salmon.jpg"
-        tags={["high protein"]}
-        ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
-        onSelect={choose}
-      />
-      <MealOption
-        title="Salad"
-        imageSrc="/Images/salad.jpg"
-        tags={["vegetarian"]}
-        ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
-        onSelect={choose}
-      />
-      <MealOption
-        title="Terriyaki Chicken"
-        imageSrc="/Images/chicken.jpg"
-        tags={["high protein"]}
-        ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
-        onSelect={choose}
-      />
+      {MEALS.map((meal) => (
+        <MealOption
+          key={meal.name}
+          title={meal.name}
+          tags={meal.tags}
+          ingredients={meal.groceries}
+          imageSrc={meal.imageSrc}
+          onSelect={() => choose(meal)}
+        />
+      ))}
     </section>
   );
 }

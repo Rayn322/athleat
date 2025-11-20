@@ -22,16 +22,18 @@ export interface ScheduleItem {
 
 export type Calendar = ScheduleItem[];
 
-// add nutrition details if we have time
 export interface Meal {
   name: string;
   calories: number;
+  tags: string[];
   groceries: string[];
+  imageSrc: string;
+  completed: boolean;
 }
 
 // since we aren't scheduling meals, heres 3 slots I guess
 export interface DayOfMeals {
-  breakfast: Meal;
-  lunch: Meal;
-  dinner: Meal;
+  breakfast: Meal | null;
+  lunch: Meal | null;
+  dinner: Meal | null;
 }

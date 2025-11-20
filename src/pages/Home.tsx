@@ -1,29 +1,41 @@
 import { ChevronRight, CircleUser } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import {
+  AddCalItem,
   CalendarDayList,
   ClassCalItem,
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
-import { useSchedule } from "../utils/localStorageHooks";
+import {
+  useMeals,
+  useSchedule,
+  useSelectedDay,
+} from "../utils/localStorageHooks";
 
 export default function Home() {
   const navigate = useNavigate();
   const firstMealRef = useRef<HTMLButtonElement>(null);
   const [schedule] = useSchedule();
+  const [meals] = useMeals();
 
-  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const [selectedDay, setSelectedDay] = useSelectedDay();
+  const todayMeals = meals[selectedDay];
 
   // Scroll to the first meal item when the component mounts
   useEffect(() => {
     if (firstMealRef.current) {
-      // scroll with some padding
       firstMealRef.current.scrollIntoView();
     }
   }, []);
+
+  function addMeal(day: number, mealType: "breakfast" | "lunch" | "dinner") {
+    navigate(`/MealOptions`, {
+      state: { day, mealType },
+    });
+  }
 
   return (
     <>
@@ -48,13 +60,47 @@ export default function Home() {
           <div className="border-t-2 border-t-light-gray" />
           <div className="min-h-0 overflow-y-auto">
             <DaySchedule>
-              <MealCalItem
-                name="Bagel with Cream Cheese"
-                startHour={8}
-                completable
-                ref={firstMealRef}
-              />
-              <MealCalItem name="Burger" startHour={12} completable />
+              {todayMeals.breakfast ? (
+                <MealCalItem
+                  meal={todayMeals.breakfast}
+                  day={selectedDay}
+                  mealType="breakfast"
+                  startHour={8}
+                  ref={firstMealRef} // just pray that nothing is earlier lol
+                />
+              ) : (
+                <AddCalItem
+                  startHour={8}
+                  ref={firstMealRef}
+                  onClick={() => addMeal(selectedDay, "breakfast")}
+                />
+              )}
+              {todayMeals.lunch ? (
+                <MealCalItem
+                  meal={todayMeals.lunch}
+                  day={selectedDay}
+                  mealType="lunch"
+                  startHour={12}
+                />
+              ) : (
+                <AddCalItem
+                  startHour={12}
+                  onClick={() => addMeal(selectedDay, "lunch")}
+                />
+              )}
+              {todayMeals.dinner ? (
+                <MealCalItem
+                  meal={todayMeals.dinner}
+                  day={selectedDay}
+                  mealType="dinner"
+                  startHour={18}
+                />
+              ) : (
+                <AddCalItem
+                  startHour={18}
+                  onClick={() => addMeal(selectedDay, "dinner")}
+                />
+              )}
               {schedule.map((item) => {
                 if (item.days.includes(selectedDay)) {
                   return (
