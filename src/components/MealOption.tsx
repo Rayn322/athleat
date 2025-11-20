@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
+import { Tag } from "../components/Tag";
 
 export type MealOptionProps = {
   title: string;
@@ -38,7 +39,7 @@ export function MealOption({
       onClick={handleClick}
       aria-pressed={selected}
       className={clsx(
-        "flex w-full items-center gap-6 rounded-[28px] border-2 p-6 text-left transition-all sm:p-7",
+        "flex w-full items-center gap-3 rounded-2xl border-2 p-3 text-left transition-all",
         selected
           ? "border-green-primary shadow-[0_0_0_6px_rgba(32,159,45,0.35)]"
           : "border-light-gray",
@@ -52,36 +53,36 @@ export function MealOption({
         <img
           src={imageSrc}
           alt={title}
-          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+          className="h-20 w-20 shrink-0 rounded-2xl object-cover"
         />
       )}
 
       {/* content */}
       <div className="min-w-0 flex-1">
-        <h3 className="text-3xl leading-tight font-medium sm:text-5xl">
+        <h3 className="text-base">
           {title}
         </h3>
 
         {/* tags */}
         {tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-3">
+          <div className="mt-1 flex flex-wrap gap-1">
             {tags.map((t) => (
-              <span
+              <Tag
                 key={t}
-                className="inline-flex items-center rounded-full bg-black px-4 py-1 text-lg font-medium text-bg-white"
-              >
-                {t}
-              </span>
+                label={t}
+                size="sm" 
+                variant="black"
+              />
             ))}
           </div>
         )}
 
         {/* ingredients */}
         {ingredients.length > 0 && (
-          <div className="mt-4 text-xl text-current/90 sm:text-2xl">
+          <div className="mt-1 text-tiny text-current/90">
             {ingredients.map((ing, i) => (
               <React.Fragment key={ing}>
-                {i > 0 && <span className="mx-2">•</span>}
+                {i > 0 && <span className="mx-1">•</span>}
                 <span>{ing}</span>
               </React.Fragment>
             ))}
