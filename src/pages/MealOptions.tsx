@@ -39,28 +39,28 @@ export default function MealOptions() {
       />
       <MealOption
         title="Veggie Bowl"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/veggie.jpg"
         tags={["vegetarian"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Salmon"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/salmon.jpg"
         tags={["high protein"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Salad"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/salad.jpg"
         tags={["vegetarian"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
       />
       <MealOption
         title="Terriyaki Chicken"
-        imageSrc="/Images/burger.jpg"
+        imageSrc="/Images/chicken.jpg"
         tags={["high protein"]}
         ingredients={["Rice", "Beans", "Corn", "Salsa", "Avocado"]}
         onSelect={choose}
