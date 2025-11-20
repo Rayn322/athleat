@@ -5,6 +5,7 @@ import {
   MealCalItem,
 } from "../components/Calendar";
 import { useNavigate } from "react-router";
+import BackButton from "../components/BackButton";
 
 export default function Groceries4() {
   // Static mock to match the screenshot
@@ -16,6 +17,9 @@ export default function Groceries4() {
   return (
     <div className="relative flex h-full flex-col">
       <div>
+        <div className="mb-2">
+          <BackButton />
+        </div>
         {/* Title */}
         <p className="text-2xl font-bold">groceries</p>
 

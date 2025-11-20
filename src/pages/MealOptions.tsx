@@ -1,6 +1,7 @@
 // src/pages/MealOptions.tsx
 import { useLocation, useNavigate } from "react-router";
 import { MealOption } from "../components/MealOption";
+import BackButton from "../components/BackButton";
 
 export default function MealOptions() {
   const navigate = useNavigate();
@@ -11,6 +12,9 @@ export default function MealOptions() {
 
   return (
     <section className="space-y-6 p-6">
+      <div className="self-start">
+        <BackButton />
+      </div>
       <h1 className="text-3xl font-medium lowercase">meal options</h1>
       <div className="text-right text-sm text-black/70">
         0 of 7 days planned

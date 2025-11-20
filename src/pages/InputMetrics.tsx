@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { ChevronLeft, CirclePlus } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 import leafLogo from "../assets/icons/leafLogo.svg";
 import { ProgressBar } from "../components/ProgressBar";
 import { Button } from "../components/Button";
@@ -42,9 +43,9 @@ export default function InputMetrics() {
     <div className="flex flex-col min-h-screen bg-bg-white px-9 pt-9 pb-10">
       {/* Top Row: Back + Progress */}
       <div className="flex items-center justify-between mb-6">
-        <button onClick={() => navigate(-1)}>
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+        <div>
+          <BackButton />
+        </div>
         <div className="w-[304px] shrink-0">
           <ProgressBar value={2} max={3} height={9} />
         </div>

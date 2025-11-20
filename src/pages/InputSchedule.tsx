@@ -1,4 +1,4 @@
-import { ChevronLeft, CircleMinus, CirclePlus } from "lucide-react";
+import { CircleMinus, CirclePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import leafLogo from "../assets/icons/leafLogo.svg";
 import { Button } from "../components/Button";
@@ -7,6 +7,7 @@ import type { ScheduleItem } from "../types/localStorage";
 import { useSchedule } from "../utils/localStorageHooks";
 import { removeScheduleItem } from "../utils/scheduleStorage";
 import { convert24hTo12h } from "../utils/time";
+import BackButton from "../components/BackButton";
 
 export default function InputSchedule() {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ export default function InputSchedule() {
     <div className="mx-auto flex min-h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
       {/* Top Row */}
       <div className="mb-6 flex w-full items-center justify-between">
-        <button onClick={() => navigate(-1)}>
-          <ChevronLeft className="h-6 w-6" />
-        </button>
+        <div>
+          <BackButton />
+        </div>
         <div className="w-[304px] shrink-0">
           <ProgressBar value={1} max={3} height={9} />
         </div>

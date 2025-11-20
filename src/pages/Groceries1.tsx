@@ -1,5 +1,6 @@
 // src/pages/Groceries1.tsx
 import { useNavigate } from "react-router";
+import BackButton from "../components/BackButton";
 import {
   AddCalItem,
   CalendarDayList,
@@ -17,6 +18,9 @@ export default function Groceries1() {
   return (
     <div className="flex h-full flex-col">
       <div>
+        <div className="mb-2">
+          <BackButton />
+        </div>
         <p className="text-2xl font-bold">groceries</p>
         <div className="mt-2 text-right text-sm text-black/70">
           0 of 7 days planned

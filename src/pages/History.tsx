@@ -1,14 +1,14 @@
 import { ContactCard } from "../components/ContactCard";
-import { ChevronLeft } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { useNavigate } from "react-router-dom";
 
 export default function History() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Ensure navigate is declared to avoid unused import errors
   return (
     <div className="space-y-8">
-      <button type="button" onClick={() => navigate(-1)}>
-        <ChevronLeft className="h-6 w-6 text-black" />
-      </button>
+      <div className="self-start">
+        <BackButton />
+      </div>
       <h1 className="text-h1">your analytics history</h1>
       <section className="mb-5 space-y-10">
         <div className="space-y-5">

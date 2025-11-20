@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TextBox } from "../components/TextBox";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 import type { User } from "../types/localStorage";
 import { useUser } from "../utils/localStorageHooks";
 
@@ -35,6 +36,9 @@ export default function CreateAccount() {
 
   return (
     <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
+      <div className="self-start">
+        <BackButton />
+      </div>
       {/* Title */}
       <h1 className="font-regular text-display text-black">
         create your account.

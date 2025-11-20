@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, X, Undo2, Heart } from "lucide-react";
+import { X, Undo2, Heart } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { ProgressBar } from "../components/ProgressBar";
 import { Button } from "../components/Button";
 import { SwipeCards, type SwipeCardRef } from "../components/SwipeCard";
@@ -13,9 +14,9 @@ export default function Preferences() {
     <div className="flex flex-col min-h-screen bg-bg-white px-9 pt-9 pb-10">
       {/* Top Row: Back + Progress + Skip */}
       <div className="flex items-center justify-between mb-6">
-        <button onClick={() => navigate(-1)}>
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+        <div>
+          <BackButton />
+        </div>
         <div className="flex items-center gap-4">
           <div className="w-[200px]">
             <ProgressBar value={3} max={3} height={9} />
