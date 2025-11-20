@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ChevronRight, Plus } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useState, type PropsWithChildren } from "react";
 import type { ScheduleItem } from "../types/localStorage";
 import MealModal from "./MealModal";
