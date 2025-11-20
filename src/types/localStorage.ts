@@ -28,6 +28,7 @@ export interface Meal {
   tags: string[];
   groceries: string[];
   imageSrc: string;
+  completed: boolean;
 }
 
 // since we aren't scheduling meals, heres 3 slots I guess

@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { ChevronRight } from "lucide-react";
 import { useState, type PropsWithChildren } from "react";
-import type { ScheduleItem } from "../types/localStorage";
+import type { Meal, ScheduleItem } from "../types/localStorage";
+import { useMeals } from "../utils/localStorageHooks";
 import MealModal from "./MealModal";
 
 function CalendarDay({
@@ -155,18 +156,34 @@ export function ClassCalItem({
 }
 
 export function MealCalItem({
-  name,
+  meal,
+  day,
+  mealType,
   startHour,
-  completable = false,
   ref,
 }: {
-  name: string;
+  meal: Meal;
+  day: number;
+  mealType: "breakfast" | "lunch" | "dinner";
   startHour: number;
-  completable?: boolean;
   ref?: React.Ref<HTMLButtonElement>;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [, setMeals] = useMeals();
+
+  function setCompleted(completed: boolean) {
+    setMeals((prevMeals) => {
+      const newMeals = [...prevMeals];
+      newMeals[day] = {
+        ...newMeals[day],
+        [mealType]: {
+          ...newMeals[day][mealType],
+          completed,
+        },
+      };
+      return newMeals;
+    });
+  }
 
   return (
     <>
@@ -178,35 +195,31 @@ export function MealCalItem({
           className="fixed top-0 left-0 z-51 flex size-full items-center justify-center bg-gray-60 px-6 backdrop-blur-[2.70px]"
         >
           <MealModal
-            name={name}
-            calories={371}
-            tags={[
-              { label: "protein", emphasized: true },
-              { label: "fats" },
-              { label: "carbs" },
-            ]}
+            name={meal.name}
+            calories={meal.calories}
+            tags={meal.tags.map((tag) => ({
+              label: tag,
+              emphasized: tag.includes("high"),
+            }))}
             onClose={() => setModalOpen(false)}
             onMarkCompleted={() => setCompleted(true)}
             onMarkIncomplete={() => setCompleted(false)}
-            completed={completed}
+            completed={meal.completed}
           />
         </div>
       )}
       <button
         ref={ref}
-        onClick={() => completable && setModalOpen(true)}
-        className={clsx(
-          "absolute inset-x-0 mr-6 ml-22 flex items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5",
-          { "cursor-pointer": completable, "cursor-default": !completable },
-        )}
+        onClick={() => setModalOpen(true)}
+        className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
         style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
       >
         <span
           className={clsx("text-base font-normal", {
-            "line-through": completed,
+            "line-through": meal.completed,
           })}
         >
-          {name}
+          {meal.name}
         </span>
         <ChevronRight />
       </button>

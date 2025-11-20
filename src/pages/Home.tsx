@@ -62,9 +62,10 @@ export default function Home() {
             <DaySchedule>
               {todayMeals.breakfast ? (
                 <MealCalItem
-                  name={todayMeals.breakfast.name}
+                  meal={todayMeals.breakfast}
+                  day={selectedDay}
+                  mealType="breakfast"
                   startHour={8}
-                  completable
                   ref={firstMealRef} // just pray that nothing is earlier lol
                 />
               ) : (
@@ -76,9 +77,10 @@ export default function Home() {
               )}
               {todayMeals.lunch ? (
                 <MealCalItem
-                  name={todayMeals.lunch.name}
+                  meal={todayMeals.lunch}
+                  day={selectedDay}
+                  mealType="lunch"
                   startHour={12}
-                  completable
                 />
               ) : (
                 <AddCalItem
@@ -88,9 +90,10 @@ export default function Home() {
               )}
               {todayMeals.dinner ? (
                 <MealCalItem
-                  name={todayMeals.dinner.name}
+                  meal={todayMeals.dinner}
+                  day={selectedDay}
+                  mealType="dinner"
                   startHour={18}
-                  completable
                 />
               ) : (
                 <AddCalItem
