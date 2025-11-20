@@ -195,7 +195,10 @@ export function MealCalItem({
       <button
         ref={ref}
         onClick={() => completable && setModalOpen(true)}
-        className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5"
+        className={clsx(
+          "absolute inset-x-0 mr-6 ml-22 flex items-center justify-between gap-2.5 rounded-xl border-2 border-black bg-white p-2.5",
+          { "cursor-pointer": completable, "cursor-default": !completable },
+        )}
         style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}
       >
         <span
@@ -214,12 +217,15 @@ export function MealCalItem({
 export function AddCalItem({
   startHour,
   onClick,
+  ref,
 }: {
   startHour: number;
   onClick?: () => void;
+  ref?: React.Ref<HTMLButtonElement>;
 }) {
   return (
     <button
+      ref={ref}
       onClick={onClick}
       className="absolute inset-x-0 mr-6 ml-22 flex cursor-pointer items-center justify-center rounded-xl bg-green-primary p-2.5 text-white"
       style={{ top: `calc(${(startHour / 24) * 100}% + 1px)` }}

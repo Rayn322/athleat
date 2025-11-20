@@ -31,7 +31,7 @@ export interface Meal {
 
 // since we aren't scheduling meals, heres 3 slots I guess
 export interface DayOfMeals {
-  breakfast: Meal;
-  lunch: Meal;
-  dinner: Meal;
+  breakfast: Meal | null;
+  lunch: Meal | null;
+  dinner: Meal | null;
 }
