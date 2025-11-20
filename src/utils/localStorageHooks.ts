@@ -1,5 +1,5 @@
 import { useLocalStorage, useSessionStorage } from "@uidotdev/usehooks";
-import type { DayOfMeals, ScheduleItem, User } from "../types/localStorage";
+import type { DayOfMeals, ScheduleItem, User, Grocery } from "../types/localStorage";
 
 export function useSchedule() {
   return useLocalStorage<ScheduleItem[]>("athleat:schedule", []);
@@ -31,4 +31,15 @@ export function useMeals() {
 export function useSelectedDay() {
   const today = new Date().getDay();
   return useSessionStorage<number>("athleat:selectedDay", today);
+}
+
+export function useGroceries() {
+  return useLocalStorage<Grocery[]>("athleat:groceries", []);
+}
+
+export function useQuickProteinSelections() {
+  return useLocalStorage<Record<string, boolean>>(
+    "athleat:quickadd:proteins:selected",
+    {}
+  );
 }

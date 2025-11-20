@@ -1,9 +1,13 @@
 import React from "react";
+import { Checkbox } from "./Checkbox";
+import { Trash } from "lucide-react";
+
 
 export type GroceryItemProps = {
   label: string;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
+  onRemove?: () => void;
   className?: string;
 };
 
@@ -11,12 +15,13 @@ export function GroceryItem({
   label,
   checked = false,
   onChange,
+  onRemove,
   className,
 }: GroceryItemProps) {
   return (
-    <label
+    <div
       className={[
-        "flex w-full cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 transition-all sm:p-5",
+        "flex w-full items-center gap-4 rounded-2xl border-2 p-3 transition-all sm:p-5",
         checked
           ? "border-green-primary shadow-[0_0_0_4px_rgba(32,159,45,0.35)]"
           : "border-light-gray",
@@ -26,13 +31,21 @@ export function GroceryItem({
         .filter(Boolean)
         .join(" ")}
     >
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange?.(e.target.checked)}
-        className="h-6 w-6 appearance-none rounded border-2 border-black transition-colors checked:border-green-primary checked:bg-green-primary"
-      />
-      <span className="text-base">{label}</span>
-    </label>
+      {/* Checkbox (controlled) */}
+      <Checkbox checked={checked} onCheckedChange={onChange} />
+
+      {/* Label */}
+      <span className="text-base flex-1">{label}</span>
+
+      {/* Trash button */}
+      <button
+        type="button"
+        aria-label={`Remove ${label}`}
+        onClick={onRemove}
+        className="p-2 rounded-xl hover:bg-black/5 active:bg-black/10 transition-colors"
+      >
+        <Trash className="h-5 w-5" />
+      </button>
+    </div>
   );
 }

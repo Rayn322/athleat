@@ -5,14 +5,26 @@ import clsx from "clsx";
 export type CheckboxProps = {
   /** Optional initial checked state (default = true) */
   defaultChecked?: boolean;
+  checked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
   className?: string;
 };
 
-export function Checkbox({ defaultChecked = true, className }: CheckboxProps) {
-  const [checked, setChecked] = React.useState(defaultChecked);
+export function Checkbox({ 
+  defaultChecked = true,
+  checked: controlledChecked,
+  onCheckedChange,
+  className,
+}: CheckboxProps) {
+  const isControlled = controlledChecked !== undefined;
+  const [uncontrolledChecked, setUncontrolledChecked] = React.useState(defaultChecked);
+
+  const checked = isControlled ? controlledChecked : uncontrolledChecked;
 
   const handleClick = () => {
-    setChecked((prev) => !prev);
+    const next = !checked;
+    if (!isControlled) setUncontrolledChecked(next);
+    onCheckedChange?.(next);
   };
 
   return (

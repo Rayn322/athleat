@@ -47,13 +47,7 @@ export default function MealOptions() {
       <div className="self-start">
         <BackButton />
       </div>
-      <h1 className="text-3xl font-medium lowercase">meal options</h1>
-      <div className="text-right text-sm text-black/70">
-        0 of 7 days planned
-      </div>
-      <div className="h-2 w-full rounded-full bg-neutral-200">
-        <div className="h-2 rounded-full bg-black" style={{ width: "0%" }} />
-      </div>
+      <h1 className="text-h1 lowercase">meal options</h1>
 
       {MEALS.map((meal) => (
         <MealOption

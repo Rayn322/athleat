@@ -7,6 +7,7 @@ export const MEALS: Meal[] = [
     tags: ["high protein", "carbs"],
     groceries: ["Bread", "Patty", "Lettuce", "Tomato", "Cheese", "Pickles"],
     imageSrc: "/Images/burger.jpg",
+    completed: false
   },
   {
     name: "Veggie Bowl",
@@ -14,6 +15,7 @@ export const MEALS: Meal[] = [
     tags: ["vegetarian"],
     groceries: ["Rice", "Beans", "Corn", "Salsa", "Avocado"],
     imageSrc: "/Images/veggie.jpg",
+    completed: false
   },
   {
     name: "Salmon",
@@ -21,6 +23,7 @@ export const MEALS: Meal[] = [
     tags: ["high protein"],
     groceries: ["Rice", "Beans", "Corn", "Salsa", "Avocado"],
     imageSrc: "/Images/salmon.jpg",
+    completed: false
   },
   {
     name: "Salad",
@@ -28,6 +31,7 @@ export const MEALS: Meal[] = [
     tags: ["vegetarian"],
     groceries: ["Rice", "Beans", "Corn", "Salsa", "Avocado"],
     imageSrc: "/Images/salad.jpg",
+    completed: false
   },
   {
     name: "Teriyaki Chicken",
@@ -35,5 +39,6 @@ export const MEALS: Meal[] = [
     tags: ["high protein"],
     groceries: ["Rice", "Beans", "Corn", "Salsa", "Avocado"],
     imageSrc: "/Images/chicken.jpg",
+    completed: false
   },
 ];

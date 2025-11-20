@@ -37,3 +37,9 @@ export interface DayOfMeals {
   lunch: Meal | null;
   dinner: Meal | null;
 }
+
+export interface Grocery {
+  id: string;
+  label: string;
+  checked: boolean;
+}
