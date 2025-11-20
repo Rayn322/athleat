@@ -28,6 +28,8 @@ export default function MealOptions() {
       return;
     }
 
+    // TODO: add ingredients to grocery list
+
     setMeals((prevMeals) => {
       const newMeals = [...prevMeals];
       newMeals[day] = {
