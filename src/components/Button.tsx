@@ -57,9 +57,8 @@ export const Button = ({
           iconPosition === "left" && "flex-row-reverse",
         )}
       >
-        {showIcon && iconPosition === "left" && IconToShow}
         <span className="truncate">{children}</span>
-        {showIcon && iconPosition === "right" && IconToShow}
+        {showIcon && IconToShow}
       </div>
     </button>
   );
