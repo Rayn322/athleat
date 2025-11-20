@@ -1,4 +1,4 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { useLocalStorage, useSessionStorage } from "@uidotdev/usehooks";
 import type { DayOfMeals, ScheduleItem, User } from "../types/localStorage";
 
 export function useSchedule() {
@@ -26,4 +26,9 @@ const initialMeals = createInitialMeals();
 
 export function useMeals() {
   return useLocalStorage<DayOfMeals[]>("athleat:meals", initialMeals);
+}
+
+export function useSelectedDay() {
+  const today = new Date().getDay();
+  return useSessionStorage<number>("athleat:selectedDay", today);
 }

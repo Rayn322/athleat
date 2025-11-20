@@ -1,5 +1,5 @@
 import { ChevronRight, CircleUser } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import {
@@ -9,7 +9,11 @@ import {
   DaySchedule,
   MealCalItem,
 } from "../components/Calendar";
-import { useMeals, useSchedule } from "../utils/localStorageHooks";
+import {
+  useMeals,
+  useSchedule,
+  useSelectedDay,
+} from "../utils/localStorageHooks";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -17,13 +21,12 @@ export default function Home() {
   const [schedule] = useSchedule();
   const [meals] = useMeals();
 
-  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const [selectedDay, setSelectedDay] = useSelectedDay();
   const todayMeals = meals[selectedDay];
 
   // Scroll to the first meal item when the component mounts
   useEffect(() => {
     if (firstMealRef.current) {
-      // scroll with some padding
       firstMealRef.current.scrollIntoView();
     }
   }, []);
