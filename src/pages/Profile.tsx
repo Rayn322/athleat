@@ -1,14 +1,16 @@
 import { Checkbox } from "../components/Checkbox";
 import { ContactCard } from "../components/ContactCard";
-import { Users, User, Calendar } from "lucide-react";
+import { Users, User, Calendar, Heart } from "lucide-react";
 import BackButton from "../components/BackButton";
 import { useNavigate } from "react-router-dom";
-import { useSchedule } from "../utils/localStorageHooks";
+import { useSchedule, usePreferences } from "../utils/localStorageHooks";
 import { convert24hTo12h } from "../utils/time";
 
 export default function History() {
   const navigate = useNavigate();
   const [schedule] = useSchedule();
+
+  const [prefs] = usePreferences();
 
   // days map
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -130,6 +132,51 @@ export default function History() {
                 </div>
               </div>
             ))}
+        </div>
+        
+        {/* PREFERENCES SECTION */}
+        <div className="mb-5 space-y-4">
+          <div className="flex flex-row justify-between border-b-2 border-light-gray pb-3">
+            <div className="flex flex-row gap-3">
+              <Heart className="h-6 w-6 text-black" />
+              <p className="text-h3">meal preferences</p>
+            </div>
+
+            <button
+              onClick={() => navigate("/preferences")}
+              className="text-sm underline text-dark-gray"
+            >
+              edit
+            </button>
+          </div>
+
+          {/* Liked */}
+          <p className="font-semibold text-base">liked meals</p>
+          {prefs.likedMeals.length === 0 ? (
+            <p className="text-sm text-dark-gray">no liked meals yet.</p>
+          ) : (
+            <div className="space-y-2 pl-3">
+              {prefs.likedMeals.map((m) => (
+                <p key={m.id} className="text-base">
+                  {m.title}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Disliked */}
+          <p className="font-semibold text-base mt-4">disliked meals</p>
+          {prefs.dislikedMeals.length === 0 ? (
+            <p className="text-sm text-dark-gray">no disliked meals yet.</p>
+          ) : (
+            <div className="space-y-2 pl-3">
+              {prefs.dislikedMeals.map((m) => (
+                <p key={m.id} className="text-base">
+                  {m.title}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

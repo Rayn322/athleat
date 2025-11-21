@@ -48,3 +48,13 @@ export function useSuppressedGroceries() {
   // store normalized labels the user deleted
   return useLocalStorage<string[]>("athleat:groceries:suppressed", []);
 }
+
+// Preferences
+import type { UserPreferences } from "../types/localStorage";
+
+export function usePreferences() {
+  return useLocalStorage<UserPreferences>("athleat:preferences", {
+    likedMeals: [],
+    dislikedMeals: [],
+  });
+}
