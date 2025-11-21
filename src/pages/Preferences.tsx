@@ -1,17 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Undo2, Heart } from "lucide-react";
 import BackButton from "../components/BackButton";
 import { ProgressBar } from "../components/ProgressBar";
 import { Button } from "../components/Button";
 import { SwipeCards, type SwipeCardRef } from "../components/SwipeCard";
+import { usePreferences } from "../utils/localStorageHooks";
 
-export default function Preferences() {
+export default function Preferences({ initialSetup = false }: { initialSetup?: boolean }) {
   const navigate = useNavigate();
   const swipeRef = useRef<SwipeCardRef>(null);
-
-  // Track remaining cards
   const [cardsRemaining, setCardsRemaining] = useState(3);
+
+  const [prefs, setPrefs] = usePreferences();
+
+  // RESET prefs only on first setup
+  useEffect(() => {
+    if (initialSetup) {
+      setPrefs({ likedMeals: [], dislikedMeals: [] });
+    }
+  }, [initialSetup]);
 
   const handleCardsChange = (newCount) => {
     setCardsRemaining(newCount);
@@ -49,20 +57,16 @@ export default function Preferences() {
 
       {/* Swipe Zone */}
       <div className="flex flex-col items-center justify-center">
-        
-        {/* Cards Box */}
         <div className="h-[460px] flex items-center justify-center">
           <SwipeCards ref={swipeRef} onCardsChange={handleCardsChange} />
         </div>
 
-        {/* Text that appears when done */}
         {cardsRemaining === 0 && (
           <p className="text-sm italic text-gray-400 mt-4 mb-2">
             you’ve seen all the meals for now!
           </p>
         )}
 
-        {/* Swipe Buttons */}
         <div className="flex items-center justify-center gap-6 mt-4 mb-6">
           <button onClick={() => swipeRef.current?.swipeFront("left")}>
             <X className="w-[52px] h-[52px] text-black" />
@@ -77,7 +81,6 @@ export default function Preferences() {
           </button>
         </div>
 
-        {/* Continue button */}
         <div className="w-full">
           <Button
             variant="primary"
