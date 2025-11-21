@@ -1,15 +1,29 @@
 import { useLocalStorage, useSessionStorage } from "@uidotdev/usehooks";
-import type { DayOfMeals, ScheduleItem, User, Grocery } from "../types/localStorage";
+import type {
+  DayOfMeals,
+  ScheduleItem,
+  User,
+  Grocery,
+  UserMetrics,
+  UserPreferences,
+} from "../types/localStorage";
 
+// ---------- SCHEDULE ----------
 export function useSchedule() {
   return useLocalStorage<ScheduleItem[]>("athleat:schedule", []);
 }
 
+// ---------- USER ----------
 export function useUser() {
   return useLocalStorage<User | null>("athleat:user", null);
 }
 
-// all meals null for the week
+// ---------- METRICS ----------
+export function useUserMetrics() {
+  return useLocalStorage<UserMetrics | null>("athleat:metrics", null);
+}
+
+// ---------- MEALS ----------
 function createInitialMeals() {
   const initialMeals: DayOfMeals[] = [];
   for (let i = 0; i < 7; i++) {
@@ -33,6 +47,7 @@ export function useSelectedDay() {
   return useSessionStorage<number>("athleat:selectedDay", today);
 }
 
+// ---------- GROCERIES ----------
 export function useGroceries() {
   return useLocalStorage<Grocery[]>("athleat:groceries", []);
 }
@@ -45,13 +60,10 @@ export function useQuickProteinSelections() {
 }
 
 export function useSuppressedGroceries() {
-  // store normalized labels the user deleted
   return useLocalStorage<string[]>("athleat:groceries:suppressed", []);
 }
 
-// Preferences
-import type { UserPreferences } from "../types/localStorage";
-
+// ---------- PREFERENCES ----------
 export function usePreferences() {
   return useLocalStorage<UserPreferences>("athleat:preferences", {
     likedMeals: [],

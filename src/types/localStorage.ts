@@ -34,6 +34,8 @@ export interface UserMetrics {
   sport: string;
   foodRestrictions: string[];
   shareProgress: boolean;
+  college?: string;
+  profilePic?: string | null;
 }
 
 export interface UserPreferences {
