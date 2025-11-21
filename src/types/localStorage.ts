@@ -1,5 +1,8 @@
+import type { CardData } from "../components/SwipeCard";
+
 export interface User {
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
@@ -20,26 +23,36 @@ export interface ScheduleItem {
   endDate: string;
 }
 
+export interface UserMetrics {
+  dietaryGoal: string;
+  heightFt: string;
+  heightIn: string;
+  weight: string;
+  weightUnit: string;
+  gender: string;
+  age: string;
+  sport: string;
+  foodRestrictions: string[];
+  shareProgress: boolean;
+}
+
+export interface UserPreferences {
+  likedMeals: CardData[];
+  dislikedMeals: CardData[];
+}
+
 export type Calendar = ScheduleItem[];
 
+// add nutrition details if we have time
 export interface Meal {
   name: string;
   calories: number;
-  tags: string[];
   groceries: string[];
-  imageSrc: string;
-  completed: boolean;
 }
 
 // since we aren't scheduling meals, heres 3 slots I guess
 export interface DayOfMeals {
-  breakfast: Meal | null;
-  lunch: Meal | null;
-  dinner: Meal | null;
-}
-
-export interface Grocery {
-  id: string;
-  label: string;
-  checked: boolean;
+  breakfast: Meal;
+  lunch: Meal;
+  dinner: Meal;
 }

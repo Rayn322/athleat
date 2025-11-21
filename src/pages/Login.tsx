@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import { TextBox } from "../components/TextBox";
-import { useUser } from "../utils/localStorageHooks";
-import BackButton from "../components/BackButton";
+import { Button } from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [user] = useUser();
-
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
 
@@ -25,30 +20,21 @@ export default function Login() {
   const emailHasError = emailTouched && !emailIsValid;
 
   // Disable button unless all fields valid
-  const buttonDisabled = !username || !emailIsValid || !password;
+  const buttonDisabled = !emailIsValid || !password;
 
   return (
-    <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
-      <div className="self-start">
-        <BackButton />
-      </div>
+    <div className="flex w-[393px] h-[852px] flex-col justify-between items-center bg-bg-white p-[60px_24px_40px_24px] mx-auto">
+
       {/* Title */}
-      <h1 className="font-regular self-start text-display text-black">
+      <h1 className="text-display font-regular text-black self-start">
         welcome back.
       </h1>
 
       {/* Input fields */}
-      <div className="mt-10 flex flex-col gap-6">
-        <TextBox
-          label="username"
-          placeholder="enter username"
-          value={username}
-          onChange={setUsername}
-        />
-
+      <div className="flex flex-col gap-6 mt-10">
         {/* Email */}
         <div className="flex flex-col">
-          <TextBox
+          <TextBox 
             label="email"
             placeholder="enter email"
             value={email}
@@ -56,15 +42,15 @@ export default function Login() {
               setEmail(v);
               if (!emailTouched) setEmailTouched(true);
             }}
-            className={emailHasError ? "border-red outline-red" : ""}
+            className={emailHasError ? "outline-red border-red" : ""}
           />
           {emailHasError && (
-            <p className="mt-1 text-small text-red">Invalid email format</p>
+            <p className="text-small text-red mt-1">Invalid email format</p>
           )}
         </div>
 
         {/* Password */}
-        <TextBox
+        <TextBox 
           label="password"
           placeholder="enter password"
           value={password}
@@ -72,41 +58,45 @@ export default function Login() {
         />
       </div>
 
-      {error && <p className="mt-2 text-small text-red">{error}</p>}
+      {error && <p className="text-small text-red mt-2">{error}</p>}
+
 
       {/* Link to create account */}
-      <p
-        className="mt-4 cursor-pointer text-small font-medium text-black underline"
+      <p 
+        className="text-small font-medium text-black underline cursor-pointer mt-4"
         onClick={() => navigate("/create-account")}
       >
         don't have an account? create one
       </p>
 
       {/* Button */}
-      <Button
+        <Button 
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-          if (!user) {
+            const saved = localStorage.getItem("fakeUser");
+
+            if (!saved) {
             setError("no account found. create one first!");
             return;
-          }
+            }
 
-          if (
-            user.username === username &&
+            const user = JSON.parse(saved);
+
+            if (
             user.email === email &&
             user.password === password
-          ) {
+            ) {
             navigate("/home");
-          } else {
-            setError("incorrect username, email, or password.");
-          }
+            } else {
+            setError("incorrect email, or password.");
+            }
         }}
-      >
+        >
         Log In
-      </Button>
+        </Button>
     </div>
   );
 }

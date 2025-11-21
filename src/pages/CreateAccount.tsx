@@ -11,7 +11,8 @@ export default function CreateAccount() {
 
   const [, setUser] = useUser();
 
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -32,7 +33,7 @@ export default function CreateAccount() {
 
   // Disable button unless all fields valid
   const buttonDisabled =
-    !username || !emailIsValid || !password || !confirmMatches;
+    !firstName || !lastName || !emailIsValid || !password || !confirmMatches;
 
   return (
     <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
@@ -47,10 +48,17 @@ export default function CreateAccount() {
       {/* Input fields */}
       <div className="mt-10 flex flex-col gap-6">
         <TextBox
-          label="username"
-          placeholder="enter username"
-          value={username}
-          onChange={setUsername}
+          label="first name"
+          placeholder="enter first name "
+          value={firstName}
+          onChange={setFirstName}
+        />
+
+        <TextBox
+          label="last name"
+          placeholder="enter last name "
+          value={lastName}
+          onChange={setLastName}
         />
 
         {/* Email */}
