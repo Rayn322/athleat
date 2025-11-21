@@ -24,7 +24,7 @@ export default function InputSchedule() {
   };
 
   return (
-    <div className="mx-auto flex min-h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
+    <div className="mx-auto flex min-h-screen flex-col bg-bg-white px-6 pt-[60px] pb-10">
       {/* Top Row */}
       <div className="mb-6 flex w-full items-center justify-between">
         <div>

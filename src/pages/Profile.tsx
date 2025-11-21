@@ -61,14 +61,14 @@ export default function History() {
           </p>
 
           <p className="text-base">
-            {metrics?.college ?? "No college entered"} | {metrics?.sport ?? ""}
+            {metrics?.college ?? ""} | {metrics?.sport ?? ""}
           </p>
 
           <button
             className="underline text-sm mt-1"
             onClick={() => fileInputRef.current?.click()}
           >
-            edit profile photo
+            upload profile photo
           </button>
 
           <input
@@ -120,13 +120,13 @@ export default function History() {
         </div>
 
         <div className="space-y-2">
-          <InfoRow label="diet goal" value="maintain composition" />
-          <InfoRow label="weight" value="115 lbs" />
-          <InfoRow label="height" value="5ft 4in" />
-          <InfoRow label="gender" value="female" />
-          <InfoRow label="age" value="20" />
-          <InfoRow label="sport" value="swimming" />
-          <InfoRow label="food restrictions" value="peanuts, gluten-free" />
+          <InfoRow label="diet goal" value="" />
+          <InfoRow label="weight" value="" />
+          <InfoRow label="height" value="" />
+          <InfoRow label="gender" value="" />
+          <InfoRow label="age" value="" />
+          <InfoRow label="sport" value="" />
+          <InfoRow label="food restrictions" value="" />
         </div>
       </div>
 
