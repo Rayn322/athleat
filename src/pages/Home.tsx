@@ -1,7 +1,6 @@
-import { ChevronRight, CircleUser } from "lucide-react";
+import { CircleUser } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import {
   AddCalItem,
   CalendarDayList,
@@ -56,7 +55,7 @@ export default function Home() {
 
         {/* sorry */}
         {/* evil negative margin */}
-        <div className="relative -mx-6 flex min-h-0 flex-col">
+        <div className="-mx-6 flex min-h-0 flex-col">
           <div className="border-t-2 border-t-light-gray" />
           <div className="min-h-0 overflow-y-auto">
             <DaySchedule>
@@ -113,16 +112,6 @@ export default function Home() {
                 }
               })}
             </DaySchedule>
-            <Button
-              width="hug"
-              icon={<ChevronRight />}
-              showIcon
-              iconPosition="right"
-              className="absolute right-3 bottom-3"
-              onClick={() => alert("Make this do something")}
-            >
-              plan next week
-            </Button>
           </div>
         </div>
       </div>
