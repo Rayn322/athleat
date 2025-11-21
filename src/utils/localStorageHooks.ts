@@ -43,3 +43,8 @@ export function useQuickProteinSelections() {
     {}
   );
 }
+
+export function useSuppressedGroceries() {
+  // store normalized labels the user deleted
+  return useLocalStorage<string[]>("athleat:groceries:suppressed", []);
+}
