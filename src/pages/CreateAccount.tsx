@@ -20,93 +20,87 @@ export default function CreateAccount() {
   const [emailTouched, setEmailTouched] = useState(false);
   const [confirmTouched, setConfirmTouched] = useState(false);
 
-  // Basic email validation
   const isValidEmail = (value: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const emailIsValid = isValidEmail(email);
   const emailHasError = emailTouched && !emailIsValid;
 
-  // Confirm password check
   const confirmMatches = confirm === password;
   const confirmHasError = confirmTouched && !confirmMatches;
 
-  // Disable button unless all fields valid
   const buttonDisabled =
     !firstName || !lastName || !emailIsValid || !password || !confirmMatches;
 
   return (
-    <div className="flex flex-col min-h-screen  bg-bg-white px-9 pt-9 pb-10">
+    <div className="flex flex-col min-h-screen bg-bg-white px-9 pt-9 pb-10">
       <div className="flex flex-col flex-1">
         <div className="self-start">
-            <BackButton />
+          <BackButton />
         </div>
-        {/* Title */}
+
         <h1 className="font-regular text-display text-black">
-            create your account.
+          create your account.
         </h1>
 
-        {/* Input fields */}
         <div className="mt-10 flex flex-col gap-6">
-            <TextBox
+          <TextBox
             label="first name"
-            placeholder="enter first name "
+            placeholder="enter first name"
             value={firstName}
             onChange={setFirstName}
-            />
+          />
 
-            <TextBox
+          <TextBox
             label="last name"
-            placeholder="enter last name "
+            placeholder="enter last name"
             value={lastName}
             onChange={setLastName}
-            />
+          />
 
-            {/* Email */}
-            <div className="flex flex-col">
+          <div className="flex flex-col">
             <TextBox
-                label="email"
-                placeholder="enter email"
-                value={email}
-                onChange={(v) => {
+              label="email"
+              placeholder="enter email"
+              value={email}
+              onChange={(v) => {
                 setEmail(v);
                 if (!emailTouched) setEmailTouched(true);
-                }}
-                className={emailHasError ? "border-red outline-red" : ""}
+              }}
+              className={emailHasError ? "border-red outline-red" : ""}
             />
             {emailHasError && (
-                <p className="mt-1 text-small text-red">Invalid email format</p>
+              <p className="mt-1 text-small text-red">Invalid email format</p>
             )}
-            </div>
+          </div>
 
-            {/* Password */}
-            <TextBox
+          <TextBox
             label="create password"
             placeholder="enter password"
             value={password}
             onChange={setPassword}
-            />
+          />
 
-            {/* Confirm password */}
-            <div className="flex flex-col">
+          <div className="flex flex-col">
             <TextBox
-                label="confirm password"
-                placeholder="re-enter password"
-                value={confirm}
-                onChange={(v) => {
+              label="confirm password"
+              placeholder="re-enter password"
+              value={confirm}
+              onChange={(v) => {
                 setConfirm(v);
                 if (!confirmTouched) setConfirmTouched(true);
-                }}
-                className={confirmHasError ? "border-red outline-red" : ""}
+              }}
+              className={confirmHasError ? "border-red outline-red" : ""}
             />
             {confirmHasError && (
-                <p className="mt-1 text-small text-red">Passwords do not match</p>
+              <p className="mt-1 text-small text-red">
+                Passwords do not match
+              </p>
             )}
-            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-      {/* Link to sign in */}
       <p
         className="mt-4 cursor-pointer text-small font-medium text-black underline"
         onClick={() => navigate("/login")}
@@ -114,18 +108,20 @@ export default function CreateAccount() {
         already have an account? log in
       </p>
 
-      {/* Button */}
       <Button
         variant={buttonDisabled ? "disabled" : "primary"}
         size="md"
         width="full"
         disabled={buttonDisabled}
         onClick={() => {
-          const newUser: User = { username, email, password };
+          const newUser: User = {
+            firstName,
+            lastName,
+            email,
+            password,
+          };
 
-          // Save the fake account
           setUser(newUser);
-
           navigate("/setup");
         }}
       >

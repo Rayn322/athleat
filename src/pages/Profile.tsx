@@ -3,43 +3,83 @@ import { ContactCard } from "../components/ContactCard";
 import { Users, User, Calendar, Heart } from "lucide-react";
 import BackButton from "../components/BackButton";
 import { useNavigate } from "react-router-dom";
-import { useSchedule, usePreferences } from "../utils/localStorageHooks";
+import { useSchedule, usePreferences, useUser, useUserMetrics } from "../utils/localStorageHooks";
 import { convert24hTo12h } from "../utils/time";
+import React, { useRef } from "react";
 
 export default function History() {
   const navigate = useNavigate();
   const [schedule] = useSchedule();
-
   const [prefs] = usePreferences();
+  const [user] = useUser();
+  const [metrics, setMetrics] = useUserMetrics();
 
-  // days map
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function onFileSelected(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setMetrics({
+        ...metrics,
+        profilePic: reader.result as string,
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // group schedule by days
   const grouped = schedule.reduce((acc, item) => {
     item.days.forEach((d) => {
       if (!acc[d]) acc[d] = [];
       acc[d].push(item);
     });
     return acc;
-  }, {});
+  }, {} as Record<number, any[]>);
 
   return (
     <div className="space-y-8">
-      {/* Top Row */}
-      <div className="flex flex-row justify-between">
+      <div className="flex justify-between">
         <BackButton />
       </div>
 
       <h1 className="text-h1">your profile</h1>
 
-      {/* Profile Card */}
+      {/* PROFILE */}
       <div className="flex flex-row space-x-3 rounded-xl border-2 border-light-gray p-6">
-        <img src="Images/sarah.png" className="h-20 w-20 rounded-4xl" />
-        <div>
-          <p className="text-h2 font-semibold">Sarah Smith</p>
-          <p className="text-base">Cuesta College | Swim & Dive</p>
-          <a className="text-base underline" href="/history">
+        <img
+          src={metrics?.profilePic}
+          className="h-20 w-20 rounded-full object-cover"
+        />
+
+        <div className="flex flex-col">
+          <p className="text-h2 font-semibold">
+            {user?.firstName} {user?.lastName}
+          </p>
+
+          <p className="text-base">
+            {metrics?.college ?? ""} | {metrics?.sport ?? ""}
+          </p>
+
+          <button
+            className="underline text-sm mt-1"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            upload profile photo
+          </button>
+
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={onFileSelected}
+          />
+
+          <a className="underline text-sm mt-1" href="/history">
             see history
           </a>
         </div>
@@ -51,13 +91,15 @@ export default function History() {
           <Users className="h-6 w-6 text-black" />
           <p className="text-h3">progress sharing</p>
         </div>
+
         <div className="flex flex-row gap-3">
           <Checkbox />
           <span className="text-base">sharing dietary progress</span>
         </div>
+
         <div className="flex flex-row space-x-3">
-          <ContactCard name={"coach joel"} company={"cuesta college"} />
-          <ContactCard name={"dr. johnson"} company={"dietitian, doctor"} />
+          <ContactCard name="coach joel" company="cuesta college" />
+          <ContactCard name="dr. johnson" company="dietitian, doctor" />
         </div>
       </div>
 
@@ -68,6 +110,7 @@ export default function History() {
             <User className="h-6 w-6 text-black" />
             <p className="text-h3">personal information</p>
           </div>
+
           <button
             onClick={() => navigate("/input-metrics")}
             className="text-sm underline text-dark-gray"
@@ -77,23 +120,24 @@ export default function History() {
         </div>
 
         <div className="space-y-2">
-          <InfoRow label="diet goal" value="maintain composition" />
-          <InfoRow label="weight" value="115 lbs" />
-          <InfoRow label="height" value="5ft 4in" />
-          <InfoRow label="gender" value="female" />
-          <InfoRow label="age" value="20" />
-          <InfoRow label="sport" value="swimming" />
-          <InfoRow label="food restrictions" value="peanuts, gluten-free" />
+          <InfoRow label="diet goal" value="" />
+          <InfoRow label="weight" value="" />
+          <InfoRow label="height" value="" />
+          <InfoRow label="gender" value="" />
+          <InfoRow label="age" value="" />
+          <InfoRow label="sport" value="" />
+          <InfoRow label="food restrictions" value="" />
         </div>
       </div>
 
-      {/* SCHEDULE SECTION */}
+      {/* SCHEDULE */}
       <div className="mb-5 space-y-4">
         <div className="flex flex-row justify-between border-b-2 border-light-gray pb-3">
           <div className="flex flex-row gap-3">
             <Calendar className="h-6 w-6 text-black" />
             <p className="text-h3">schedule</p>
           </div>
+
           <button
             onClick={() => navigate("/input-schedule")}
             className="text-sm underline text-dark-gray"
@@ -102,7 +146,6 @@ export default function History() {
           </button>
         </div>
 
-        {/* --- Schedule Summary --- */}
         <div className="space-y-4">
           {Object.keys(grouped).length === 0 && (
             <p className="text-sm text-dark-gray">no schedule added yet.</p>
@@ -122,10 +165,14 @@ export default function History() {
                     >
                       <p className="text-sm font-medium">{item.name}</p>
                       <p className="text-xs text-dark-gray">
-                        {item.type} • {convert24hTo12h(item.time.start)}–{convert24hTo12h(item.time.end)}
+                        {item.type} • {convert24hTo12h(item.time.start)}–
+                        {convert24hTo12h(item.time.end)}
                       </p>
+
                       {!item.recurring && (
-                        <p className="text-xs text-dark-gray">one-time event</p>
+                        <p className="text-xs text-dark-gray">
+                          one-time event
+                        </p>
                       )}
                     </div>
                   ))}
@@ -133,8 +180,8 @@ export default function History() {
               </div>
             ))}
         </div>
-        
-        {/* PREFERENCES SECTION */}
+
+        {/* PREFERENCES */}
         <div className="mb-5 space-y-4">
           <div className="flex flex-row justify-between border-b-2 border-light-gray pb-3">
             <div className="flex flex-row gap-3">
@@ -150,7 +197,6 @@ export default function History() {
             </button>
           </div>
 
-          {/* Liked */}
           <p className="font-semibold text-base">liked meals</p>
           {prefs.likedMeals.length === 0 ? (
             <p className="text-sm text-dark-gray">no liked meals yet.</p>
@@ -164,7 +210,6 @@ export default function History() {
             </div>
           )}
 
-          {/* Disliked */}
           <p className="font-semibold text-base mt-4">disliked meals</p>
           {prefs.dislikedMeals.length === 0 ? (
             <p className="text-sm text-dark-gray">no disliked meals yet.</p>
@@ -183,7 +228,6 @@ export default function History() {
   );
 }
 
-/* Helper component */
 function InfoRow({ label, value }) {
   return (
     <div className="flex flex-row gap-3">

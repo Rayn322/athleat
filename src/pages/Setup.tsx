@@ -7,7 +7,7 @@ export default function Setup() {
   const navigate = useNavigate();
 
   return (
-    <div className="mx-auto flex h-[852px] w-[392px] flex-col bg-bg-white px-6 pt-[60px] pb-10">
+    <div className="mx-auto flex min-h-screen flex-col bg-bg-white px-6 pt-[60px] pb-10">
       {/* Back button */}
       <div className="mb-10">
         <BackButton />
