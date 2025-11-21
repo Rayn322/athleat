@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ChevronRight } from "lucide-react";
 import { useState, type PropsWithChildren } from "react";
+import { useNavigate } from "react-router";
 import type { Meal, ScheduleItem } from "../types/localStorage";
 import { useMeals } from "../utils/localStorageHooks";
 import MealModal from "./MealModal";
@@ -168,6 +169,7 @@ export function MealCalItem({
   startHour: number;
   ref?: React.Ref<HTMLButtonElement>;
 }) {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [, setMeals] = useMeals();
 
@@ -182,6 +184,12 @@ export function MealCalItem({
         },
       };
       return newMeals;
+    });
+  }
+
+  function onEdit() {
+    navigate(`/MealOptions`, {
+      state: { day, mealType },
     });
   }
 
@@ -204,6 +212,7 @@ export function MealCalItem({
             onClose={() => setModalOpen(false)}
             onMarkCompleted={() => setCompleted(true)}
             onMarkIncomplete={() => setCompleted(false)}
+            onEdit={onEdit}
             completed={meal.completed}
           />
         </div>

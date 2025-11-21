@@ -13,7 +13,10 @@ export default function MealOptions() {
     state?: { day: number; mealType: "breakfast" | "lunch" | "dinner" };
   };
 
-  const [, setMeals] = useMeals();
+  const [meals, setMeals] = useMeals();
+  const currentMeal = location.state
+    ? meals[location.state.day][location.state.mealType]
+    : null;
 
   useEffect(() => {
     if (!location.state?.day || !location.state?.mealType) {
@@ -57,6 +60,7 @@ export default function MealOptions() {
           ingredients={meal.groceries}
           imageSrc={meal.imageSrc}
           onSelect={() => choose(meal)}
+          selected={currentMeal?.name === meal.name}
         />
       ))}
     </section>

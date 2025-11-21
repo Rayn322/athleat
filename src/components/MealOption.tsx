@@ -59,20 +59,13 @@ export function MealOption({
 
       {/* content */}
       <div className="min-w-0 flex-1">
-        <h3 className="text-base">
-          {title}
-        </h3>
+        <h3 className="text-base">{title}</h3>
 
         {/* tags */}
         {tags.length > 0 && (
           <div className="mt-1 flex flex-wrap gap-1">
             {tags.map((t) => (
-              <Tag
-                key={t}
-                label={t}
-                size="sm" 
-                variant="black"
-              />
+              <Tag key={t} label={t} size="sm" variant="black" />
             ))}
           </div>
         )}
