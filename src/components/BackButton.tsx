@@ -10,7 +10,7 @@ export default function BackButton() {
       className="flex items-center gap-1 text-base font-medium hover:underline"
     >
       <ChevronLeft className="h-5 w-5" strokeWidth={2} />
-      <span>Back</span>
+      <span>back</span>
     </button>
   );
 }
