@@ -36,78 +36,80 @@ export default function CreateAccount() {
     !firstName || !lastName || !emailIsValid || !password || !confirmMatches;
 
   return (
-    <div className="mx-auto flex h-[852px] w-[393px] flex-col items-center justify-between bg-bg-white p-[60px_24px_40px_24px]">
-      <div className="self-start">
-        <BackButton />
-      </div>
-      {/* Title */}
-      <h1 className="font-regular text-display text-black">
-        create your account.
-      </h1>
-
-      {/* Input fields */}
-      <div className="mt-10 flex flex-col gap-6">
-        <TextBox
-          label="first name"
-          placeholder="enter first name "
-          value={firstName}
-          onChange={setFirstName}
-        />
-
-        <TextBox
-          label="last name"
-          placeholder="enter last name "
-          value={lastName}
-          onChange={setLastName}
-        />
-
-        {/* Email */}
-        <div className="flex flex-col">
-          <TextBox
-            label="email"
-            placeholder="enter email"
-            value={email}
-            onChange={(v) => {
-              setEmail(v);
-              if (!emailTouched) setEmailTouched(true);
-            }}
-            className={emailHasError ? "border-red outline-red" : ""}
-          />
-          {emailHasError && (
-            <p className="mt-1 text-small text-red">Invalid email format</p>
-          )}
+    <div className="flex flex-col min-h-screen  bg-bg-white px-9 pt-9 pb-10">
+      <div className="flex flex-col flex-1">
+        <div className="self-start">
+            <BackButton />
         </div>
+        {/* Title */}
+        <h1 className="font-regular text-display text-black">
+            create your account.
+        </h1>
 
-        {/* Password */}
-        <TextBox
-          label="create password"
-          placeholder="enter password"
-          value={password}
-          onChange={setPassword}
-        />
+        {/* Input fields */}
+        <div className="mt-10 flex flex-col gap-6">
+            <TextBox
+            label="first name"
+            placeholder="enter first name "
+            value={firstName}
+            onChange={setFirstName}
+            />
 
-        {/* Confirm password */}
-        <div className="flex flex-col">
-          <TextBox
-            label="confirm password"
-            placeholder="re-enter password"
-            value={confirm}
-            onChange={(v) => {
-              setConfirm(v);
-              if (!confirmTouched) setConfirmTouched(true);
-            }}
-            className={confirmHasError ? "border-red outline-red" : ""}
-          />
-          {confirmHasError && (
-            <p className="mt-1 text-small text-red">Passwords do not match</p>
-          )}
+            <TextBox
+            label="last name"
+            placeholder="enter last name "
+            value={lastName}
+            onChange={setLastName}
+            />
+
+            {/* Email */}
+            <div className="flex flex-col">
+            <TextBox
+                label="email"
+                placeholder="enter email"
+                value={email}
+                onChange={(v) => {
+                setEmail(v);
+                if (!emailTouched) setEmailTouched(true);
+                }}
+                className={emailHasError ? "border-red outline-red" : ""}
+            />
+            {emailHasError && (
+                <p className="mt-1 text-small text-red">Invalid email format</p>
+            )}
+            </div>
+
+            {/* Password */}
+            <TextBox
+            label="create password"
+            placeholder="enter password"
+            value={password}
+            onChange={setPassword}
+            />
+
+            {/* Confirm password */}
+            <div className="flex flex-col">
+            <TextBox
+                label="confirm password"
+                placeholder="re-enter password"
+                value={confirm}
+                onChange={(v) => {
+                setConfirm(v);
+                if (!confirmTouched) setConfirmTouched(true);
+                }}
+                className={confirmHasError ? "border-red outline-red" : ""}
+            />
+            {confirmHasError && (
+                <p className="mt-1 text-small text-red">Passwords do not match</p>
+            )}
+            </div>
         </div>
-      </div>
+    </div>
 
       {/* Link to sign in */}
       <p
         className="mt-4 cursor-pointer text-small font-medium text-black underline"
-        onClick={() => navigate("/setup")}
+        onClick={() => navigate("/login")}
       >
         already have an account? log in
       </p>

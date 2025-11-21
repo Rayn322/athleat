@@ -21,7 +21,7 @@ export function TextBox({
   className,
 }: TextBoxProps) {
   return (
-    <div className={clsx("inline-flex w-80 flex-col gap-2", className)}>
+    <div className={clsx("inline-flex flex-col gap-2", className)}>
       <label className="text-base font-normal text-dark-gray">{label}</label>
 
       <div
