@@ -201,7 +201,7 @@ export default function History() {
               onClick={() => navigate("/preferences")}
               className="text-sm underline text-dark-gray"
             >
-              edit
+              update
             </button>
           </div>
 
