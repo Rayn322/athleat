@@ -36,10 +36,13 @@ function CalendarDay({
         {dayLetter}
       </p>
       <p
-        className={clsx("flex aspect-square items-center px-2.5 py-1.5", {
-          "text-black": !selected,
-          "rounded-full bg-black text-white": selected,
-        })}
+        className={clsx(
+          "flex aspect-square items-center justify-center px-2.5 py-1.5",
+          {
+            "text-black": !selected,
+            "rounded-full bg-black text-white": selected,
+          },
+        )}
       >
         {dayNumber}
       </p>
