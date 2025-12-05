@@ -120,13 +120,21 @@ export default function History() {
         </div>
 
         <div className="space-y-2">
-          <InfoRow label="diet goal" value="" />
-          <InfoRow label="weight" value="" />
-          <InfoRow label="height" value="" />
-          <InfoRow label="gender" value="" />
-          <InfoRow label="age" value="" />
-          <InfoRow label="sport" value="" />
-          <InfoRow label="food restrictions" value="" />
+          <InfoRow label="diet goal" value={metrics?.dietaryGoal ?? ""} />          
+          <InfoRow label="weight" value={metrics ? `${metrics.weight} ${metrics.weightUnit}` : ""} />
+          <InfoRow
+            label="height"
+            value={
+              metrics ? `${metrics.heightFt}' ${metrics.heightIn}"` : ""
+            }
+          />
+          <InfoRow label="gender" value={metrics?.gender ?? ""} />
+          <InfoRow label="age" value={metrics?.age ?? ""} />
+          <InfoRow label="sport" value={metrics?.sport ?? ""} />
+          <InfoRow
+            label="food restrictions"
+            value={metrics?.foodRestrictions?.join(", ") ?? ""}
+          />
         </div>
       </div>
 
