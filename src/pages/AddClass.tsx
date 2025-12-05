@@ -176,7 +176,7 @@ export default function AddClass() {
 
           {/* Dates */}
           <div className="mb-6">
-            <div className="text-base text-dark-gray">starts:</div>
+            <div className="text-base text-dark-gray">start repeat:</div>
             <input
               type="date"
               value={startDate}
@@ -187,7 +187,7 @@ export default function AddClass() {
           </div>
 
           <div className="mb-6">
-            <div className="text-base text-dark-gray">ends:</div>
+            <div className="text-base text-dark-gray">end repeat:</div>
             <input
               type="date"
               value={endDate}
