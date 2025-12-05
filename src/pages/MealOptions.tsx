@@ -19,7 +19,7 @@ export default function MealOptions() {
     : null;
 
   useEffect(() => {
-    if (!location.state?.day || !location.state?.mealType) {
+    if (location.state?.day === undefined || !location.state?.mealType) {
       navigate("/home");
     }
   }, [location.state, navigate]);
